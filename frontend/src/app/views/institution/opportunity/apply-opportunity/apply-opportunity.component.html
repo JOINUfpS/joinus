@@ -1,0 +1,48 @@
+<p-dialog [(visible)]="applydisplay" [blockScroll]="true" [dismissableMask]="true"
+          [draggable]="false" [maximizable]="false" [minY]="90"
+          [modal]="true" [style]="{ maxWidth: '60rem' }"
+          [styleClass]="'col-sm-11 col-md-9 col-lg-6 col-xl-5'">
+  <p-header>
+    <h2 class="title-dialog">Aplicar a oportunidad</h2>
+  </p-header>
+  <div class="pt-2 mb-4">
+    <div *ngIf="!this.opportunity.oppoSimpleRequest;" class="row">
+      <p class="align-content-center keep-format-text">Para esta oportunidad debes dirigirte al sitio web del
+        empleador dando clic en el siguiente <a [href]="opportunity.oppoApplicationUrl" target="_blank">link</a>, donde
+        encontrarás toda la información necesaria para postularte.
+      </p>
+    </div>
+    <div *ngIf="this.opportunity.oppoSimpleRequest;" class="row">
+    <span>En esta sección podrás subir tu hoja de vida, la cual será enviada al correo del reclutador
+      (<strong>{{this.opportunity.oppoEmployerEmail}}</strong>), para seguir con el proceso de selección.</span>
+      <div class="col-lg-12 p-2 pb-2" *ngIf="viewPdf">
+        <div class="content-img-pdf">
+          <img alt="Pdf subido" class="img-pdf center pb-mb-3" src="./assets/img/brand/pdf.png">
+        </div>
+        <div class="col-lg-12 d-flex justify-content-center">
+          <span *ngFor="let file of uploadedFiles" class="text-pdf">{{file.name}} - {{file.size}} bytes</span>
+        </div>
+      </div>
+
+      <div class="col-12 p-2 pl-3" *ngIf="!viewPdf">
+        <div class="content-img-pdf">
+          <img src="./assets/img/brand/pdf-on.png" alt="Imagen de PDF"/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="this.opportunity.oppoSimpleRequest;" class="row footer-dialog-upload upload-button">
+    <div class="col p-2 content-inco file-upload-container">
+      <p-fileUpload #photo (onSelect)="onSelectFile($event,photo)" [auto]="false" [showCancelButton]="false"
+                    [showUploadButton]="false" accept=".pdf" chooseIcon="pi pi-paperclip"
+                    chooseLabel="Subir hoja de vida" customUpload="true" mode="basic" name="fileImg">
+      </p-fileUpload>
+    </div>
+    <div *ngIf="this.opportunity.oppoSimpleRequest;" class="col p-2 al-end">
+      <button (click)="applyOpportunity()" [disabled]="!validFile || buttonFormActioned" class="btn-new"
+              label="Aplicar a oportunidad" pButton type="button">
+        <p-progressSpinner [hidden]="!buttonFormActioned" [style]="{width: '20px', height: '20px'}"></p-progressSpinner>
+      </button>
+    </div>
+  </div>
+</p-dialog>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37.02 37.02">
+  <defs>
+    <style>.cls-1 {
+      fill: none;
+    }
+
+    .cls-2 {
+      fill: url(#Degradado_sin_nombre_2);
+    }</style>
+    <linearGradient id="Degradado_sin_nombre_2" x1="2.31" y1="18.51" x2="34.7" y2="18.51"
+                    gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1b4263"/>
+      <stop offset="1" stop-color="#20a494"/>
+    </linearGradient>
+  </defs>
+  <title>Recurso 3</title>
+  <g id="Capa_2" data-name="Capa 2">
+    <g id="Capa_1-2" data-name="Capa 1">
+      <rect class="cls-1" width="20" height="20"/>
+      <path class="cls-2"
+            d="M18.51,37a4.63,4.63,0,0,0,4.63-4.63H13.88A4.63,4.63,0,0,0,18.51,37Zm2.3-34.48a2.31,2.31,0,0,0-4.6-.46,1.77,1.77,0,0,0,0,.46A11.58,11.58,0,0,0,6.94,13.88c0,2.54-1.16,13.88-4.63,16.2H34.7c-3.47-2.32-4.62-13.66-4.62-16.2A11.58,11.58,0,0,0,20.81,2.54Z"/>
+    </g>
+  </g>
+</svg>

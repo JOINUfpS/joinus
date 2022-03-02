@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+  <div class="col-12 ">
+    <div class="card notification-card">
+      <div class="card-body">
+        <div class="bg-transparent pt-0 pb-0">
+          <div class="row align-items-center" (mouseover)="showOptionButton = true" (mouseleave)="showOptionButton = false">
+            <div>
+              <div class="media align-items-center" (click)="this.goToTheNotification()">
+              <span class="avatar avatar-sm rounded-circle">
+              <div
+                [style.background-image]="'url('+ this.utilitiesString.getImage(this.notification?.notiAuthorPhoto, 'perfil') +')'"
+                class="img img-perfil-public"></div>
+            </span>
+              </div>
+            </div>
+            <div class="col-9 pl-0 media-body ml-2 d-lg-block">
+              <div class="mb-0 text-sm font-weight-bold cursor">
+                <h4 class="mb-0 cl text-user" (click)="this.goToTheNotification()" [innerHTML]="notification.notiIssue + ' ' + notification.notiDestinationName">
+                </h4>
+                <h5>{{this.notification.notiDate}}</h5>
+                <div *ngIf="this.notification?.notiType === fullText" class="row m-auto">
+                  <div class="mr-2 text-center footer-public m-auto">
+                    <button (click)="sendFullText()" class="btn btn-new" pButton type="button" [label]="sendMessage">
+                      <p-progressSpinner *ngIf="showSpinnerSending"
+                                         [style]="{width: '20px', height: '20px'}"></p-progressSpinner>
+                    </button>
+                  </div>
+                  <div class="text-center footer-public m-auto">
+                    <button (click)="declineRequest()" class="btn-ico-user" pButton type="button"
+                            [label]="declineMessage">
+                      <p-progressSpinner *ngIf="showSpinnerDecline"
+                                         [style]="{width: '20px', height: '20px'}"></p-progressSpinner>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-1 al-end">
+              <em *ngIf="!notification.notiIsRead" class="bi bi-check-circle-fill color-icon-fill"></em>
+              <button (click)="menu.toggle($event)" class="btn-table" icon="pi pi-ellipsis-h" pButton
+                      type="button" *ngIf="showOptionButton"></button>
+              <p-menu #menu [hideTransitionOptions]="'0ms'" [model]="items" [popup]="true"
+                      [showTransitionOptions]="'0ms'" class="p-menu-float">
+              </p-menu>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

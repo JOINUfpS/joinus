@@ -1,0 +1,91 @@
+
+.title-dialog {
+  margin: 0 !important;
+}
+
+.p-dialog-mask.p-component-overlay {
+  background-color: rgb(255 255 255 / 57%) !important;
+}
+
+.p-dialog .p-dialog-header {
+  border-bottom: 1px solid #c8c8c88c !important;
+  background: #ffffff !important;
+  color: #3e434a;
+  padding: 1rem;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.p-dialog {
+  box-shadow: 0 1px 18px rgba(25, 65, 99, 0.22) !important;
+  border-radius: 8px !important;
+  border: 1px solid #c8c8c800 !important;
+  background: #ffffff;
+  @media screen and (min-width: 320px) and (max-width: 425px) {
+    width: 95% !important;
+  }
+}
+
+.title-dialog {
+  font-size: 20px !important;
+  font-weight: 400 !important;
+  color: #3e434a;
+}
+
+.footer-dialog {
+  border-top: 1px solid #c8c8c8;
+  text-align: end;
+}
+
+.p-dialog .p-dialog-content {
+  color: #3e434a !important;
+}
+
+.form-control-label {
+  color: #3e434a;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.p-card {
+  background: #ffffff;
+  color: #333333;
+  box-shadow: 0 1px 12px rgba(138, 155, 232, 0.21) !important;
+  border-radius: 3px;
+}
+
+.footer-dialog-upload {
+  border: 1px solid #e7e7e7;
+  border-radius: 8px;
+  padding: 0 0 0 7px;
+}
+
+.p-dialog .p-dialog-footer {
+  border-top: transparent !important;
+  padding: 0.571rem 0 !important;
+}
+
+.choose-fileupload > .p-fileupload > .p-button.p-fileupload-choose > .p-button-icon {
+  font-size: 22px !important;
+  margin-right: 0 !important;
+}
+
+.p-button.p-fileupload-choose {
+  padding: .3rem;
+}
+
+.p-fileupload {
+  margin-top: 12px;
+}
+
+.p-tieredmenu-overlay {
+  z-index: 1001;
+  transform-origin: center top;
+  top: 37.847px !important;
+  left: -58.41px !important;
+}
+
+.line-left {
+  border-left: 1px solid #e7e7e7 !important;
+  padding-left: 9px;
+}

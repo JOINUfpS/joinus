@@ -1,0 +1,122 @@
+<div class="row justify-content-center">
+  <div class="col-xl-3 col-lg-3 col-md-11 col-sm-12 mb-5 mb-xl-0 order-xl-1 order-lg-1 sidebar-wrapper-left">
+    <div class="row pr-4 d-none d-xl-flex">
+      <div class="card card-profile shadow">
+        <div class="card-body p-md-3 line">
+          <div class="row justify-content-center">
+            <div class="col-lg-12 order-lg-2 pt-2">
+              <div class="img-user img-profile">
+                <div [routerLink]="['perfil/', this.userSession.id]"
+                  [style.background-image]="'url('+ this.utilitiesString.getImage(this.userSession?.userPhoto, 'perfil') +')'"
+                  class="cursor img img-user-public">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center pt-3 pb-0">
+            <h1 [routerLink]="['perfil/', this.userSession.id]" class="cursor mb-2 content-text-tooltip-dashboard"
+              pTooltip="{{this.userSession.userName}}" tooltipPosition="top"
+              (mouseover)="utilitiesString.seeTooltipText($event, this.userSession.userName.length)"
+              [tooltipDisabled]="utilitiesString.activeTooltip">{{this.userSession.userName}}
+              <div class="available"></div>
+            </h1>
+            <div class="cl mb-0">
+              {{userIntro !== '' ? userIntro : 'Aquí pondríamos una descripción tuya... si tan solo tuviéramos una!. ' +
+              'Puedes ir a tú perfil y agregarla...'}}
+              <div class="text-sm see-more-less" (click)="seeIntro()">{{labelSeeIntro}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body p-md-3">
+          <h3 [routerLink]="['perfil/', this.userSession.id]" class="cursor cl mb-1 al-center"><em
+              class="bi bi-award-fill text-color"></em>{{this.userSession.userDegree.careerName}}</h3>
+          <div class="row pt-1">
+            <div [routerLink]="['perfil/', this.userSession.id]" class="cursor col-6">
+              <h3 class="cursor cl mb-1 al-center">
+                {{this.numberFollowerUsers != null ? this.numberFollowerUsers : '...'}}
+              </h3>
+              <h3 class="cl mb-1 al-center text-color">Seguidores</h3>
+            </div>
+            <div [routerLink]="['perfil/', this.userSession.id]" class="cursor col-6">
+              <h3 class="cl mb-1 al-center">
+                {{this.numberFollowedUsers != null ? this.numberFollowedUsers : '...'}}
+              </h3>
+              <h3 class="cl mb-1 al-center text-color">Seguidos</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-xl-block">
+
+      <app-footer></app-footer>
+
+    </div>
+  </div>
+  <div (scrolled)="onScrollDown()"
+    class="col-xl-5 col-lg-8 col-md-11 col-sm-12 order-xl-2 order-lg-2 order-md-2 order-sm-2 p-mr-xl-7 p-mr-lg-6 "
+    infiniteScroll>
+    <app-create-edit-publication (updateList)="addNewPublication($event)" [showCreateEditButton]="true">
+    </app-create-edit-publication>
+    <app-card-publication (eventDelete)="removePublicationFromDOM($event)"
+      *ngFor="let publication of this.publications; index as i" [indexPublication]="i" [publication]="publication"
+      id="publication-{{i}}">
+    </app-card-publication>
+    <app-skeleton-publication *ngIf="isLoadingPublications"></app-skeleton-publication>
+    <div *ngIf="!isLoadingPublications && this.publications?.length===0" class="mt-2">
+      <div class="card shadow">
+        <div class="card-body pt-0 pb-3 pt-3 al-center">
+          <div class="col-12 mb-2">
+            <div class="align-content-lg-center">
+              <div class="home m-auto"></div>
+            </div>
+            <h2 class="m-0 p-0 col-12 text-header">No hay publicaciones aún.</h2>
+            <h4 class="m-0 p-0 col-12">Aquí aparecerán las publicaciones que hagas, se uno de los primeros en
+              publicar.</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="col-xl-4 col-lg-8 col-md-11 col-sm-12 mb-2 order-xl-3 order-lg-1 order-md-1 order-sm-1 d-none d-lg-block sidebar-wrapper-right">
+    <div class="row px-3 ">
+      <div *ngIf="showRolesFunctions" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 p-0">
+        <div class="card card-profile mb-3 shadow">
+          <div class="card-header p-3">
+            <h2 class="mb-0 text-header">Funciones de tu rol</h2>
+          </div>
+          <div class="card-body funti-rol p-3">
+            <div *ngFor="let itemModelGrouped of modelGrouped">
+              <div *ngIf="!itemModelGrouped.moduIsGeneric" class="col-lg-12 p-2 line">
+                <button [routerLink]="itemModelGrouped.moduRouter" class="btn btn-funti-rol"
+                  label="{{itemModelGrouped.moduName}}" pButton pTooltip="{{itemModelGrouped.moduName}}"
+                  tooltipPosition="bottom" type="button">
+                  <div class="mr-2 {{itemModelGrouped.moduIcon}}"></div>
+                  <p></p>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-12 col-lg-12 p-0 d-none d-lg-flex pb-2">
+        <div class="card card-profile shadow fill">
+          <div class="card-header p-3">
+            <h2 class="mb-0 text-header">Otros usuarios de Joinus</h2>
+          </div>
+          <div class="card-body px-3 pt-1 pb-3">
+            <div class="col">
+              <app-follow-user-card #cardFollowUser (updateList)="updateViewFollows()"
+                *ngFor="let userSuggested of suggestedUsers | slice:0:3" [dashboard]="true" [follow]="true"
+                [observerUserId]="this.userSession.id" [suggestedUser]="userSuggested"></app-follow-user-card>
+            </div>
+            <div class="col mt-3 al-center">
+              <a [routerLink]="'usuarios'" class="see-more-research">Ver más usuarios</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+  <div class="mb-3 col-xl-10 col-lg-10 col-md-11 col-12 justify-content-center">
+    <div class="card shadow">
+      <div class="card-body">
+        <div class="bg-transparent pt-0 pb-0 pl-lg-4">
+          <div class="row align-items-center custom-justify-evenly">
+            <div class="col-auto px-2">
+              <span class="avatar rounded-circle">
+                <div [routerLink]="['/perfil/', this.user.id]"
+                  [style.background-image]="'url('+ this.utilitiesString.getImage(this.user?.userPhoto, 'perfil') +')'"
+                  class="cursor img-list-user-public">
+                </div>
+              </span>
+            </div>
+            <div class="col-lg col-8">
+              <a [routerLink]="['/perfil/', user.id]" class="pr-0">
+                <h3 class="mb-0 text-blod cursor">{{user.userName}}</h3>
+              </a>
+              <h5 class="mb-0 cl text-user">{{user.instName}}</h5>
+              <h4 class="mb-0 cl text-user">{{user.userEmail}}</h4>
+            </div>
+            <div class="col-xl-3 col-auto px-2">
+              <div class="row align-items-center justify-content-center">
+                <div class="col-auto px-2">
+                  <button *ngIf="optionAssignRole" (click)="assignRole()" [disabled]="false"
+                    class="btn-new-institution mr-lg-2" icon="bi bi-grid-fill" pButton type="button" label=" "
+                    pTooltip="Asignar rol" iconPos="right"></button>
+
+                  <button *ngIf="!optionAssignRole" [disabled]="false" [routerLink]="['/perfil/', user.id]"
+                    iconPos="right" class="btn-new-institution" label=" " icon="bi bi-eye-fill" pButton type="button"
+                    pTooltip="Ver perfil">
+                  </button>
+
+                  <button *ngIf="optionAssignRole" (click)="becomeAdministrator()" [disabled]="false"
+                    class="btn-new-institution" pTooltip="Administrador de la red" icon="bi bi-gear-fill" pButton
+                    type="button" label=" " iconPos="right"></button>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

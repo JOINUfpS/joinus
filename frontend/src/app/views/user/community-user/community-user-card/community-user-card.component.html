@@ -1,0 +1,33 @@
+<div class="follow mb-2">
+  <div class="row px-1">
+    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12">
+      <button (click)="viewProfileUser()" class="button_text">{{userMember?.userName}}</button>
+      <p class="pl-2">{{userMember?.userEmail }}</p>
+    </div>
+    <div *ngIf="showDesigneAdmin" class="col-xl-4 col-lg-5 col-md-4 col-sm-12 al-end m-auto pb-2 pt-2">
+      <button (click)="showInviteTakeRoleModal()" *ngIf="userSessionMember?.cousAdmin && !userMember?.cousAdmin"
+              class="btn-new" label="{{stringCommunity.APPOINT_ADMIN}}" pButton type="button">
+      </button>
+    </div>
+    <div class="col-xl-4 col-lg-5 col-md-4 col-sm-12 al-end m-auto pb-2 pt-2">
+      <button
+        *ngIf="userSessionMember?.cousAdmin && userMember?.cousAdmin && userSessionMember?.userId !== userMember?.userId"
+        icon="bi bi-x-circle" iconPos="right" pTooltip="Eliminar cómo administrador" label=" "
+        class="al-end btn-circle color-icon-fill" pButton type="button" (click)="deleteAdmin(userMember)"></button>
+    </div>
+    <div *ngIf="showApproveOrDenyUnion" class="col-xl-4 col-lg-5 col-md-4 col-sm-12 al-end p-0">
+      <button (click)="approveUnion()" [disabled]="!this.hiddenProgressDeny"
+              class="col-xl-4 col-lg-4 col-md-5 mt-1 mx-1 btn-agree" icon="bi bi-person-check-fill"
+              label="{{labelButtonApprove}}" pButton type="button">
+        <p-progressSpinner [hidden]="this.hiddenProgressAprrove"
+                           [style]="{width: '20px', height: '20px'}"></p-progressSpinner>
+      </button>
+      <button (click)="denyUnion()" [disabled]="!this.hiddenProgressAprrove"
+              class="col-xl-4 col-lg-4 col-md-5 mt-1 mx-1 btn-decline" label="{{labelButtonDeny}}" pButton
+              icon="bi bi-person-x-fill" type="button">
+        <p-progressSpinner [hidden]="this.hiddenProgressDeny"
+                           [style]="{width: '20px', height: '20px'}"></p-progressSpinner>
+      </button>
+    </div>
+  </div>
+</div>

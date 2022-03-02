@@ -1,0 +1,31 @@
+<div class="row justify-content-center">
+  <div class="col-12">
+    <div class="card card-profile shadow mt-4">
+      <div class="card-body pb-0">
+        <div class="row pb-2">
+          <div class="col pl-0 media-body ml-2 d-lg-block">
+            <h3 class="mb-0 text-blod">{{ this.opportunity.oppoTitle }}</h3>
+            <h5 class="m-0"><em class="bi bi-clock-history"></em> Fecha limite: {{ this.opportunity.oppoExpirationDate }}
+            </h5>
+          </div>
+          <div class="al-end">
+            <button (click)="unBookmarked(this.opportunity)" class="btn-table color-icon-fill" icon="pi pi-times-circle"
+                    iconPos="left" pButton pTooltip="Quitar" type="button"></button>
+          </div>
+        </div>
+      </div>
+      <div class="card-body pl-3 pt-md-0 pb-md-0 mt-2">
+        <em class="bi bi-cash-stack"></em><span>{{ this.opportunity.oppoRemuneration }}</span>
+        <div class="col-lg-12 p-0">
+          <span *ngIf="this.opportunity?.oppoEmployerEmail">
+            <em class="bi bi-envelope"></em>{{ this.opportunity?.oppoEmployerEmail }}</span>
+        </div>
+        <div class="col-lg-12 mb-md-2 p-0 pt-2">
+          <button (click)="apply()" class="btn btn-new btn-rol-opportunity" iconPos="left" label="Aplicar" pButton
+                  type="button"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-apply-opportunity #modalApplyOpportunity></app-apply-opportunity>

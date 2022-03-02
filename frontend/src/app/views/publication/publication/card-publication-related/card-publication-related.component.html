@@ -1,0 +1,84 @@
+<div class="row justify-content-center">
+  <div class="col-12">
+    <div class="card card-profile shadow mt-3">
+      <div class="card-body px-3 pb-0">
+        <div class="row pb-2">
+          <div class="col-1 pr-0 media align-items-center">
+            <div [routerLink]="['/perfil/', publication.userId]"
+                 [style.background-image]="'url('+ this.utilitiesString.getImage(publication?.userPhoto, 'perfil') +')'"
+                 class="cursor img img-perfil-public">
+            </div>
+          </div>
+          <div class="col pl-0 media-body ml-2 d-lg-block">
+            <span [routerLink]="['/perfil/', publication.userId]"
+                  class="mb-0 text-sm font-weight-bold cursor">{{publication?.userName}}
+            </span>
+            <span *ngIf="publication?.commId !== null">
+              <em class="bi bi-caret-right"></em>
+              <span [routerLink]="['/usuarios/comunidad', this.publication.commId]"
+                    class="mb-0 text-sm font-weight-bold cursor">{{publication?.commName}}</span>
+            </span>
+            <div class="col-12 p-0">
+              <button (click)="privacy.toggle($event)" *ngIf="this.user.id === this.publication?.userId"
+                      class="btn-privacy p-0 mr-2" icon="{{this.publication.publPrivacy ? 'bi bi-lock': 'bi bi-globe'}}"
+                      pButton type="button"></button>
+              <p-menu #privacy [hideTransitionOptions]="'0ms'" [model]="privacyOptions" [popup]="true"
+                      class="p-menu-float">
+              </p-menu>
+              <em *ngIf="this.user.id !== this.publication.userId" class="btn-privacy p-0 mr-2 bi bi-globe"></em>
+              <span class="mb-0 text-sm">{{publication?.createdDate}}</span>
+              <span *ngIf="publication?.cateId !== null"
+                    class="content-chip chip-category-publication mr-2 ml-2">{{publication?.cateName}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body p-3 pt-md-0 pb-md-0 mt-2">
+        <h3 [routerLink]="['/publicaciones/publicacion', this.publication.id]"
+            class="cursor justifyText mb-2 text-header">{{publication?.publTitle}}</h3>
+        <div class="row pl-3 pr-3">
+          <p [innerHTML]="this.publDescription" class="keep-format-text"></p>
+          <p (click)="seeDescription()" class="text-sm see-more-less" id="element">{{labelSeeDescription}}</p>
+        </div>
+        <div *ngFor="let author of publication.publAuthors" class="content-chip my-3 mr-2">
+          <div class="media align-items-center">
+            <span class="avatar avatar-sm rounded-circle">
+              <div (click)="seeProfile(author.id)"
+                   [style.background-image]="'url('+ this.utilitiesString.getImage(author?.authorPhoto, 'perfil') +')'"
+                   class="{{author?.id ? 'cursor' : ''}} img img-user-public">
+              </div>
+            </span>
+            <div class="media-body ml-1">
+              <h5 (click)="seeProfile(author.id)"
+                  (mouseover)="utilitiesString.seeTooltipText($event, author?.authorName.length)"
+                  [tooltipDisabled]="utilitiesString.activeTooltip"
+                  class="{{author?.id ? 'cursor' : ''}} chip-text-author mb-0 card-round-author"
+                  pTooltip="{{ author?.authorName }}"
+                  tooltipPosition="top">{{ author?.authorName }}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="publication?.publAttachments.length > 0">
+        <div *ngFor="let attachment of publication?.publAttachments" class="card-body p-3 pt-md-0 pb-md-0 mt-3">
+          <div *ngIf="attachment.fileType==='video/mp4'"
+               style="max-width: 100%;min-width: 500px; width: calc((100vh + -350px) * 2)">
+            <div style="height: 100%;left: 0;width: calc(100%);">
+              <video controls style="height: 100%; width: 100%;">
+                <source [src]="this.utilitiesString.getImage(attachment.id)" type="video/mp4">
+                <track default kind="captions" label="Español" src="" srclang="es">
+              </video>
+            </div>
+          </div>
+          <div *ngIf="attachment.fileType==='image/png'"
+               style="max-width: 100%;min-width: 500px; width: calc((100vh + -350px) * 2)">
+            <div style="height: 100%;left: 0;width: calc(100%);margin: auto;">
+              <img [src]="this.utilitiesString.getImage(attachment.id)" alt="..."
+                   style="height: 100%; width: 100%;margin: auto;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

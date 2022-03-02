@@ -1,0 +1,33 @@
+<div class="row p-2">
+  <div class="col-12 justify-content-center">
+    <div class="card">
+      <div class="m-2">
+        <div class="row align-items-center">
+          <div class="px-0 m-auto">
+            <div class="media align-items-center">
+              <span class="avatar avatar-sm rounded-circle">
+                <div
+                  [style.background-image]="'url('+ this.utilitiesString.getImage(idUserPhotoToShare, 'perfil') +')'"
+                  class="img img-author">
+                </div>
+               </span>
+            </div>
+          </div>
+          <div class="col-7">
+            <div class="pl-0 media-body mx-3 p-0 inline-grid">
+              <span class="mb-0 text-blod cursor white-space">{{userNameToShare}}</span>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="p-0 al-end m-auto">
+              <button (click)="sharePublication(followedUser)" [disabled]="this.disableSharing" [label]="shareMessage"
+                      class="btn btn-new p-1" pButton type="button">
+                <p-progressSpinner *ngIf="showSpinner" [style]="{width: '20px', height: '20px'}"></p-progressSpinner>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

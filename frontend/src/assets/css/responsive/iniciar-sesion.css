@@ -1,0 +1,21 @@
+.container-logo-input{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1%;
+}
+
+.container-input-login {
+    width: 400px;
+}
+
+
+@media(max-width:768px){
+
+  .container-logo{
+    display: none;
+  }
+  .container-input-login {
+      width: 320px;
+  }
+}

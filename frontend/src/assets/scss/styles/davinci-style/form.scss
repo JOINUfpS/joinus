@@ -1,0 +1,439 @@
+.p-autocomplete {
+  width: 100%;
+}
+
+.p-calendar {
+  width: 100%;
+}
+
+.error-date-field > p-calendar {
+  width: 100%;
+  border: 1px solid #ff0000;
+}
+
+.p-checkbox .p-checkbox-box {
+  border: 1px solid #a6a6a6;
+  background: #ffffff;
+  width: 20px;
+  height: 20px;
+  color: #333333;
+  border-radius: 50% !important;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s,
+  box-shadow 0.2s;
+}
+
+.p-checkbox .p-checkbox-box.p-highlight {
+  border-color: #ffffff !important;
+  background: #3dd0a0 !important;
+}
+
+.check-register {
+  font-size: 1rem !important;
+  color: #898f98 !important;
+  background: #ffffff !important;
+  padding: 0.5rem 0.8rem !important;
+  border: 1px solid #e7e7e7 !important;
+  border-radius: 3px !important;
+  height: 40px !important;
+  display: table;
+}
+
+.colchek-4 {
+  flex: 0 0 31.3333333333%;
+  max-width: 31.333333%;
+}
+
+.content-chip {
+  display: inline-flex;
+  background: #f0f6fa;
+  padding: 0.3rem 0.6rem;
+  border-radius: 26px;
+}
+
+.content-chip-interest_skills {
+  display: inline-flex;
+  padding: 0.3rem 0.6rem 0.3rem 0.3rem;
+  border-radius: 18px;
+}
+
+.chip-category-publication {
+  background: #03cfa7;
+  color: var(--primary-color-text);
+}
+
+.content-chip-user {
+  display: inline-flex;
+  border: 1px solid #e7e7e7;
+  padding: 0.6rem 0.6rem 0.6rem 0.6rem;
+  border-radius: 26px;
+}
+
+.p-dropdown .p-dropdown-label.p-placeholder {
+  color: #666666;
+}
+
+.p-dropdown .p-dropdown-label.p-placeholder {
+  color: #666666;
+}
+
+.p-dropdown {
+  background: #ffffff00;
+  border: 1px solid #e7e7e7 !important;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s,
+  box-shadow 0.2s;
+  border-radius: 3px;
+  width: 100%;
+}
+
+.p-dropdown .p-dropdown-label.p-placeholder {
+  color: #898f98 !important;
+}
+
+.dropdown-roles {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+.p-dropdown-panel {
+  border: 1px solid #ffffff !important;
+  @media screen and (max-width: 430px) {
+    width: 94%;
+    right: 0;
+    transform: translateX(10px);
+  }
+}
+
+.p-dropdown-label {
+  border: 1px solid #a6a6a600 !important;
+  background: #ffffff00 !important;
+}
+
+.p-multiselect-label,
+.p-dropdown-label,
+.p-inputgroup {
+  font-size: 14px !important;
+}
+
+.dropdown-privacy .p-dropdown {
+  width: 100%;
+  border-radius: 52px !important;
+}
+
+.dropdown-privacy .p-dropdown-label {
+  border: 1px solid #a6a6a600 !important;
+  border-radius: 52px !important;
+}
+
+
+:host ::ng-deep .p-dropdown {
+  width: 14rem;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item{
+  white-space: normal;
+}
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  background: #3dd0a0 !important;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight > span {
+  color: #ffffff !important;
+
+}
+
+.privacy > .p-dropdown {
+  border-radius: 26px;
+  width: 100%;
+  background: #f0f6fa;
+  border: 1px solid #c5c5c500 !important;
+  display: flex;
+}
+
+.dropdown-privacy > .p-dropdown-label {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  height: 25px !important;
+}
+
+.p-tooltip {
+  color: #fff;
+}
+
+.tooltip .tooltiptext-bottomarrow::after {
+  border-color: #f90000 transparent transparent transparent;
+}
+
+.p-multiselect-panel .p-multiselect-items .p-multiselect-item.p-highlight {
+  background: #3dd0a0 !important;
+}
+
+.p-multiselect-panel,
+.p-multiselect-items,
+.p-multiselect-item.p-highlight,
+> span {
+  color: #ffffff !important;
+}
+
+.p-multiselect-item {
+  font-size: 15px;
+}
+
+.p-multiselect {
+  width: 100%;
+  background: #ffffff00;
+  border: 1px solid #e7e7e7 !important;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s,
+  box-shadow 0.2s;
+  border-radius: 3px;
+  height: 40px !important;
+}
+
+.p-checkbox .p-checkbox-box {
+  border: 1px solid #e7e7e7 !important;
+  border-radius: 2px !important;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s,
+  box-shadow 0.2s;
+}
+
+.textarea,
+textarea {
+  width: 100%;
+  font-size: 15px !important;
+  color: #4f4f4f !important;
+  background: #ffffff !important;
+  padding: 0.5rem 1rem !important;
+  border: 1px solid #e7e7e7 !important;
+  border-radius: 3px !important;
+  box-sizing: border-box !important;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.14) !important;
+}
+
+.p-inputtext {
+  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+  Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 14px !important;
+  color: #4f4f4f !important;
+  background: #ffffff !important;
+  padding: 0.5rem 0.5rem !important;
+  border: 1px solid #e7e7e7 !important;
+  border-radius: 3px !important;
+  //height: 40px !important;
+  box-sizing: border-box !important;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.14) !important;
+}
+
+.class-error {
+  border: 1px solid rgb(255, 0, 0) !important;
+  box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(255, 0, 0, 0.6);
+  outline: 0 none;
+}
+
+.input-comment {
+  align-content: flex-end;
+  border-radius: 25px !important;
+  background: #f0f6fa !important;
+  border-color: transparent !important;
+  height: 36px !important;
+}
+
+.input-comment:focus {
+  border-color: transparent !important;
+}
+
+.input-comment-edit {
+  align-content: flex-end;
+  border-radius: 18px !important;
+  border-color: transparent !important;
+}
+
+.input-comment-edit:focus {
+  border-color: transparent !important;
+}
+
+.p-inputgroup-addon:first-child,
+.p-inputgroup button:first-child,
+.p-inputgroup input:first-child {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  outline: none !important;
+}
+
+.p-inputgroup {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+body,
+.p-inputtext,
+.p-component {
+  font-family: Quicksand, serif !important;
+}
+
+.p-inputgroup-addon {
+  background: #ffffff00 !important;
+  color: #898f98 !important;
+  border: 0 !important;
+  padding: 0.629rem 0.729rem !important;
+  min-width: 2.357rem !important;
+}
+
+.p-float-label textarea:focus ~ label,
+.p-float-label textarea.ui-state-filled ~ label {
+  top: -0.1em !important;
+  font-size: 13px;
+  background: white;
+  border-radius: 10px;
+  padding: 0 5px;
+}
+
+.p-field {
+  margin-bottom: 1rem;
+}
+
+.p-float-label > textarea ~ label {
+  left: 0.25em;
+  top: 1em;
+}
+
+.p-float-label {
+  display: block;
+  position: relative;
+}
+
+.p-float-label label {
+  margin-left: 0.1rem;
+  top: 40%;
+}
+
+.p-float-label textarea ~ label {
+  top: 1rem;
+}
+
+.p-float-label > label {
+  left: 0.429rem;
+  color: #666666;
+  transition-duration: 0.2s;
+}
+
+::placeholder {
+  color: #898f98 !important;
+}
+
+
+
+label {
+  font-size: 13px !important;
+  margin-bottom: 0.2rem !important;
+}
+
+span,
+p {
+  font-size: 14px !important;
+}
+
+.p-paginator .p-dropdown .p-dropdown-label,
+.p-dropdown .p-dropdown-label {
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
+.p-dropdown:focus,
+button:focus,
+.p-dropdown .p-dropdown-label:focus {
+  outline: 0 !important;
+}
+
+.p-float-label input:focus ~ label,
+.p-float-label input.p-filled ~ label,
+.p-float-label textarea:focus ~ label,
+.p-float-label textarea.p-filled ~ label,
+.p-float-label .p-inputwrapper-focus ~ label,
+.p-float-label .p-inputwrapper-filled ~ label {
+  top: -0.2rem !important;
+  font-size: 12px !important;
+  background: white !important;
+}
+
+.p-datepicker table td > span.p-highlight {
+  color: #ffffff !important;
+  background: #3dd0a0 !important;
+}
+
+.p-datepicker table td > span {
+  border-radius: 26px !important;
+}
+
+.p-datepicker table td.p-datepicker-today > span {
+  background: #f0f6fa !important;
+  color: #194163 !important;
+  border-color: transparent !important;
+}
+
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month, .p-datepicker .p-datepicker-header .p-datepicker-title select {
+  border-color: #e7e7e7;
+  border-radius: 5px;
+  color: #666666;
+}
+
+
+.p-float-label > label {
+  left: 0.5rem !important;
+  color: #898f98 !important;
+  transition-duration: 0.2s;
+}
+
+.p-float-label > textarea ~ label {
+  left: 0.5em !important;
+  top: 1.7em !important;
+}
+
+input:focus,
+textarea:focus {
+  border: 1px solid #bababa !important;
+}
+
+.text-small {
+  font-size: 0.775rem !important;
+}
+
+.p-autocomplete {
+  .p-autocomplete-token {
+    background: #3dd0a0 !important;
+
+    .p-autocomplete-token-label {
+      color: #ffffff !important;
+    }
+    .p-autocomplete-token-icon {
+      color: #ffffff !important;
+    }
+  }
+}
+
+.p-chips {
+  width: auto;
+
+  .p-chips-token {
+    background: #3dd0a0 !important;
+    .p-chips-token-label {
+      color: #ffffff !important;
+    }
+    .p-chips-token-icon {
+      color: #ffffff !important;
+    }
+  }
+}
+
+.p-accordion {
+  .p-accordion-tab-active {
+    border: 1px solid #ffffff !important;
+    .p-accordion-header-link {
+      background: #3dd0a0 !important;
+      .p-accordion-header-text {
+        color: #ffffff !important;
+      }
+    }
+  }
+}

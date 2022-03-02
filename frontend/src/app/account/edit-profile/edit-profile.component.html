@@ -1,0 +1,206 @@
+<p-dialog [(visible)]="editProfileDialogDisplay" [blockScroll]="true"
+          [dismissableMask]="true"
+          [draggable]="false" [maximizable]="false" [minY]="70"
+          [modal]="true"
+          [styleClass]="'col-xl-5 col-lg-7 col-md-8 col-sm-11 col-11 '"
+          [style]="{maxWidth: '60rem'}">
+  <p-header>
+    <h2 class="title-dialog">{{ this.headerText }}</h2>
+  </p-header>
+  <div class="pr-4 pl-4">
+    <div class="row pt-2">
+      <ng-template [ngIf]="fieldEdit === 'general'">
+        <form [formGroup]="formGeneral">
+          <div class="row pt-2">
+            <div class="col-xl-6 xol-lg-6 col-md-6 col-sm-12 p-2">
+              <label>Nombres y apellidos<span class="text-requerid">*</span></label>
+              <input (input)="utilitiesConfigString.convertOnlyText($event);" formControlName="user_name" maxlength="30"
+                     pInputText size="100" type="text">
+            </div>
+            <div class="col-xl-6 xol-lg-6 col-md-6 col-sm-12 p-2">
+              <label>Correo institucional<span class="text-requerid">*</span></label>
+              <input formControlName="user_email" maxlength="30" pInputText size="100" type="email" disabled>
+            </div>
+            <div class="col-xl-6 xol-lg-6 col-md-6 col-sm-12 p-2">
+              <label>Celular o teléfono</label>
+              <input formControlName="user_phone" id="userPhone" pInputText type="text" minlength="10" maxlength="10">
+              <small *ngIf="formGeneral.get('user_phone').hasError('minlength')"
+                     class="text-requerid">10 dígitos o ninguno.</small>
+              <small *ngIf="formGeneral.get('user_phone').hasError('pattern')"
+                     class="text-requerid">El celular solo puede contener números, evite los espacios.</small>
+            </div>
+            <div class="col-xl-6 xol-lg-6 col-md-6 col-sm-12 p-2">
+              <label>País<span class="text-requerid">*</span></label>
+              <p-dropdown (onChange)="reseatDropdownStatesAndCities()" (onClick)="getCountries()"
+                          [autoDisplayFirst]="false"
+                          [options]="countries" appendTo="body" class="ui-state-filled"
+                          emptyFilterMessage="No se han encontrado resultados" filter="filter"
+                          formControlName="user_country"
+                          id="user_country" inputId="user_country"
+                          optionLabel="name" placeholder="País...">
+              </p-dropdown>
+            </div>
+            <div [hidden]="hiddenStates" class="col-xl-6 xol-lg-6 col-md-6 col-sm-12 p-2">
+              <label>Estado<span class="text-requerid">*</span></label>
+              <p-dropdown (onChange)="reseatDropdownCities()" (onClick)="getStates()" [autoDisplayFirst]="false"
+                          [options]="states" appendTo="body" class="ui-state-filled"
+                          emptyFilterMessage="No se han encontrado resultados" filter="filter"
+                          formControlName="user_department"
+                          id="user_department" inputId="user_department"
+                          optionLabel="name" placeholder="Estado, Departamento, Provincia..">
+              </p-dropdown>
+            </div>
+            <div [hidden]="hiddenCities" class="col-xl-6 xol-lg-6 col-md-6 col-sm-12 p-2">
+              <label>Ciudad o municipio<span class="text-requerid">*</span></label>
+              <p-dropdown (onClick)="getCities()" [autoDisplayFirst]="false" [options]="cities"
+                          appendTo="body" class="ui-state-filled"
+                          emptyFilterMessage="No se han encontrado resultados"
+                          filter="filter" formControlName="user_municipality" id="user_municipality"
+                          inputId="user_municipality" optionLabel="name" placeholder="Ciudad, Municipio...">
+              </p-dropdown>
+            </div>
+            <div class="col-xl-6 xol-lg-6 col-md-6 col-sm-12 p-2">
+              <label>Carrera o título profesional<span class="text-requerid">*</span></label>
+              <p-dropdown [autoDisplayFirst]="false" [options]="listUniversityCareers" appendTo="body"
+                          class="dropdown-roles" emptyFilterMessage="No se encontraron resultados"
+                          formControlName="user_degree"
+                          id="userDegree" optionLabel="careerName">
+              </p-dropdown>
+            </div>
+          </div>
+        </form>
+      </ng-template>
+    </div>
+    <ng-template [ngIf]="fieldEdit === 'intro'">
+      <form [formGroup]="introForm">
+          <textarea class="ui-inputtext" cols="40" formControlName="user_intro"
+                    placeholder="Empieza a escribir sobre ti..." maxlength="500" rows="10" size="250" type="text">
+          </textarea>
+      </form>
+    </ng-template>
+    <ng-template [ngIf]="fieldEdit === 'interest'">
+      <form [formGroup]="interestForm">
+        <p-chips class="col-12" formControlName="user_interest" placeholder="Escribe tus intereses..."
+                 separator=","></p-chips>
+      </form>
+    </ng-template>
+    <ng-template [ngIf]="fieldEdit === 'skill'">
+      <form [formGroup]="skillForm">
+        <div class="col-12">
+          <p-chips formControlName="user_skill" placeholder="Escribe tus habilidades..."
+                   separator=","></p-chips>
+        </div>
+      </form>
+    </ng-template>
+    <ng-template [ngIf]="fieldEdit === 'curriculum vitae'">
+      <form [formGroup]="formGeneral">
+        <div class="row m-auto pl-5">
+          <div class="col-lg-12 p-2 pb-2">
+            <div class="content-img-pdf" *ngIf="validFile">
+              <img *ngIf="validFile" alt="..." class="img-pdf center pb-mb-3" src="./assets/img/brand/pdf.png">
+            </div>
+            <div class="content-img-pdf" *ngIf="!validFile">
+              <img *ngIf="!validFile" alt="..." class="img-pdf center pb-mb-3" src="./assets/img/brand/pdf-on.png">
+            </div>
+            <div class="col-lg-12 d-flex justify-content-center">
+              <span *ngFor="let file of uploadedFiles" class="text-pdf">{{file.name}} - {{file.size}} bytes</span>
+            </div>
+          </div>
+        </div>
+      </form>
+    </ng-template>
+  </div>
+  <p-footer class="row px-2 footer-dialog-upload upload-button">
+    <div class="col pl-2 p-2 content-inco" *ngIf="fieldEdit === 'curriculum vitae'">
+      <p-fileUpload #photo (onSelect)="onSelectFile($event,photo)" [auto]="false" [showCancelButton]="false"
+                    [showUploadButton]="false" accept=".pdf" chooseIcon="bi bi-paperclip"
+                    chooseLabel="Subir hoja de vida" customUpload="true" mode="basic" name="fileImg">
+      </p-fileUpload>
+    </div>
+    <div class="col p-2 pr-2 al-end">
+      <button (click)="processSaved()" *ngIf="fieldEdit === 'curriculum vitae'"
+              [disabled]="buttonFormActioned"
+              [label]="buttonFormActioned? 'Actualizando' : 'Actualizar'" class="btn-new" pButton type="button">
+        <p-progressSpinner [hidden]="!buttonFormActioned" [style]="{width: '20px', height: '20px'}"></p-progressSpinner>
+      </button>
+      <button (click)="saveSkill()" *ngIf="fieldEdit === 'skill'" [disabled]="!skillForm?.valid  || buttonFormActioned"
+              [label]="buttonFormActioned? 'Actualizando' : 'Actualizar'" class="btn-new" pButton type="button">
+        <p-progressSpinner [hidden]="!buttonFormActioned" [style]="{width: '20px', height: '20px'}"></p-progressSpinner>
+      </button>
+      <button (click)="saveInterest()" *ngIf="fieldEdit === 'interest'"
+              [disabled]="!interestForm?.valid  || buttonFormActioned"
+              [label]="buttonFormActioned? 'Actualizando' : 'Actualizar'" class="btn-new" pButton type="button">
+        <p-progressSpinner [hidden]="!buttonFormActioned" [style]="{width: '20px', height: '20px'}"></p-progressSpinner>
+      </button>
+      <button (click)="saveIntro()" *ngIf="fieldEdit === 'intro'"
+              [disabled]="!introForm?.valid  || buttonFormActioned"
+              [label]="buttonFormActioned? 'Actualizando' : 'Actualizar'" class="btn-new" pButton type="button">
+        <p-progressSpinner [hidden]="!buttonFormActioned" [style]="{width: '20px', height: '20px'}"></p-progressSpinner>
+      </button>
+      <button (click)="processSaved()" *ngIf="fieldEdit === 'general'"
+              [disabled]="!formGeneral?.valid  || buttonFormActioned"
+              [label]="buttonFormActioned? 'Actualizando' : 'Actualizar'" class="btn-new" pButton type="button">
+        <p-progressSpinner [hidden]="!buttonFormActioned" [style]="{width: '20px', height: '20px'}"></p-progressSpinner>
+      </button>
+    </div>
+  </p-footer>
+</p-dialog>
+
+<p-dialog [(visible)]="newProjectDialogDisplay" [draggable]="false" [maximizable]="false" [minY]="70"
+          [modal]="true" [styleClass]="'col-sm-11 col-md-9 col-lg-6 col-xl-5'">
+  <p-header>
+    <h2 class="title-dialog">{{headerText}}</h2>
+  </p-header>
+  <div class="pr-4 pl-4">
+    <form [formGroup]="formNewProject">
+      <div class="p-field p-col-12 mb-4 mt-2">
+          <span class="p-float-label">
+            <input formControlName="userProjectTitle" id="userProjectTitle" pInputText type="text">
+            <label for="userProjectTitle">Título<strong class="text-requerid">*</strong></label>
+          </span>
+      </div>
+      <div class="p-field p-col-12 mb-4">
+        <ckeditor [config]="utilityRichText.config" [editor]="editorRichAbstract" class="ck-editor__editable"
+                  formControlName="userProjectAbstract"
+                  id="userProjectAbstract"></ckeditor>
+      </div>
+      <div class="py-2 px-0 mb-2">
+          <span class="p-float-label">
+            <p-calendar [(ngModel)]="startDateProject" [locale]="utilitiesConfigString.language" [readonlyInput]="true"
+                        [showIcon]="true" [yearNavigator]="true"
+                        appendTo="body" dateFormat="mm/yy" formControlName="userProjectStartDate"
+                        id="userProjectStartDate" inputId="navigators" view="month"
+                        yearRange="1900:2050"></p-calendar>
+            <label for="userProjectStartDate">Fecha estimada de inicio<strong class="text-requerid">*</strong></label>
+          </span>
+      </div>
+      <span class="p-float-label mb-2">
+              <p-calendar [(ngModel)]="EndDateProject" [readonlyInput]="true" [showIcon]="true"
+                          [locale]="utilitiesConfigString.language" appendTo="body" [showWeek]="true"
+                          [yearNavigator]="true" dateFormat="mm/yy" formControlName="userProjectEndDate"
+                          id="userProjectEndDate" inputId="navigators" view="month" yearRange="1900:2050"></p-calendar>
+              <label for="userProjectEndDate">Fecha estimada de finalización<strong
+                class="text-requerid">*</strong></label>
+              <small *ngIf="formNewProject?.get('userProjectEndDate').hasError('noValidDate')" class="error-field">
+                 La fecha de finalización debe ser mayor o igual a la fecha de inicio
+              </small>
+            </span>
+      <span class="p-float-label">
+        <input class="ng-invalid" formControlName="userProjectLink" id="userProjectLink" maxlength="100"
+               pInputText
+               size="40" type="text">
+        <label for="userProjectLink">Url o link de complementos (https://example.com/example)</label>
+        <small *ngIf="formNewProject?.get('userProjectLink').hasError('pattern')" class="text-requerid">La url es
+              inválida.</small>
+      </span>
+    </form>
+  </div>
+  <p-footer>
+    <div class="col-lg-12 p-2 footer-dialog">
+      <button (click)="processSaved()" [disabled]="!formNewProject?.valid || buttonFormActioned"
+              [label]="buttonFormActioned? 'Agregando' : 'Agregar'" class="btn-new" pButton type="button">
+        <p-progressSpinner [hidden]="!buttonFormActioned" [style]="{width: '20px', height: '20px'}"></p-progressSpinner>
+      </button>
+    </div>
+  </p-footer>
+</p-dialog>

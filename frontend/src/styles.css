@@ -1,0 +1,56 @@
+/* You can add global styles to this file, and also import other style files */
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+/* Encabezados de tabla centrados */
+
+b, strong {
+  font-weight: bold  !important;
+}
+
+table th {
+  text-align: center;
+}
+
+/* Filas centradas */
+table tr {
+  text-align: center;
+}
+
+
+p-confirmdialog > .ui-confirmdialog {
+  border-radius: 5px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16), 0 -3px 6px 0 rgba(0, 0, 0, 0.16);
+}
+
+p-confirmdialog .ui-dialog-footer {
+  justify-content: space-evenly;
+  display: flex;
+}
+
+button.button_text {
+  background: none;
+  border: none;
+}
+
+
+html, body {
+  height: 100%;
+}
+
+.text-requerid {
+  color: red;
+  font-size: 16px;
+  margin-left: 2px;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.ck-editor__editable {
+  min-height: 150px !important;
+}

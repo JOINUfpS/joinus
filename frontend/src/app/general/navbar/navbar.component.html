@@ -1,0 +1,269 @@
+<nav class="navbar navbar-top navbar-expand-md navbar-dark py-1" id="navbar-main">
+  <!-- NAV SIN RESPONSIVE -->
+  <div class="container-fluid ml-sm--4" *ngIf="this.user">
+    <!-- logo -->
+    <a [routerLink]="['']" routerLinkActive="active">
+      <div class="navbar-brand pt-0 content-nav px-2">
+        <img alt="Logo Joinus" class="nav-img-log mr-1" src="./assets/img/brand/joinus.svg" />
+        <picture>
+          <source media="(max-width:425px)" srcset="./assets/img/brand/ufps-gray-logo-only.png">
+          <img alt="Logo Joinus" class="nav-img-log" src="./assets/img/brand/ufps-gray-logo.png" />
+        </picture>
+
+      </div>
+    </a>
+    <!-- buscador -->
+    <form id="search" class="navbar-search navbar-search-dark form-inline mr-1 ml--8">
+      <div [ngClass]="{ focused: focus === true }" class=" container-input-search form-group mb-0">
+        <div class="p-inputgroup filter-ico mb-0">
+          <span class="p-inputgroup-addon bi bi-search icon-search-navbar"></span>
+          <input (blur)="focus=false" (focus)="true" (keyup.enter)="search()" [(ngModel)]="searchField"
+            class="input-search" id="searchInput" name="searchInput" pInputText placeholder="Buscar" type="text" />
+        </div>
+      </div>
+    </form>
+
+    <!--  MENU DE JOINUS -->
+    <div class="navbar-brand pt-0 d-none d-md-flex">
+      <ul class="navbar-nav">
+        <li class="nav-item nav-items-general navbar-search-dark" pTooltip="Inicio" tooltipPosition="bottom">
+          <a [routerLinkActiveOptions]="{exact: true}" [routerLink]="['']" class="nav-link" routerLinkActive="active">
+            <div class="home"></div>
+          </a>
+          <div [routerLinkActiveOptions]="{exact: true}" [routerLink]="['']" class="active-home"
+            routerLinkActive="active"></div>
+        </li>
+        <li class="nav-item nav-items-general navbar-search-dark" pTooltip="Comunidades" tooltipPosition="bottom">
+          <a [routerLinkActiveOptions]="{exact: true}" [routerLink]="'usuarios/comunidades/'" class="nav-link"
+            routerLinkActive="active">
+            <div class="community"></div>
+          </a>
+          <div [routerLinkActiveOptions]="{exact: true}" [routerLink]="'usuarios/comunidades/'" class="active-community"
+            routerLinkActive="active"></div>
+        </li>
+        <li class="nav-item nav-items-general navbar-search-dark" pTooltip="Usuarios" tooltipPosition="bottom">
+          <a [routerLinkActiveOptions]="{exact: true}" [routerLink]="'usuarios/'" class="nav-link"
+            routerLinkActive="active">
+            <div class="user"></div>
+          </a>
+          <div [routerLinkActiveOptions]="{exact: true}" [routerLink]="'usuarios/'" class="active-user"
+            routerLinkActive="active"></div>
+        </li>
+        <li class="nav-item nav-items-general navbar-search-dark" pTooltip="Oportunidades" tooltipPosition="bottom">
+          <a [routerLinkActiveOptions]="{exact: true}" [routerLink]="'institucion/oportunidades/'" class="nav-link"
+            routerLinkActive="active">
+            <div class="opportunity"></div>
+          </a>
+          <div [routerLinkActiveOptions]="{exact: true}" [routerLink]="'institucion/oportunidades/'"
+            class="active-opportunity" routerLinkActive="active"></div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="container-items">
+      <div (click)="showSidebar()" class=" px-2 d-block d-sm-block d-md-none" id="menu">
+        <em class="bi bi-list btn-size"></em>
+      </div>
+
+      <!-- notification -->
+      <ul id="notification" class="navbar-nav align-items-center d-sm-contents">
+        <li class="nav-item navbar-search-dark" pTooltip="Chat" tooltipPosition="bottom">
+          <a [routerLink]="'chat/'" class="nav-link" routerLinkActive="active">
+            <div class="chat"></div>
+          </a>
+          <div [routerLink]="'chat/'" class="active-chat" routerLinkActive="active"></div>
+        </li>
+        <li class="nav-item cursor" ngbDropdown placement="bottom-right" (change)="changeClassNotification($event)">
+          <a class="nav-link pr-0" ngbDropdownToggle>
+            <span *ngIf="numNotifications > 0" class="badge">{{numNotifications}}</span>
+            <div [ngClass]="classNotification" id="notification-active"></div>
+            <div class="dropdown-menu-right" ngbDropdownMenu>
+              <app-list-notification #listNotification (communicatorWithFatherOutput)="showNumberNoSee($event)">
+              </app-list-notification>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item" ngbDropdown placement="bottom-right">
+          <a class="pr-sm-0" ngbDropdownToggle role="button">
+            <div class="media align-items-center">
+              <span class="avatar avatar-sm rounded-circle">
+                <div
+                  [style.background-image]="'url('+ this.utilitiesString.getImage(this.user?.userPhoto, 'perfil') +')'"
+                  class="img img-user-public">
+                </div>
+              </span>
+              <div class="media-body ml-2 d-none d-lg-block">
+                <h4 class="mb-0 text-sm font-weight-bold content-text-tooltip-navbar" pTooltip="{{this.user?.userName}}"
+                  tooltipPosition="top"
+                  (mouseover)="utilitiesString.seeTooltipTextUserNavbar($event, this.user?.userName.length)"
+                  [tooltipDisabled]="utilitiesString.activeTooltip">{{this.userNameToShow}}</h4>
+              </div>
+            </div>
+          </a>
+          <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right" ngbDropdownMenu>
+            <a [routerLink]="['/perfil/', this.user.id]" class="dropdown-item cursor" routerLinkActive="active">
+              <em class="bi bi-person-fill"></em>
+              <span>Ver tu perfil</span>
+            </a>
+            <a *ngIf="this.user.userRole.length!==0" routerLinkActive="active" (click)="seeUser()"
+              class="dropdown-item cursor">
+              <em class="bi bi-diagram-3-fill"></em>
+              <span>Cambiar de rol</span>
+            </a>
+            <a (click)="requestRole()" class="dropdown-item cursor" routerLinkActive="active">
+              <em class="bi bi-file-earmark-check-fill"></em>
+              <span>Solicitar rol</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a (click)="logout()" class="dropdown-item cursor" routerLinkActive="active">
+              <em class="bi bi-box-arrow-right"></em>
+              <span>Cerrar sesión</span>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div *ngIf="!this.user" class="container-fluid">
+    <button *ngIf="!this.user" [routerLink]="['/iniciar-sesion']" label="Iniciar sesión" pButton type="button"
+      class="btn-new" icon="icon-right" iconPos="left"></button>
+  </div>
+</nav>
+
+<!-- RESPONSIVE -->
+<div *ngIf="sidebar" class="{{toggleSlider}} d-lg-none">
+  <div class="sidebar-header" id="logo">
+    <div (click)="closeSidebar()" class="logo">
+      <div class="logo clearfix">
+        <div class="row justify-content-between align-items-center">
+          <div class="col-auto">
+            <a [routerLink]="['']" class="logo-text float-left" routerLinkActive="active">
+              <div class="logo-img">
+                <img alt="Logo Joinus" class="nav-img-log" src="./assets/img/brand/joinus.svg" />
+              </div>
+            </a>
+
+          </div>
+          <div class="col-auto">
+            <a (click)="closeSidebar()" class="nav-close d-block d-xl-none">
+              <em class="bi bi-x toggle-icon icon-close"></em>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar-content main-menu-content">
+    <div class="nav-container">
+      <ul class="navbar-nav navbar-nav-menu">
+        <li (click)="closeSidebar()" class="nav-item sidebar-item">
+          <a [routerLink]="['']" class="nav-link sidebar-link">
+            <div class="container-img-menu">
+              <div class="home"></div>
+            </div>
+            <div class="container-text-sidebar">
+              <span class="text-sidebar">Inicio</span>
+            </div>
+          </a>
+        </li>
+        <li (click)="closeSidebar()" class="nav-item sidebar-item">
+          <a [routerLink]="'usuarios/comunidades/'" class="nav-link sidebar-link">
+
+            <div class="container-img-menu">
+              <div class="community"></div>
+            </div>
+            <div class="container-text-sidebar">
+              <span class="text-sidebar">Comunidades</span>
+            </div>
+
+          </a>
+        </li>
+        <li (click)="closeSidebar()" class="nav-item sidebar-item">
+          <a [routerLink]="'usuarios/'" class="nav-link sidebar-link">
+
+            <div class="container-img-menu">
+              <div class="user"></div>
+            </div>
+            <div class="container-text-sidebar">
+              <span class="text-sidebar">Usuarios</span>
+            </div>
+
+          </a>
+        </li>
+        <li (click)="closeSidebar()" class="nav-item sidebar-item">
+          <a [routerLink]="'institucion/oportunidades/'" class="nav-link sidebar-link">
+            <div class="container-img-menu">
+              <div class="opportunity"></div>
+            </div>
+            <div class="container-text-sidebar">
+              <span class="text-sidebar">Oportunidades</span>
+            </div>
+          </a>
+          <div [routerLink]="'institucion/oportunidades/'" class="active-sidebar" routerLinkActive="active"></div>
+        </li>
+      </ul>
+      <ul class="navbar-nav navbar-nav-menu pt-0" *ngIf="showRolesFunctions">
+        <div *ngFor="let itemModelGrouped of modelGrouped">
+          <div *ngIf="!itemModelGrouped.moduIsGeneric" class="">
+            <li (click)="closeSidebar()" class="nav-item sidebar-item">
+              <a [routerLink]="itemModelGrouped.moduRouter" class="nav-link sidebar-link">
+                <div class="mx-auto">
+                  <div class=" {{itemModelGrouped.moduIcon}}"></div>
+                </div>
+                <div class="container-text-sidebar">
+                  <span class="text-sidebar">{{itemModelGrouped.moduName}}</span>
+                </div>
+              </a>
+              <div [routerLink]="itemModelGrouped.moduRouter" class="active-sidebar" routerLinkActive="active"></div>
+            </li>
+          </div>
+        </div>
+      </ul>
+      <div class="row justify-content-center">
+        <div class="col-10">
+          <app-footer></app-footer>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-dialog [(visible)]="visibilityDialogChangeRole" [blockScroll]="true" [closable]="true" [dismissableMask]="true"
+  [draggable]="false" [minX]="70" [minY]="70" [modal]="true"
+  [styleClass]="'col-xl-5 col-lg-7 col-md-8 col-sm-11 col-11 '" [style]="{maxWidth: '60rem'}">
+  <p-header>
+    <h2>
+      <em class="icon-user"></em>
+      <span class="title-dialog">Hola ¡{{ this.user.userName }}!</span>
+    </h2>
+  </p-header>
+
+  <p-toolbar>
+    <div class="ui-toolbar-group-right">
+      <p>{{ this.user.userName }}, en esta sección encontrarás los roles que tienes
+        asignados, de esta lista debes escoger el rol que quieres tener activo
+        ahora. <em class="text-blod">Para acceder a las funcionalidades asignadas al
+          mismo, se cerrara tu sesión y deberás volver a ingresar.</em>
+      </p>
+    </div>
+  </p-toolbar>
+  <p-table>
+    <ng-template pTemplate="emptymessage">
+      <tr *ngFor="let role of this.user.userRole" class="cursor">
+        <td>
+          <span *ngIf="role.roleId !== this.user.userRoleActive" (click)="roleChange(role)">
+            <button [disabled]="buttonChangeRolePress" pButton type="button" class="btn-decline"
+              label="{{role.roleName}}">
+            </button>
+          </span>
+          <p-progressSpinner [hidden]="!buttonChangeRolePress" [style]="{width: '20px', height: '20px'}">
+          </p-progressSpinner>
+          <span *ngIf="role.roleId === this.user.userRoleActive" pTooltip="Este rol ya esta activo">
+            <button pButton type="button" class="status-Autorizada" label="{{role.roleName}}"></button>
+          </span>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-dialog>

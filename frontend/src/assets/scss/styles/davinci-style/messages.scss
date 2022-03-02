@@ -1,0 +1,57 @@
+.p-toast .p-toast-message {
+  margin: 0 0 1rem 0;
+  box-shadow: 0 0 14px 0 rgb(138 155 232 / 25%) !important;
+  border-radius: 4px;
+}
+
+.p-toast .p-toast-message .p-toast-message-content .p-toast-detail {
+  margin: 0 !important;
+}
+
+.p-toast .p-toast-message .p-toast-message-content .p-toast-message-text {
+  margin: 0 !important;
+}
+
+.p-toast .p-toast-message .p-toast-message-content .p-toast-message-icon {
+  display: none !important;
+}
+
+.p-toast .p-toast-message.p-toast-message-success {
+  background: #ffffff !important;
+  border: solid #38ae4b !important;
+  border-width: 4px 0 0 0 !important;
+  color: #434343 !important;
+  @media screen and (min-width: 300px) and (max-width: 500px) {
+    width: 80%;
+  }
+}
+
+.p-toast .p-toast-message.p-toast-message-warn {
+  background: #ffffff !important;
+  border: solid #faa636 !important;
+  border-width: 4px 0 0 0 !important;
+  color: #434343 !important;
+  @media screen and (min-width: 300px) and (max-width: 500px) {
+    width: 80%;
+  }
+}
+
+.p-toast .p-toast-message.p-toast-message-error {
+  background: #ffffff !important;
+  border: solid #d41b1b !important;
+  border-width: 4px 0 0 0 !important;
+  color: #434343 !important;
+  @media screen and (min-width: 300px) and (max-width: 500px) {
+    width: 80%;
+  }
+}
+
+.p-toast .p-toast-message.p-toast-message-info {
+  background: #ffffff !important;
+  border: solid #87ceeb !important;
+  border-width: 4px 0 0 0 !important;
+  color: #434343 !important;
+  @media screen and (min-width: 300px) and (max-width: 500px) {
+    width: 80%;
+  }
+}

@@ -1,0 +1,159 @@
+<div class="row justify-content-center">
+  <h1>Busca usuarios, comunidades, publicaciones y más</h1>
+  <div class="mb-3 col-xl-10 col-lg-10 col-md-11 col-12 justify-content-center">
+    <div class="card shadow">
+      <div class="card-body">
+        <div class="p-inputgroup filter-ico mb-0">
+          <span class="p-inputgroup-addon pi pi-search"></span>
+          <input (keyup.enter)="search()" [(ngModel)]="stringToSearch" class="input-search filter-icono" pInputText
+                 placeholder="Buscar usuario, comunidad, publicación..."
+                 type="text">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="mb-3 col-xl-10 col-lg-10 col-md-11 col-12 justify-content-center">
+    <div class="card card-profile shadow">
+      <div class="card-body pt-0 pb-0">
+        <div class="row text-center">
+          <button (click)="validateQueryToBeMade(0)" class="col p-2 mr-2 cursor button-tab" label="Usuarios" pButton
+                  type="button">
+            <span class="btn-info-{{ selectedIndex }}"></span>
+          </button>
+          <button (click)="validateQueryToBeMade(1)" class="col p-2 mr-2 cursor button-tab" label="Comunidades"
+                  pButton
+                  type="button">
+            <span class="btn-followers-{{ selectedIndex }}"></span>
+          </button>
+          <button (click)="validateQueryToBeMade(2)" class="col p-2 mr-2 cursor button-tab" label="Publicaciones"
+                  pButton
+                  type="button">
+            <span class="btn-publications-{{ selectedIndex }}"></span>
+          </button>
+          <button (click)="validateQueryToBeMade(3)" class="col p-2 mr-2 cursor button-tab" label="Preguntas" pButton
+                  type="button">
+            <span class="btn-favorites-{{ selectedIndex }}"></span>
+          </button>
+          <button (click)="validateQueryToBeMade(4)" class="col p-2 mr-2 cursor button-tab" label="Oportunidad" pButton
+                  type="button">
+            <span class="btn-opportunity-{{ selectedIndex }}"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pt-0 pb-0">
+  <p-tabView [activeIndex]="selectedIndex" styleClass="tabview-custom">
+    <p-tabPanel>
+      <div *ngIf="usersFound?.length == 0" class="row justify-content-center">
+        <div class="mb-3 col-xl-10 col-lg-10 col-md-11 col-12 justify-content-center">
+          <div class="card shadow">
+            <div class="card-body">
+              <h3 class="col-12">No se ha encontrado ningún usuario que coincida con la búsqueda</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div (scrolled)="onScrollDownUser()" infiniteScroll>
+        <app-user-card *ngFor="let user of usersFound" [optionAssignRole]="false" [user]="user"></app-user-card>
+      </div>
+      <div [hidden]="!isLoading" class="row justify-content-center">
+        <div class="mb-3 col-xl-10 col-lg-10 col-md-11 col-12 justify-content-center">
+          <div class="card shadow">
+            <app-skeleton-user class="mt--4"></app-skeleton-user>
+          </div>
+        </div>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel>
+      <div *ngIf="communitiesFound?.length == 0" class="row justify-content-center">
+        <div class="mb-3 col-xl-10 col-lg-10 col-md-11 col-12 justify-content-center">
+          <div class="card shadow">
+            <div class="card-body">
+              <h3 class="col-12">No se ha encontrado ninguna comunidad que coincida con la búsqueda</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div (scrolled)="onScrollDownCommunity()" infiniteScroll>
+        <div *ngIf="communitiesFound?.length > 0 || isLoading" class="row justify-content-center">
+          <div class="mb-3 col-xl-10 col-lg-10 col-md-11 col-12 justify-content-center">
+            <div class="card shadow">
+              <div class="card-body">
+                <div class="flex">
+                  <div class="row">
+                    <div class="col-xl-5 col-lg-4 col-md-7 col-sm-12 p-0 content-inco justify-content-center">
+                      <app-community-card
+                        *ngFor="let community of communitiesFound" [community]="community" [showButton]="false">
+                      </app-community-card>
+                      <app-skeleton-community [hidden]="!isLoading"></app-skeleton-community>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel>
+      <div class="row justify-content-center">
+        <div class="mb-3 col-xl-10 col-lg-10 col-md-11 col-12 justify-content-center">
+          <div class="card shadow">
+            <div class="card-body">
+              <h3 *ngIf="publicationsFound?.length == 0"
+                  class="col-12">No se ha encontrado ninguna publicación que coincida con la búsqueda</h3>
+              <div (scrolled)="onScrollDownPublications()"
+                   class="col-xl-5 col-lg-4 col-md-7 col-sm-12 p-0 content-inco justify-content-center" infiniteScroll>
+                <app-card-publication
+                  *ngFor="let publicationsStandard of publicationsFound"
+                  [publication]="publicationsStandard"></app-card-publication>
+              </div>
+              <app-skeleton-publication [hidden]="!isLoading"></app-skeleton-publication>
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel>
+      <div class="row justify-content-center">
+        <div class="mb-3 col-xl-10 col-lg-10 col-md-11 col-12 justify-content-center">
+          <div class="card shadow">
+            <div class="card-body">
+              <h3 *ngIf="questionsFound?.length == 0"
+                  class="col-12">No se ha encontrado ninguna pregunta que coincida con la búsqueda</h3>
+              <div (scrolled)="onScrollDownQuestions()"
+                   class="col-xl-5 col-lg-4 col-md-7 col-sm-12 p-0 content-inco justify-content-center" infiniteScroll>
+                <app-card-publication *ngFor="let question of questionsFound"
+                                      [publication]="question"></app-card-publication>
+              </div>
+              <app-skeleton-publication [hidden]="!isLoading"></app-skeleton-publication>
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel>
+      <div class="row justify-content-center">
+        <div class="mb-3 col-xl-10 col-lg-10 col-md-11 col-12 justify-content-center">
+          <div class="card shadow">
+            <div class="card-body">
+              <h3 *ngIf="opportunitiesFound?.length == 0"
+                  class="col-12">No se ha encontrado ninguna oportunidad que coincida con la búsqueda</h3>
+              <div (scrolled)="onScrollDownOpportunities()"
+                   class="col-xl-5 col-lg-4 col-md-7 col-sm-12 p-0 content-inco justify-content-center" infiniteScroll>
+                <app-card-opportunity *ngFor="let opportunity of opportunitiesFound" [opportunity]="opportunity">
+                </app-card-opportunity>
+              </div>
+              <app-skeleton-publication [hidden]="!isLoading"></app-skeleton-publication>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </p-tabPanel>
+  </p-tabView>
+</div>

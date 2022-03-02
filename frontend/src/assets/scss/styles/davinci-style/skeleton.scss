@@ -1,0 +1,70 @@
+.skeleton-round {
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  animation: animation 2s ease-out infinite;
+}
+
+.skeleton-right-angled {
+  height: 20px;
+  width: 38%;
+  border-radius: 5px;
+  animation: animation 2s ease-out infinite;
+}
+
+.skeleton-right-angled-notification {
+  height: 20px;
+  width: 100%;
+  border-radius: 5px;
+  animation: animation 2s ease-out infinite;
+}
+
+.skeleton-right {
+  height: 20px;
+  width: 100%;
+  border-radius: 5px;
+  animation: animation 2s ease-out infinite;
+}
+
+.skeleton-right-autor {
+  height: 20px;
+  width: 100%;
+  border-radius: 46px;
+  animation: animation 2s ease-out infinite;
+}
+
+.skeleton-right-small {
+  height: 15px;
+  width: 17%;
+  border-radius: 5px;
+  animation: animation 2s ease-out infinite;
+}
+
+.skeleton-right-small-notification {
+  height: 15px;
+  width: 50%;
+  border-radius: 5px;
+  animation: animation 2s ease-out infinite;
+}
+
+.skeleton-button-small {
+  height: 25px;
+  width: 100%;
+  border-radius: 5px;
+  animation: animation 2s ease-out infinite;
+}
+
+@keyframes animation {
+  0% {
+    background: #F8F8F8;
+  }
+  50% {
+    background: #F2F2F2;
+  }
+  100% {
+    background: #F8F8F8;
+  }
+  100% {
+    background: #F2F2F2;
+  }
+}

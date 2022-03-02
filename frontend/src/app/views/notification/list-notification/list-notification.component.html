@@ -1,0 +1,15 @@
+<div (scrolled)="onScrollDown()" class="content-notification" infiniteScroll
+     [scrollWindow]="false">
+  <div class="dropdown-header noti-title">
+    <h4 class="text-overflow m-0 text-blod">Notificaciones</h4>
+  </div>
+  <div *ngIf="notificationsVirtual?.length == 0" class="card-body">
+    <h2 class="mb-0">No tiene notificaciones nuevas</h2>
+  </div>
+  <app-card-notification (eventMarkNotificationUnread)="markNotificationAsUnRead()"
+                         (eventDelete)="removeNotification($event)"
+                         *ngFor="let notification of notificationsVirtual; index as i" [indexNotification]="i"
+                         [notification]="notification" id="notification-{{i}}">
+  </app-card-notification>
+  <app-skeleton-notification *ngIf="isLoadingNotifications"></app-skeleton-notification>
+</div>

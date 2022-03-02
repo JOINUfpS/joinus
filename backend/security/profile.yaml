@@ -1,0 +1,11 @@
+django:
+  application:
+    name: asn_security
+    port: 8094
+    base_url: /api/
+    context_path: securities/
+    api_gateway: asn_gateway/
+    eureka_server: http://10.128.0.11:8090/eureka/
+    static_url: /static/
+  profiles:
+    active: loc

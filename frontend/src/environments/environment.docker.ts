@@ -1,0 +1,17 @@
+export const environment = {
+  production: false,
+  urlChat: 'http://192.168.0.12:8087/asn_balancing/api_gateway/asn_chat/chats/api/',
+  chatWebsocket: 'ws://192.168.0.12:8087/asn_balancing_socket/socket_chat/ws/',
+  notificationUrl: 'http://192.168.0.12:8087/asn_balancing/api_gateway/asn_notification/notifications/api/',
+  notificationWebSocket: 'ws://192.168.0.12:8087/asn_balancing_socket/socket_notification/ws/',
+  file: 'http://192.168.0.12:8087/asn_balancing/api_gateway/asn_file/files/api/file/get_object/',
+  fileUrl: 'http://192.168.0.12:8087/asn_balancing/api_gateway/asn_file/files/api/',
+  institutionUrl: 'http://192.168.0.12:8087/asn_balancing/api_gateway/asn_institution/institutions/api/',
+  publicationUrl: 'http://192.168.0.12:8087/asn_balancing/api_gateway/asn_publication/publications/api/',
+  securityUrl: 'http://192.168.0.12:8087/asn_balancing/api_gateway/asn_security/securities/api/',
+  userUrl: 'http://192.168.0.12:8087/asn_balancing/api_gateway/asn_user/users/api/',
+  utilityUrl: 'http://192.168.0.12:8087/asn_balancing/api_gateway/asn_utility/utilities/api/',
+  defaultImage: '3fa85f64-5717-4562-b3fc-2c963f66afa6/',
+  imgUser: '992f149f-b056-484b-bc0b-573eca93f90f/',
+  CONTEXT_PATH: 'davinci',
+};

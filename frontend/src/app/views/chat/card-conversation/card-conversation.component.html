@@ -1,0 +1,35 @@
+<div class="row pt-pb-1">
+  <div [ngClass]="conversationClass">
+    <div class="card-body p-2 cursor">
+      <div class="row align-items-center" (mouseover)="showOptionButton = true" (mouseleave)="showOptionButton = false">
+        <div class="col" (click)="seeConversation($event)">
+          <div class="row align-items-center ">
+            <div class="col-auto px-2">
+              <span class="avatar avatar-sm rounded-circle mr-2">
+                <div
+                  [style.background-image]="'url('+ this.utilitiesConfigString.getImage(this.photoOtherUser, 'perfil') +')'"
+                  class="cursor img img-user-public"></div>
+              </span>
+            </div>
+            <div class="col px-2">
+              <span pTooltip="{{this.nameOtherUser}}" tooltipPosition="bottom"
+                [tooltipDisabled]="utilitiesConfigString.activeTooltip"
+                (mouseover)="utilitiesConfigString.seeTooltipText($event, this.nameOtherUser.length)">
+                {{this.nameOtherUser}}</span>
+
+            </div>
+          </div>
+        </div>
+        <div class="al-end col-auto">
+          <button (click)="menu.toggle($event)" class="btn-table" icon="pi pi-ellipsis-h" pButton type="button"
+            *ngIf="showOptionButton"></button>
+          <p-menu #menu [hideTransitionOptions]="'0ms'" [model]="items" [popup]="true" [showTransitionOptions]="'0ms'"
+            class="p-menu-float">
+          </p-menu>
+        </div>
+      </div>
+    </div>
+    <div class="cursor">
+    </div>
+  </div>
+</div>

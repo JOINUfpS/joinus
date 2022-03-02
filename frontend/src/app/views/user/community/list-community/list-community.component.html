@@ -1,0 +1,79 @@
+<div class="row justify-content-center">
+  <div class="col-xl-3 col-lg-4 col-md-12 col-sm-12 order-xl-1 mb-3 mb-xl-1">
+    <div class="card shadow">
+      <div class="card-header p-3">
+        <h2 class="mb-0 text-header">Comunidades</h2>
+      </div>
+      <div class="card-body p-3">
+        <div class="col-lg-12 p-2 line">
+          <button (click)="activeIndex = 0" class="button-profile btn" icon="bi bi-geo-alt-fill" label="Donde te uniste"
+                  pButton
+                  type="button"></button>
+        </div>
+        <div class="col-12 p-2 line">
+          <button (click)="activeIndex = 1" class="button-profile btn" icon="bi bi-compass-fill"
+                  label="Encontrar comunidades" pButton
+                  type="button"></button>
+        </div>
+        <div class="col-12 p-0 mt-3">
+          <button (click)="addCommunity(null)" icon="pi pi-plus" iconPos="left" label="Crear Comunidad"
+                  class="btn btn-new" pButton type="button"></button>
+        </div>
+        <div class="row mt-4 pl-3 pr-3">
+          <div class="col-12 line p-0 pb-1">
+            <h4 class="cl mb-0">Comunidades que administras</h4>
+          </div>
+        </div>
+        <button (click)="this.seeCommunity(community.id)" *ngFor="let community of this.communitiesManaged"
+                class="button-community col-12" label="{{community.commName}}" pButton
+                type="button">
+          <a class="mr-1">
+            <div class="media align-items-center">
+            <span class="avatar avatar-sm rounded-circle">
+              <div [style.background-image]="'url('+ this.utilitiesConfigString.getImage(community.commPhotoId)+')'"
+                   class="img img-user-public"></div>
+            </span>
+            </div>
+          </a>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 order-xl-2">
+    <div class="card shadow">
+      <div class="p-4">
+        <p-tabView [(activeIndex)]="activeIndex">
+          <p-tabPanel class="flex">
+            <div class="row">
+              <h1 class="col-12 mb-4">Comunidades a las que te uniste</h1>
+              <h3 *ngIf="this.communitiesMember?.length == 0" class="col-12">
+                No te has unido a una comunidad, ve y encuentra comunidades de tú interes
+              </h3>
+              <div *ngFor="let community of this.communitiesMember"  class="col-xl-6 col-lg-5 col-md-8 col-sm-12 p-0">
+                <app-community-card [community]="community">
+                </app-community-card>
+              </div>
+            </div>
+          </p-tabPanel>
+          <p-tabPanel class="flex">
+            <div class="row">
+              <h1 class="col-12 mb-4">Comunidades nuevas para ti</h1>
+              <h3 *ngIf="this.communitiesPendingApproval?.length == 0 && this.otherCommunities?.length == 0"
+                  class="col-12">Aún no existen otras comunidades en la red</h3>
+              <div *ngFor="let community of this.communitiesPendingApproval"
+                   class="col-xl-6 col-lg-5 col-md-8 col-sm-12 p-0">
+                <app-community-card [community]="community" [pendingApproval]="true" [showButton]="true">
+                </app-community-card>
+              </div>
+              <div *ngFor="let community of this.otherCommunities"
+                   class="col-xl-6 col-lg-5 col-md-8 col-sm-12 p-0">
+                <app-community-card [community]="community" [showButton]="true"></app-community-card>
+              </div>
+            </div>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+    </div>
+  </div>
+</div>
+<app-create-edit-community #modalCommunity (updateList)="getAllCategoriesOfCommunities()"></app-create-edit-community>

@@ -1,0 +1,311 @@
+.navbar-vertical {
+  display: none !important;
+}
+
+.category {
+  background-image: url("../../../img/icons/category-active.svg");
+  width: 37px;
+  height: 37px;
+  background-repeat: no-repeat;
+}
+
+.home {
+  background-image: url("../../../img/icons/home-active.svg");
+  width: 30px;
+  height: 30px;
+  margin: auto;
+  background-repeat: no-repeat;
+}
+
+.institution {
+  background-image: url("../../../img/icons/institution-active.svg");
+  width: 37px;
+  height: 37px;
+  margin: auto;
+  background-repeat: no-repeat;
+}
+
+.user {
+  background-image: url("../../../img/icons/user-active.svg");
+  width: 30px;
+  height: 30px;
+  margin: auto;
+  background-repeat: no-repeat;
+}
+
+.rol {
+  background-image: url("../../../img/icons/rol-active.svg");
+  width: 37px;
+  height: 37px;
+  background-repeat: no-repeat;
+}
+
+.opportunity {
+  background-image: url("../../../img/icons/opportunity-active.svg");
+  width: 30px;
+  height: 30px;
+  margin: auto;
+  background-repeat: no-repeat;
+}
+
+.community {
+  background-image: url("../../../img/icons/community-active.svg");
+  width: 30px;
+  height: 30px;
+  margin: auto;
+  background-repeat: no-repeat;
+}
+
+.chat {
+  background-image: url("../../../img/icons/chat.svg");
+  width: 20px;
+  height: 20px;
+  margin: auto;
+  background-repeat: no-repeat;
+}
+
+.bell {
+  background-image: url("../../../img/icons/bell.svg");
+  width: 20px;
+  height: 20px;
+  margin: auto;
+  background-repeat: no-repeat;
+}
+
+.active-bell {
+  background-image: url("../../../img/icons/bell-active.svg");
+  width: 20px;
+  height: 20px;
+  background-size: contain;
+  background-position: 50%;
+  background-repeat: no-repeat;
+}
+
+.navbar-dark .navbar-nav .nav-link.active > .opportunity {
+  background-image: url("../../../img/icons/opportunity.svg");
+  width: 30px;
+  height: 30px;
+  background-repeat: no-repeat;
+}
+
+.navbar-dark .navbar-nav .nav-link.active > .community {
+  background-image: url("../../../img/icons/community.svg");
+  width: 30px;
+  height: 30px;
+  background-repeat: no-repeat;
+}
+
+.navbar-dark .navbar-nav .nav-link.active > .rol {
+  background-image: url("../../../img/icons/rol.svg");
+  width: 37px;
+  height: 37px;
+  background-repeat: no-repeat;
+}
+
+.navbar-dark .navbar-nav .nav-link.active > .institution {
+  background-image: url("../../../img/icons/institution.svg");
+  width: 37px;
+  height: 37px;
+  background-repeat: no-repeat;
+}
+
+.navbar-dark .navbar-nav .nav-link.active > .user {
+  background-image: url("../../../img/icons/user.svg");
+  width: 30px;
+  height: 30px;
+  background-repeat: no-repeat;
+}
+
+.navbar-dark .navbar-nav .nav-link.active > .home {
+  background-image: url("../../../img/icons/home.svg");
+  width: 30px;
+  height: 30px;
+  margin: auto;
+  background-repeat: no-repeat;
+}
+
+.navbar-dark .navbar-nav .nav-link.active > .category {
+  background-image: url("../../../img/icons/category.svg");
+  width: 37px;
+  height: 37px;
+  background-repeat: no-repeat;
+}
+
+.navbar-dark .navbar-nav .nav-link.active > .chat {
+  background-image: url("../../../img/icons/chat-active.svg");
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+}
+
+.nav-img-log {
+  margin: auto;
+  height: 30px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: rgb(21 21 21 / 95%) !important;
+}
+
+.nav-item {
+  margin: auto 10px;
+}
+
+.nav-items-general {
+  margin-right: 30px;
+}
+
+.nav-link {
+  padding: 0.5rem !important;
+  background: #f0f6fa;
+  border-radius: 25px;
+  width: 100%;
+}
+
+.nav-link:hover {
+  background: #e9f6ff !important;
+}
+
+@media screen and (min-width: 768px) {
+  .navbar-expand-md .navbar-nav .nav-link {
+    padding: 0.5rem !important;
+  }
+}
+
+.icon-navbar {
+  width: 95%;
+  height: 95%;
+}
+
+.active-home.active {
+  background-color: #3dd0a0;
+  height: 3px;
+  position: relative;
+  right: 4px;
+  bottom: -7px;
+  width: 100%;
+  transition-property: transform;
+  transform-origin: center bottom;
+  left: 2px;
+}
+
+.active-community.active {
+  background-color: #3dd0a0;
+  height: 3px;
+  position: relative;
+  right: 2px;
+  bottom: -7px;
+  width: 100%;
+  transition-property: transform;
+  transform-origin: center bottom;
+  left: 2px;
+}
+
+.active-user.active {
+  background-color: #3dd0a0;
+  height: 3px;
+  position: relative;
+  right: 2px;
+  bottom: -7px;
+  width: 100%;
+  transition-property: transform;
+  transform-origin: center bottom;
+  left: 2px;
+}
+
+.active-opportunity.active {
+  background-color: #3dd0a0;
+  height: 3px;
+  position: relative;
+  right: 2px;
+  bottom: -7px;
+  width: 100%;
+  transition-property: transform;
+  transform-origin: center bottom;
+  left: 2px;
+}
+
+.active-chat.active {
+  background-color: #3dd0a0;
+  height: 3px;
+  position: relative;
+  right: 2px;
+  bottom: -11px;
+  width: 100%;
+  transition-property: transform;
+  transform-origin: center bottom;
+  left: 2px;
+}
+
+.main-content .navbar-top {
+  background-color: #ffffff !important;
+  box-shadow: 0 2px 5px rgb(25 65 99 / 21%);
+  position: fixed;
+  padding: 0;
+}
+
+.content-nav {
+  display: flex;
+  width: 7%;
+  height: auto;
+  margin: 0;
+  top: 0;
+}
+
+.navbar-brand {
+  display: flex !important;
+}
+
+.navbar {
+  padding: 0.5rem !important;
+  position: fixed !important;
+}
+
+.p-tooltip .p-tooltip-text {
+  background-color: rgba(0, 0, 0, 0.582) !important;
+  color: #ffffff !important;
+  border-radius: 6px !important;
+}
+
+.p-tooltip.p-tooltip-top .p-tooltip-arrow {
+  border-top-color: rgba(0, 0, 0, 0.582) !important;
+}
+
+.p-tooltip.p-tooltip-left .p-tooltip-arrow {
+  border-left-color: rgba(0, 0, 0, 0.582) !important;
+}
+
+.p-tooltip.p-tooltip-right .p-tooltip-arrow {
+  border-right-color: rgba(0, 0, 0, 0.582) !important;
+}
+
+.p-tooltip.p-tooltip-bottom .p-tooltip-arrow {
+  border-bottom-color: rgba(0, 0, 0, 0.582) !important;
+}
+
+
+//ajustes front cat98
+
+
+@media screen and (max-width: 450px) {
+  .container-items{
+    display: contents;
+    position: relative;
+    align-items: center;
+  }
+  .dropdown-menu {
+    position: absolute !important;
+    background-color: #f6f6f6 !important;
+  }
+  .content-notification{
+    width: 310px !important;
+    height: auto !important;
+  }
+
+
+
+  .active-bell {
+    margin-inline: 6px;
+
+  }
+}

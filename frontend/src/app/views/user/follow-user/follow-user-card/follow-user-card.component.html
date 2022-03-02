@@ -1,0 +1,30 @@
+<div class="row follow p-2">
+  <div class="px-0 cursor m-auto">
+    <div [routerLink]="['/perfil/', idUserToShow]" routerLinkActive="active">
+      <div class="media align-items-center">
+        <div [style.background-image]="'url('+ this.utilitiesConfigString.getImage(userPhotoToShow, 'perfil') +')'"
+             class="img img-author">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pl-0 media-body mx-3 p-0 inline-grid">
+    <h3 [routerLink]="['/perfil/', idUserToShow]" class="mb-0 text-blod cursor white-space"
+        routerLinkActive="active">{{nameToShow}}</h3>
+    <h4 class="mb-0 cl text-user-follow white-space">{{userDegreeToShow}}</h4>
+  </div>
+  <div *ngIf="!hiddenFollow" class="p-0 al-end m-auto">
+    <button (click)="followUser()" [disabled]="buttonFollowUserActioned" class="btn btn-follow btn-new" label="Seguir"
+            pButton type="button">
+      <p-progressSpinner [hidden]="!buttonFollowUserActioned"
+                         [style]="{width: '20px', height: '20px'}"></p-progressSpinner>
+    </button>
+  </div>
+  <div *ngIf="!hiddenUnfollow" class="p-0 al-end m-auto">
+    <button (click)="unfollowUser()" [disabled]="buttonUnfollowUserActioned" class="btn btn-follow-leave btn-new"
+            label="Dejar de seguir" pButton type="button">
+      <p-progressSpinner [hidden]="!buttonUnfollowUserActioned"
+                         [style]="{width: '20px', height: '20px'}"></p-progressSpinner>
+    </button>
+  </div>
+</div>

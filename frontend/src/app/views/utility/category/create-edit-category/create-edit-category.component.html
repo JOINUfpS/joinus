@@ -1,0 +1,51 @@
+<p-dialog [(visible)]="display" [blockScroll]="utilitiesString.blockScroll" [draggable]="false"
+          [dismissableMask]="utilitiesString.dismissableMask" [maximizable]="false" [minY]="70"
+          [modal]="utilitiesString.modal" [styleClass]="'col-sm-10 col-md-7 col-lg-6 col-xl-5 col-11'"
+          [style]="{maxWidth: '60rem'}">
+  <p-header>
+    <h2 *ngIf="category" class="title-dialog">Editar categoria</h2>
+    <h2 *ngIf="!category" class="title-dialog">Crear categoria</h2>
+  </p-header>
+  <div class="pr-4 pl-4">
+    <form [formGroup]="form">
+      <div class="row pt-2">
+        <div class="col-lg-12 p-2">
+          <span class="p-float-label">
+            <p-dropdown appendTo="body" [options]="typeOptions" [showClear]="false" formControlName="cateType"
+                        optionLabel="name" id="cateType"></p-dropdown>
+            <label for="cateType">Selecciona un tipo de categoría<strong class="text-requerid">*</strong></label>
+          </span>
+        </div>
+        <div class="col-lg-12 p-2">
+          <span class="p-float-label">
+            <input formControlName="cateName" id="cateName" pInputText type="text"
+                   [ngClass]="classErrorCateName" (change)="changeErrorClassCateName()">
+             <label for="cateName">Nombre<strong class="text-requerid">*</strong></label>
+          </span>
+          <small *ngIf="errors.has('cate_name')" class="error-field">{{errors.get('cate_name')}}</small>
+        </div>
+        <div class="col-lg-12 p-2">
+          <span class="p-float-label">
+          <p-dropdown appendTo="body" [options]="statusOptions" [showClear]="true" formControlName="cateStatus"
+                      optionLabel="name" id="cateStatus"></p-dropdown>
+            <label for="cateStatus">Selecciona un estado<strong class="text-requerid">*</strong></label>
+          </span>
+        </div>
+        <div class="col-lg-12 p-2">
+          <label for="description"></label>
+          <textarea id="description" maxlength="300" class="textarea" pInputTextarea formControlName="cateDescription"
+                    cols="40" placeholder="Descripción" rows="5"></textarea>
+        </div>
+      </div>
+    </form>
+    <div class="row">
+      <div class="col-lg-12 p-2 footer-dialog">
+        <button (click)="save()" [disabled]="!form.valid || buttonCreateCategoryActioned"
+                [label]="category ? 'Editar' : 'Guardar'" class="btn-new" pButton type="button">
+          <p-progressSpinner [hidden]="!buttonCreateCategoryActioned"
+                             [style]="{width: '20px', height: '20px'}"></p-progressSpinner>
+        </button>
+      </div>
+    </div>
+  </div>
+</p-dialog>

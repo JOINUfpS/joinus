@@ -1,0 +1,7 @@
+django:
+  application:
+    config:
+      DEBUG: True
+      HOST_DATABASE: mongodb+srv://user:04052018@tesisasn.0rbje.mongodb.net/asn_utility?retryWrites=true&w=majority
+      DATABASE_USER: user
+      DATABASE_PASSWORD: 04052018

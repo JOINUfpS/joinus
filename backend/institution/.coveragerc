@@ -1,0 +1,18 @@
+[run]
+branch = True
+omit =
+    asn_institution/*
+    institution/migrations/*
+    institution/__init__.py
+    institution/admin.py
+    institution/apps.py
+    institution/models.py
+    institution/serializer.py
+    institution/tests.py
+    opportunity/migrations/*
+    opportunity/templates/*
+    opportunity/__init__.py
+    opportunity/admin.py
+    opportunity/models.py
+    opportunity/tests.py
+    manage.py

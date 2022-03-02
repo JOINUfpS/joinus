@@ -1,0 +1,38 @@
+<div infiniteScroll (scrolled)="onScrollDown()">
+  <div class="row justify-content-center">
+    <div class="mb-3 col-xl-10 col-lg-10 col-md-11 col-12 justify-content-center">
+      <div class="card shadow">
+        <div class="card-body">
+          <div class="p-inputgroup filter-ico mb-0">
+            <span class="p-inputgroup-addon pi pi-search"></span>
+            <input (keyup.enter)="searchUser()" [(ngModel)]="stringUserToSearch" class="input-search filter-icono"
+                   pInputText placeholder="Escribe el nombre y presiona enter" type="text">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!isLoadingSearch && users?.length == 0" class="row justify-content-center">
+    <div class="mb-3 col-xl-10 col-lg-10 col-md-11 col-12 justify-content-center">
+      <div class="card shadow">
+        <div class="card-body">
+          <h3 class="col-12">No se ha encontrado ningún usuario que coincida con la busqueda</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngFor="let user of users;">
+    <app-user-card *ngIf="user.id !== userSession.id" (eventEmitterAssignRole)="addOrEdit($event)"
+                   [optionAssignRole]="permissions.includes(constPermissions.AUTHORIZE_ROLE)"
+                   [user]="user"></app-user-card>
+  </div>
+  <div [hidden]="!isLoadingSearch" class="row justify-content-center">
+    <div class="mb-3 col-xl-10 col-lg-10 col-md-11 col-12 justify-content-center">
+      <div class="card shadow">
+        <app-skeleton-user class="mt--4"></app-skeleton-user>
+      </div>
+    </div>
+  </div>
+  <app-edit-user #modalUser (updateList)="getUsers()"></app-edit-user>
+</div>
+

@@ -1,0 +1,214 @@
+version: "3.7"
+
+services:
+
+  frontend:
+    container_name: joinus_frontend
+    image: nginx:1.17.1-alpine
+    working_dir: /usr/local/app
+    volumes:
+      - type: bind
+        source: /var2/dockers-studentsprojects/joinus/my-nginx-frontend.conf
+        target: /etc/nginx/conf.d/default.conf
+      - type: bind
+        source: /var2/dockers-studentsprojects/joinus/nginx
+        target: /usr/share/nginx/html
+    ports:
+      - 8088:80
+
+  balancing:
+    container_name: joinus_balancing
+    image: nginx:1.17.1-alpine
+    volumes:
+      - type: bind
+        source: /var2/dockers-studentsprojects/joinus/my-nginx-balancing.conf
+        target: /etc/nginx/conf.d/default.conf
+    ports:
+      - 8089:8089
+
+  eureka:
+    container_name: joinus_eureka
+    image: openjdk:12
+    working_dir: /code
+    ports:
+      - 8090:8090
+    volumes:
+      - type: bind
+        source: /var2/dockers-studentsprojects/joinus/java/eureka
+        target: /code
+    command: java -jar target/eureka-0.0.1-SNAPSHOT.jar
+
+
+  api_gateway:
+    container_name: joinus_api_gateway
+    image: openjdk:12
+    working_dir: /code
+    ports:
+      - 8099:8099
+    volumes:
+      - type: bind
+        source: /var2/dockers-studentsprojects/joinus/java/gateway
+        target: /code
+    command: java -jar target/gateway-0.0.1-SNAPSHOT.jar
+
+
+  institution:
+    container_name: joinus_institution
+    image: python:3.8
+    working_dir: /code
+    ports:
+      - 8091:8091
+    volumes:
+      - type: bind
+        source: /var2/dockers-studentsprojects/joinus/python/institution
+        target: /code
+    command: bash -c "
+      pip install -r requirements.txt &&
+      python3 manage.py runserver 0.0.0.0:8091
+      "
+    links:
+      - mongo
+
+  user:
+    container_name: joinus_user
+    image: python:3.8
+    working_dir: /code
+    ports:
+      - 8092:8092
+    volumes:
+      - type: bind
+        source: /var2/dockers-studentsprojects/joinus/python/user
+        target: /code
+    command: bash -c "
+      pip install -r requirements.txt &&
+      python3 manage.py runserver 0.0.0.0:8092
+      "
+    links:
+      - mongo
+
+  publication:
+    container_name: joinus_publication
+    image: python:3.8
+    working_dir: /code
+    ports:
+      - 8093:8093
+    volumes:
+      - type: bind
+        source: /var2/dockers-studentsprojects/joinus/python/publication
+        target: /code
+    command: bash -c "
+      pip install -r requirements.txt &&
+      python3 manage.py runserver 0.0.0.0:8093
+      "
+    links:
+      - mongo
+
+
+  security:
+    container_name: joinus_security
+    image: python:3.8
+    working_dir: /code
+    ports:
+      - 8094:8094
+    volumes:
+      - type: bind
+        source: /var2/dockers-studentsprojects/joinus/python/security
+        target: /code
+    command: bash -c "
+      pip install -r requirements.txt &&
+      python3 manage.py runserver 0.0.0.0:8094
+      "
+    links:
+      - mongo
+
+  utility:
+    container_name: joinus_utility
+    image: python:3.8
+    working_dir: /code
+    ports:
+      - 8095:8095
+    volumes:
+      - type: bind
+        source: /var2/dockers-studentsprojects/joinus/python/utility
+        target: /code
+    command: bash -c "
+      pip install -r requirements.txt &&
+      python3 manage.py runserver 0.0.0.0:8095
+      "
+    links:
+      - mongo
+
+  file:
+    container_name: joinus_file
+    image: python:3.8
+    working_dir: /code
+    ports:
+      - 8096:8096
+    volumes:
+      - type: bind
+        source: /var2/dockers-studentsprojects/joinus/python/file
+        target: /code
+      - type: bind
+        source: /var2/dockers-studentsprojects/joinus/files
+        target: /tesis-asn
+    command: bash -c "
+      pip install -r requirements.txt &&
+      python3 manage.py runserver 0.0.0.0:8096
+      "
+    links:
+      - mongo
+
+  chat:
+    container_name: joinus_chat
+    image: python:3.8
+    working_dir: /code
+    ports:
+      - 8097:8097
+    volumes:
+      - type: bind
+        source: /var2/dockers-studentsprojects/joinus/python/chat
+        target: /code
+    command: bash -c "
+      pip install -r requirements.txt &&
+      python3 manage.py runserver 0.0.0.0:8097
+      "
+    links:
+      - mongo
+
+  notification:
+    container_name: joinus_notification
+    image: python:3.8
+    working_dir: /code
+    ports:
+      - 8098:8098
+    volumes:
+      - type: bind
+        source: /var2/dockers-studentsprojects/joinus/python/notification
+        target: /code
+    command: bash -c "
+      pip install -r requirements.txt &&
+      python3 manage.py runserver 0.0.0.0:8098
+      "
+    links:
+       - mongo
+
+  redis:
+    container_name: joinus_redis
+    image: redis
+    ports:
+      - 6379:6379
+
+  mongo:
+    container_name: joinus_mongo
+    image: mongo
+    environment:
+      - MONGO_INITDB_DATABASE=tesisasn
+      - MONGO_INITDB_ROOT_USERNAME=user
+      - MONGO_INITDB_ROOT_PASSWORD=04052018
+    volumes:
+      - type: bind
+        source: /var2/dockers-studentsprojects/joinus/data/db
+        target: /data/db
+    ports:
+      - 27017:27017
+

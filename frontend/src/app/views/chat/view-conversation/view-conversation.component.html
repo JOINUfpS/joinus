@@ -1,0 +1,73 @@
+<div class="card shadow chat-messages shadow mb-4">
+  <div *ngIf="!this.thereConversationShow" class="container-show-chat-without-messages">
+    <div class="row justify-content-center py-2 m-auto">
+      <div class="col-lg-3 order-lg-2 py-2">
+        <div class="container-img">
+          <div class="file-upload-container col-12">
+            <div [style.background-image]="'url(./assets/img/brand/joinus-text.svg)'" class="user-edit-profile" style="background-size: contain;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 al-center py-2 mb-4">
+      <h1 class="m-auto pl-3 ml-4">Joinus</h1>
+      <h2 class="mb-4 mt-3 text-blod">¡Comparte en privado tus ideas con otros usuarios de Joinus!</h2>
+      <h4>En este espacio podrás entablar conversación sobre las nuevas investigaciones, compartir publicaciones y
+        divertirte con tus amigos, solo selecciona una de las conversaciones de la derecha o crea una nueva.</h4>
+    </div>
+  </div>
+  <div [hidden]="!this.thereConversationShow" class="card-content">
+      <!--sección de header-mensaje-->
+      <div class="col-12">
+        <div class="row">
+          <div class="col-12 header-chat-conversation">
+            <div class="media align-items-center">
+            <span class="avatar avatar-sm rounded-circle">
+              <div
+                [style.background-image]="'url('+ this.utilitiesConfigString.getImage(this.userToShow?.photo, 'perfil') +')'"
+                class="cursor img img-user-public"></div>
+            </span>
+              <span class="pl-4"><strong class="m-auto">{{this.userToShow?.name}}</strong></span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!--sección de mensajes-->
+      <div class="col-12 mb-4 mb-lg-2">
+        <div #scrollMe (scrolledUp)="onScrollUp()" [scrollWindow]="false" infiniteScroll id="container-messages">
+          <div class="al-center">
+            <p-progressSpinner [hidden]="!this.showSpinner" [style]="{width: '40px', height: '40px'}" class="mt-2"></p-progressSpinner>
+          </div>
+          <ul class="chat-messages-show-list" id="message-list">
+          </ul>
+        </div>
+      </div>
+      <!--barra inferior emojis-barra escribir-botón enviar-->
+      <div class="col-12 bg-color-chat">
+        <div class="col-12 px-0 py-3">
+          <div class="row align-items-center ">
+            <div class="col-auto pr-0">
+              <em [ngClass]="classMenuEmoji" (click)="showEmojiModalPicker()"></em>
+              <emoji-mart *ngIf="showEmojiPicker" title="Elige un emoji" emoji="point_up" [showPreview]="false"
+                          class="emojis-container" (emojiClick)="addEmoji($event)" [isNative]="true" [showSingleCategory]="true"
+                          [emojiTooltip]="true"></emoji-mart>
+            </div>
+            <div class="col px-2">
+            <textarea (keyup.enter)="sendMsg()" [(ngModel)]="message"
+                      class="chat-messages-create-input input-field icon send-message-chat" rows="1" id="input_message" pInputTextarea
+                      placeholder="Escribe algo..." autoResize="autoResize">
+            </textarea>
+            </div>
+            <div class="col-auto pl-0">
+              <button (click)="sendMsg()" #messageInput class="d-lg-block d-none chat-messages-create-button btn-new" icon="icon-send"
+                      pButton type="button"><i class="pi pi-send"></i></button>
+              <button (click)="sendMsg()" #messageInput class="d-lg-none d-block chat-messages-create-button btn-new" icon="icon-send"
+                      pButton type="button"><i class="pi pi-send"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>

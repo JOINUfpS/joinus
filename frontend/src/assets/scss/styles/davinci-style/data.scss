@@ -1,0 +1,85 @@
+.p-datatable .p-datatable-thead > tr > th {
+  border: 1px solid #c8c8c800 !important;
+  color: #6b6b6b !important;
+  background: #f4f4f400 !important;
+}
+
+.p-paginator {
+  background: #f4f4f400 !important;
+  color: #333333;
+  border: solid #c8c8c800 !important;
+}
+
+.p-datatable .p-datatable-tbody > tr > td,
+th {
+  border-bottom: 1px solid #e4e4e4 !important;
+  border-left: 1px solid #e4e4e400 !important;
+  border-right: 1px solid #e4e4e400 !important;
+  font-size: 13px !important;
+}
+
+.p-paginator-bottom {
+  padding-top: 2rem !important;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  background: #f0f6fa !important;
+  border-color: #007bd900;
+  color: #194163 !important;
+  border-radius: 26px !important;
+}
+
+.p-paginator .p-paginator-first:hover,
+.p-paginator .p-paginator-prev:hover,
+.p-paginator .p-paginator-next:hover,
+.p-paginator .p-paginator-last:hover {
+  border-radius: 26px !important;
+  background: #f0f6fa;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page:hover {
+  border-radius: 26px !important;
+  background: #f0f6fa;
+}
+
+.p-paginator .p-paginator-first,
+.p-paginator .p-paginator-prev,
+.p-paginator .p-paginator-next,
+.p-paginator .p-paginator-last {
+  border-radius: 26px !important;
+  background: #f0f6fa;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page {
+  border-radius: 26px !important;
+  background: #f0f6fa;
+}
+
+.p-datatable-tbody > tr > td {
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.p-datatable .p-datatable-tbody > tr > td::before {
+  padding: 0 !important;
+}
+
+@media screen and (min-width: 300px) {
+  .p-datatable table{
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+}
+@media screen and (max-width: 500px) {
+
+  .p-datatable-tbody > tr > td {
+
+    white-space: normal;
+  }
+  .p-datatable .p-datatable-thead > tr > th{
+    text-align: center !important;
+  }
+}

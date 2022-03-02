@@ -1,0 +1,36 @@
+<div class="col-12 p-0 content-inco">
+  <div class="row m-1 ml-4 mt-3">
+    <div class="col-auto pl-0 pr-2">
+      <div [style.background-image]="'url('+ this.utilitiesString.getImage(comment?.comm_user_photo, 'perfil') +')'"
+          class="img img-perfil-public">
+      </div>
+    </div>
+    <div class="col content-commet">
+      <div class="row">
+        <div class="col">
+          <h4 class="text-blod mb-0 cursor" (click)="viewProfileUser()">{{comment?.comm_user_name}}</h4>
+          <span class="mb-0 text-small">{{comment?.comm_date}}</span>
+          <div *ngIf="editingComment" class="col-12 pl-0">
+            <label for="input_comment"></label>
+            <textarea (blur)="focus = false" (keydown.enter)="editComment()" [(ngModel)]="publComment"
+                      autoResize="autoResize" class="input-comment-edit" id="input_comment" pInputTextarea
+                      placeholder="Escribe tu comentario" ></textarea>
+          </div>
+        </div>
+        <div *ngIf="comment.comm_user_id === this.user.id && !editingComment" class="col-2">
+          <button (click)="menu.toggle($event)" class="btn-option-community p-option" icon="pi pi-ellipsis-h" pButton
+                  type="button"></button>
+          <p-menu #menu [hideTransitionOptions]="'0ms'" [model]="items" [popup]="true" [showTransitionOptions]="'0ms'">
+          </p-menu>
+        </div>
+      </div>
+      <div *ngIf="!editingComment" class="row mt-2">
+        <div class="col">
+          <div class="mb-0 keep-format-text">{{commContent}}
+            <div class="text-sm see-more-less" id="element" (click)="seeCompleteContent()">{{labelSeeComment}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

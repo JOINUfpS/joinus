@@ -1,0 +1,23 @@
+<footer class="footer p-0 pt-lg-4">
+  <div class="row align-items-center justify-content-xl-between line-top pt-3">
+    <div class="col-12">
+      <div class="row">
+        <div class="copyright text-center text-xl-left text-muted m-auto font-weight-bold">
+          <a class="font-weight-bold text-color mr-5">{{ date | date: "yyyy" }}</a>
+          <a href="{{urlConductNorms}}"
+             rel="noopener" target="_blank" class="font-weight-bold text-color">Normas</a>
+        </div>
+        <div class="text-xl-right m-auto">
+          <ul class="nav nav-footer justify-content-center justify-content-xl-end">
+            <li class="nav-item">
+              <a routerLink="/acerca-de-nosotros" class="font-weight-bold m-auto text-color">Acerca de</a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/ayuda" class="m-auto text-color">Ayuda</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

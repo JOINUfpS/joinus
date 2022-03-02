@@ -1,0 +1,96 @@
+<p-dialog [(visible)]="display" [blockScroll]="true" [dismissableMask]="true"
+          [draggable]="false" [maximizable]="false" [minY]="70"
+          [modal]="true" [styleClass]="'col-xl-5 col-lg-7 col-md-8 col-sm-12 col-11 '"
+          [style]="{maxWidth: '60rem'}">
+  <p-header>
+    <h2 class="title-dialog" *ngIf="!becomeAdministrator">Invitación de rol</h2>
+    <h2 class="title-dialog" *ngIf="becomeAdministrator">Convertir en administrador</h2>
+  </p-header>
+  <div class="pr-4 pl-4">
+    <form [formGroup]="form">
+      <div class="row justify-content-center pb-2">
+        <div class="img-user img-profile">
+          <div [style.background-image]="'url('+ this.utilitiesString.getImage(this.user?.userPhoto, 'perfil') +')'"
+               class="img img-user-public">
+          </div>
+        </div>
+      </div>
+      <div class="row line ">
+        <h4 class="cl mb-0 form-control-label">INFORMACIÓN IMPORTANTE</h4>
+      </div>
+      <div class="row pb-2">
+        <div class="col-lg-12 p-2" *ngIf="!becomeAdministrator">
+          <p>En esta sección podrás asignar o des asignar al usuario seleccionado un rol que podrá o dejará de usar en la
+            plataforma.</p>
+        </div>
+        <div class="col-lg-12 p-2" *ngIf="becomeAdministrator">
+          <p>En esta sección podrás asignar a un usuario como administrador de la red</p>
+        </div>
+      </div>
+      <div class="row line">
+        <h4 class="cl mb-0">INFORMACIÓN DE USUARIO</h4>
+      </div>
+      <div class="row pt-2">
+        <div class="col-lg-6 p-2">
+          <label class="form-control-label" for="userName">Nombre</label>
+          <input formControlName="userName" id="userName" pInputText type="text">
+        </div>
+        <div class="col-lg-6 p-2">
+          <label class="form-control-label" for="userEmail">Correo</label>
+          <input type="text" pInputText formControlName="userEmail" id="userEmail" maxlength="50"
+                 (input)="utilitiesString.convertOnlyTextEmail($event, form?.get('userEmail'));">
+        </div>
+      </div>
+      <div class="row pb-2">
+        <div class="col-lg-6 p-2">
+          <label class="form-control-label" for="userPhone">Teléfono</label>
+          <input formControlName="userPhone" id="userPhone" maxlength="10" minlength="8" pInputText type="text"
+                 (input)="utilitiesString.convertOnlyNumber($event);">
+        </div>
+        <div class="col-lg-6 p-2" *ngIf="!becomeAdministrator">
+          <label class="form-control-label" for="roleName">Rol</label>
+          <p-multiSelect [options]="roles" defaultLabel="Seleccione un rol" appendTo="body"
+                         formControlName="userRole" id="roleName" optionLabel="roleName">
+          </p-multiSelect>
+        </div>
+      </div>
+      <div class="row line">
+        <h4 class="cl mb-0" *ngIf="!becomeAdministrator">INFORMACIÓN DE LA CARRERA</h4>
+        <h4 class="cl mb-0 text-blod" *ngIf="becomeAdministrator">INFORMACIÓN DEL ROL ADMINISTRADOR</h4>
+      </div>
+      <div class="row pt-2" *ngIf="!becomeAdministrator">
+        <div class="col-lg-6 p-2">
+          <label class="form-control-label" for="userDegree">Carrera universitaria</label>
+          <input formControlName="userDegree" id="userDegree" pInputText type="text">
+        </div>
+        <div class="col-lg-6 p-2">
+          <label class="form-control-label" for="status">Estado</label>
+          <p-dropdown appendTo="body" formControlName="userStatus" [options]="statusOptions" optionLabel="name"
+                      [autoDisplayFirst]="false" editable="true" id="status"></p-dropdown>
+        </div>
+      </div>
+      <div class="row pt-2" *ngIf="becomeAdministrator">
+        <div class="pr-4 pl-4">
+          <p>Dentro de las funcionalidades de este rol están: </p>
+          <ul>
+            <li>Aprobar solicitudes de nuevos roles.</li>
+            <li>Otorgar nuevos roles a los usuarios de la comunidad.</li>
+          </ul>
+        </div>
+        <div class="col-lg-12 p-2" *ngIf="becomeAdministrator">
+          <p-checkbox binary="true" formControlName="userAdmin" inputId="binary">
+          </p-checkbox>
+          <label class="text-blod mb-0 pl-2" pTooltip="">Convertir en administrador de la red</label>
+        </div>
+      </div>
+    </form>
+  </div>
+  <p-footer>
+    <div class="col-lg-12 p-2 footer-dialog">
+      <button (click)="save()" [disabled]="!form.valid" *ngIf="!becomeAdministrator" label="Enviar invitación"
+              pButton class="btn-new" type="button"></button>
+      <button (click)="save()" [disabled]="!form.valid" *ngIf="becomeAdministrator" label="Volver administrador"
+              pButton class="btn-new" type="button"></button>
+    </div>
+  </p-footer>
+</p-dialog>

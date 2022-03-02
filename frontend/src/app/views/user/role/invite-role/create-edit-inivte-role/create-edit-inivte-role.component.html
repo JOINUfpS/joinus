@@ -1,0 +1,59 @@
+<p-dialog [(visible)]="display" [blockScroll]="utilitiesString.blockScroll" [draggable]="false"
+          [dismissableMask]="utilitiesString.dismissableMask" [maximizable]="false" [minY]="70"
+          [modal]="utilitiesString.modal" [styleClass]="'col-sm-11 col-md-6 col-lg-5 col-xl-5 col-11'"
+          [style]="{maxWidth: '60rem'}">
+  <p-header>
+    <h2 class="title-dialog" *ngIf="inviteRole">Editar invitación</h2>
+    <h2 class="title-dialog" *ngIf="!inviteRole">Nueva invitación</h2>
+  </p-header>
+  <div class="pr-4 pl-4">
+    <form [formGroup]="form">
+      <div class="row pt-2">
+        <div class="col-lg-12 p-2">
+          <span class="p-float-label">
+            <p-dropdown [autoDisplayFirst]="false" [itemSize]="1" [readonly]="inviteRole" [showClear]="true"
+                        id="userName" [options]="userOptions" formControlName="user" [filter]="true"
+                        [virtualScroll]="true" appendTo="body" filterBy="userName" optionLabel="userName">
+            </p-dropdown>
+            <label for="userName">Selecciona un usuario<strong class="text-requerid">*</strong></label>
+          </span>
+        </div>
+        <div class="col-lg-12 p-2">
+          <span class="p-float-label">
+            <p-dropdown [autoDisplayFirst]="false" appendTo="body" [options]="roleOptions" optionLabel="roleName"
+                        [filter]="true" [showClear]="true" filterBy="roleName" formControlName="role" id="roleName">
+            </p-dropdown>
+            <label for="roleName">Selecciona un rol<strong class="text-requerid">*</strong></label>
+          </span>
+        </div>
+        <br>
+        <div class="col-lg-12 p-2" *ngIf="inviteRole">
+          <span class="p-float-label">
+            <input class="ui-inputtext" type="text" pInputText
+                   (input)="utilitiesString.convertOnlyTextEmail($event,form?.get('user_email'));" minlength="3"
+                   [value]="inviteRole.userEmail" maxlength="30" id="correo">
+            <label for="correo">Correo<strong class="text-requerid">*</strong></label>
+          </span>
+        </div>
+        <br>
+        <div class="col-lg-12 p-2" *ngIf="inviteRole">
+          <span class="p-float-label">
+            <p-dropdown appendTo="body" [filter]="true" [options]="statusOptions" [showClear]="true" filterBy="name"
+                        optionLabel="name" id="inviteRoleStatus"></p-dropdown>
+            <label for="inviteRoleStatus">Selecciona un estado<strong class="text-requerid">*</strong></label>
+          </span>
+        </div>
+      </div>
+    </form>
+    <div class="row">
+      <div class="col p-2 footer-dialog">
+        <button (click)="save()" [disabled]="!form.valid || buttonCreateInviteRoleActioned"
+                [label]="inviteRole ? 'Guardar' : 'Enviar'"
+                class="btn-new" pButton type="button">
+          <p-progressSpinner [hidden]="!buttonCreateInviteRoleActioned"
+                             [style]="{width: '20px', height: '20px'}"></p-progressSpinner>
+        </button>
+      </div>
+    </div>
+  </div>
+</p-dialog>

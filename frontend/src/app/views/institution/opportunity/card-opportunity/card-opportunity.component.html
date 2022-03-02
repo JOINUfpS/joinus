@@ -1,0 +1,77 @@
+<div class="row justify-content-center">
+  <div class="col-12">
+    <div class="card card-profile mb-4 shadow">
+      <div class="card-body px-3 pb-0">
+        <div class="row pb-2">
+          <div class="col-auto pr-0 media align-items-center">
+            <div [routerLink]="['/perfil/', opportunity.userId]" class="cursor">
+              <div
+                [style.background-image]="'url('+ this.utilitiesString.getImage(opportunity?.userPhoto, 'perfil') +')'"
+                class="cursor img img-perfil-public">
+              </div>
+            </div>
+          </div>
+          <div class="col media-body d-lg-block">
+            <span [routerLink]="['/perfil/', opportunity.userId]"
+                  class="mb-0 text-sm font-weight-bold cursor">{{opportunity?.userName}}</span>
+            <h5 class="mb-0">{{opportunity?.createdDate}}</h5>
+          </div>
+          <div class="col-2 al-end">
+            <button class="btn-table btn-delete color-icon-fill" type="button" pButton pTooltip="Guardar"
+                    icon="bi bi-{{savedEvent}}"
+                    (click)="processSave(opportunity)" *ngIf="saveButton" iconPos="left"></button>
+            <button (click)="menu.toggle($event)" *ngIf="editButton" class="btn-table"
+                    icon="pi pi-ellipsis-h" pButton type="button"></button>
+            <p-menu #menu [model]="items" [popup]="true" [showTransitionOptions]="'0ms'">
+            </p-menu>
+          </div>
+        </div>
+      </div>
+      <div class="card-body pr-3 pt-md-0 pb-md-0 mt-2">
+        <h2 class="justifyText pr-2 mb-2 text-header">{{opportunity?.oppoTitle}}</h2>
+        <h5 class="justifyText">
+          {{opportunity?.oppoCountry.name}}
+          <strong *ngIf="opportunity?.oppoDepartment.name" class="mr-1">·</strong>{{opportunity?.oppoDepartment.name}}
+          <strong *ngIf="opportunity?.oppoMunicipality.name">·</strong>{{opportunity?.oppoMunicipality.name}}
+          <em class="ml-1 bi bi-clock-history"></em>Fecha limite:<strong
+          class="text-blod ml-1">{{opportunity?.oppoExpirationDate}}</strong>
+        </h5>
+        <div class="justifyText pr-2 mb-2">
+          <span><em class="bi bi-briefcase-fill"></em>{{opportunity?.oppoTypeContract}} · </span>
+          <em class="bi bi-cash-stack"></em><span
+          *ngIf="opportunity?.oppoRemuneration != '0'">${{ opportunity?.oppoRemuneration }}</span>
+          <span *ngIf="opportunity?.oppoRemuneration === '0'">A convenir</span>
+          <strong *ngIf="this.opportunity?.oppoEmployerEmail"> · <em
+            class="bi bi-envelope"></em></strong>{{this.opportunity?.oppoEmployerEmail}}
+        </div>
+        <div class="justifyText pr-2 mb-2">
+          <p [innerHTML]="opportunity?.oppoDescription"></p>
+        </div>
+        <div *ngIf="opportunity?.oppoAttachments.length!=0">
+          <div *ngFor="let attachment of opportunity?.oppoAttachments" class="p-0 pt-md-0 pb-md-2 mt-0">
+            <div class="col-12">
+              <div *ngIf="attachment.fileType==='image/png'"
+                   [style.background-image]="'url('+ this.utilitiesString.getImage(attachment.id) +')'"
+                   class="img img-publication">
+                <video *ngIf="attachment.fileType==='video/mp4'" class="img-publication" controls>
+                  <source [src]="this.utilitiesString.getImage(attachment.id)"
+                          type="video/mp4">
+                  <track default kind="captions" label="Español" src="" srclang="es">
+                </video>
+              </div>
+            </div>
+          </div>
+          <br>
+        </div>
+        <div class="card-body p-3 pt-md-3">
+          <button (click)="apply(opportunity)" iconPos="left" label="Aplicar" pButton type="button"
+                  *ngIf="applyButton" class="btn btn-new btn-rol-opportunity" tooltipPosition="top"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-apply-opportunity #modalApplyOpportunity></app-apply-opportunity>
+<app-create-edit-opportunity #modalCreateEditOpportunity (updateOpportunity)="updateOpportunity($event)">
+</app-create-edit-opportunity>

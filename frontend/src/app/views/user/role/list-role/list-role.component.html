@@ -1,0 +1,110 @@
+<div class="row justify-content-center">
+  <div class="col-xl-3 col-md-4 col-12 order-xl-1 mb-4 mb-lg-1">
+    <div class="card shadow">
+      <div class="card-header p-3">
+        <h2 class="mb-0 text-header">Gestión de roles</h2>
+      </div>
+      <div class="card-body p-3">
+        <div class="col-lg-12 p-2" *ngIf="!isCreating">
+          <label class="form-control-label">Roles</label>
+          <div class="p-inputgroup">
+            <p-dropdown (onChange)="setRole()" optionLabel="roleName" appendTo="body" [(ngModel)]="role"
+              placeholder="Roles" class="dropdown-roles" [options]="roles" dataKey="id" [autoDisplayFirst]="false">
+            </p-dropdown>
+            <button type="button" class="btn-rol-filter" pButton tooltipPosition="top" pTooltip="Nuevo rol"
+              icon="pi pi-plus" iconPos="left" (click)="newRole()"
+              *ngIf="permissionStructure.includes(constPermissions.CREATE)"></button>
+            <button (click)="deleteRole(role)" [disabled]="!role" class="btn-rol-filter" icon="pi pi-times"
+              iconPos="left" *ngIf="permissionStructure.includes(constPermissions.DELETE)" pButton pTooltip="Eliminar"
+              tooltipPosition="top" type="button"></button>
+          </div>
+        </div>
+        <div *ngIf="isCreating" [formGroup]="allForm" class="col-lg-12 p-2">
+          <label class="form-control-label" for="roleName">Nombre rol</label>
+          <div class="p-inputgroup">
+            <input class="ui-inputtext" type="text" pInputText (input)="utilitiesString.convertOnlyTextNumber($event)"
+              formControlName="roleName" id="roleName" maxlength="100" placeholder="Nombre rol">
+            <button (click)="savePermission()" class="btn-rol-filter" icon="pi pi-check" iconPos="left" pButton
+              pTooltip="Guardar" tooltipPosition="top" type="button"></button>
+            <button type="button" class="btn-rol-filter" pButton tooltipPosition="top" pTooltip="Cancelar"
+              icon="pi pi-times" iconPos="left" (click)="cancelCreatingRole()">
+            </button>
+          </div>
+          <small *ngIf="errors.has('role_name')" class="text-requerid">{{errors.get('role_name')}}</small>
+        </div>
+        <div class="col-lg-12 p-2">
+          <label class="form-control-label">Módulo</label>
+          <p-dropdown (onChange)="getActions()" [disabled]="!role" appendTo="body" optionLabel="moduName"
+            placeholder="Módulo" [(ngModel)]="module" [options]="modules" [autoDisplayFirst]="false">
+          </p-dropdown>
+        </div>
+        <div class="col-lg-12 p-2">
+          <label class="form-control-label">Permisos</label>
+          <p-multiSelect [disabled]="!role" appendTo="body" optionLabel="id" [(ngModel)]="action"
+            selectedItemsLabel="{0} modulos seleccionados" [options]="actions" defaultLabel="Permisos">
+          </p-multiSelect>
+        </div>
+        <div class="col-lg-12 p-2">
+          <button (click)="savePermission()" [disabled]="!module || !permissionStructure.includes(constPermissions.GET)"
+            label="Guardar permiso" pButton type="button" class="btn btn-new" icon="icon-right" iconPos="left"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-9 col-md-8 col-12 order-xl-2 mb-4 mb-lg-2">
+    <div class="card shadow p-lg-4">
+      <div class="card-body px-0">
+        <div class="col-lg-12 p-2">
+          <div class="p-inputgroup filter-ico">
+            <span class="p-inputgroup-addon pi pi-search"></span>
+            <label for="buscar"></label>
+            <input class="input-search filter-icono" type="text" pInputText placeholder="Buscar"
+              (input)="dt.filterGlobal($event.target.value, 'contains')" id="buscar">
+          </div>
+        </div>
+        <div class="row m-0">
+          <p-toolbar class="col-lg-12 p-0">
+            <h3 class="total-record mb-0">Registros: {{permissions.length}}</h3>
+          </p-toolbar>
+          <div class="table">
+            <p-table #dt [columns]="cols" [value]="permissions" [paginator]="configTables.paginator"
+              [rowsPerPageOptions]="configTables.rowsPerPage" [rows]="configTables.rowCount"
+              currentPageReportTemplate="({currentPage} of {totalPages})">
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns; let i = index" id="head-roles-{{i}}" [pSortableColumn]="col.field">
+                    {{col.header}}
+                    <p-sortIcon *ngIf="col.field !== 'actions'" [field]="col.field"></p-sortIcon>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-rowData let-i="rowIndex" let-columns="columns">
+                <tr>
+                  <td *ngFor="let col of columns" (mouseover)="utilitiesString.calcWidth($event)"
+                    pTooltip="{{rowData[col.field]}}" tooltipPosition="top"
+                    [tooltipDisabled]="utilitiesString.activeTooltip">
+                    <span *ngIf="col.field !== 'actions'">
+                      {{rowData[col.field]}}
+                    </span>
+                    <span *ngIf="col.field === 'actions'">
+                      <button class="btn-table btn-delete center " (click)="deletePermission(rowData)" type="button"
+                        pButton pTooltip="Eliminar" icon="pi pi-times-circle" iconPos="left"
+                        *ngIf="permissionStructure.includes(constPermissions.EDIT)"></button>
+                    </span>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr *ngIf="permissions.length === 0">
+                  <td [attr.colspan]="columns.length">
+                    {{utilitiesString.msgEmptyTable}}
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

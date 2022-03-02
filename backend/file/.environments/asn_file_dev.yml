@@ -1,0 +1,7 @@
+django:
+  application:
+    config:
+      DEBUG: False
+      HOST_DATABASE: mongodb://user:04052018@mongo:27017/asn_file?authSource=admin&retryWrites=true&w=majority
+      DATABASE_USER: user
+      DATABASE_PASSWORD: 04052018

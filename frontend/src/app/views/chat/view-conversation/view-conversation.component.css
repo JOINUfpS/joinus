@@ -1,0 +1,30 @@
+.emojis-container {
+  position: absolute;
+  bottom: 35px;
+  right: 1px;
+}
+
+.input-icons i {
+  position:absolute;
+  bottom:3px;
+  right:25px;
+  width:24px;
+  height:24px;
+  margin: auto;
+}
+
+.header-chat-conversation{
+  background-color: #cce8ff;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.bg-color-chat{
+  background-color: #f6f6f670;
+}
+
+@media screen and (min-width: 300px) and (max-width: 500px) {
+  .emojis-container {
+    left: 0px;
+  }
+}

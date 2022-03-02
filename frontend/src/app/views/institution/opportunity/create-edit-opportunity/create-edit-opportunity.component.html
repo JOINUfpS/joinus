@@ -1,0 +1,157 @@
+<p-dialog [(visible)]="display" [blockScroll]="true" [dismissableMask]="true"
+          [draggable]="false" [maximizable]="false" [minY]="90"
+          [modal]="true" [styleClass]="'col-11 col-md-8 col-lg-7 col-xl-5 col-sm-11'"
+          [style]="{ maxWidth: '60rem' }">
+  <p-header>
+    <h2 *ngIf="!this.showEditBtn" class="title-dialog">Crear oportunidad</h2>
+    <h2 *ngIf="this.showEditBtn" class="title-dialog">Actualizar oportunidad</h2>
+  </p-header>
+  <div class="pr-4 pl-4">
+    <form *ngIf="form != null" [formGroup]="form">
+      <div class="mb-3 row">
+        <div class="mb-2 col-lg-12 p-2">
+          <span class="p-float-label">
+            <input formControlName="oppoTitle" id="oppoTitle" maxlength="100"
+                   pInputText type="text">
+            <label for="oppoTitle">Cargo o título<strong class="text-requerid ml-1">*</strong></label>
+          </span>
+        </div>
+        <div class="col-lg-12 p-2 px-0 mb-3">
+          <ckeditor [config]="utilityRichText.config" [editor]="editor" class="ck-editor__editable"
+                    formControlName="oppoDescription"></ckeditor>
+        </div>
+        <div class="error-date-field col-lg-12 p-2">
+          <span class="p-float-label">
+             <p-calendar [(ngModel)]="dateOpportunity" [monthNavigator]="true" [readonlyInput]="true"
+                         [showIcon]="true" [yearNavigator]="true" dateFormat="dd-mm-yy" id="oppoExpirationDate"
+                         formControlName="oppoExpirationDate" appendTo="body" inputId="navigators" yearRange="1900:2050"
+                         (change)="clearErrorExpirationDate()" [locale]="utilitiesString.language"
+                         class="error-date-field"></p-calendar>
+            <label for="oppoExpirationDate">Fecha limite para aplicar<strong
+              class="text-requerid">*</strong></label>
+             <small *ngIf="form.get('oppoExpirationDate').hasError('noValidDate')"
+                    class="error-field">La fecha para aplicar debe ser mayor a hoy.</small>
+          </span>
+        </div>
+      </div>
+      <div class="mb-2 row">
+        <div class="col-lg-6 p-2">
+          <span class="p-float-label">
+            <input [options]="{ prefix: '', inputMode: 1, precision: 0 }" currencyMask
+                   formControlName="oppoRemuneration"
+                   id="oppoRemuneration" pInputText>
+            <label for="oppoRemuneration">Remuneración($)</label>
+          </span>
+          <small *ngIf="form.get('oppoRemuneration').hasError('pattern')" class="text-requerid">El salario no debe ser
+            negativo ni contener letras.</small>
+        </div>
+        <div class="col-lg-6 p-2">
+          <span class="p-float-label">
+            <p-dropdown [autoDisplayFirst]="false" [options]="typeContract" appendTo="body"
+                        placeholder="" formControlName="oppoTypeContract" id="oppoTypeContract" inputId="dropdown"
+                        optionLabel="cateName">
+            </p-dropdown>
+            <label for="oppoTypeContract">Tipo de contrato<strong class="text-requerid">*</strong></label>
+          </span>
+        </div>
+      </div>
+      <div class="mb-2 row">
+        <div class="col-lg-6 p-2">
+          <span class="p-float-label">
+            <input [ngClass]="errorClassEmployerEmail" formControlName="oppoEmployerEmail" id="oppoEmployerEmail"
+                   maxlength="100" pInputText type="text" (change)="clearErrorClassEmployerEmail()"
+                   pTooltip="Ha este correo se enviaran las hojas de vida de los interesados"
+                   tooltipPosition="top">
+            <label for="oppoEmployerEmail">Correo del empleador</label>
+          </span>
+          <small *ngIf="form.get('oppoEmployerEmail').hasError('pattern')" class="text-requerid">El correo es
+            inválido.</small>
+        </div>
+        <div class="col-lg-6 p-2">
+          <p-checkbox [binary]="true" formControlName="oppoSimpleRequest" label="Solicitud via correo electrónico"
+                      pTooltip="Las Hojas de Vida de los interesados se enviaran al correo anterior sí no, la postulación sera via web">
+          </p-checkbox>
+        </div>
+      </div>
+      <div class="mb-2 row">
+        <div class="col-lg-6 p-2">
+          <span class="p-float-label">
+            <input [ngClass]="errorClassApplicationUrl" formControlName="oppoApplicationUrl" id="oppoApplicationUrl"
+                   maxlength="100" pInputText type="text" (change)="clearErrorClassApplicationUrl()"
+                   pTooltip="Los interesados deben dirigirse a este sitio web para postularse a esta oportunidad"
+                   tooltipPosition="bottom">
+            <label for="oppoApplicationUrl">Sitio web del empleador</label>
+          </span>
+          <small *ngIf="form.get('oppoApplicationUrl').hasError('pattern')" class="text-requerid">La URL no es
+            válida.</small>
+        </div>
+        <div class="col-lg-6 p-2">
+          <span class="p-float-label">
+            <p-dropdown (onChange)="reseatDropdownStatesAndCities()" (onClick)="getCountriesOpportunity()"
+                        [autoDisplayFirst]="false"
+                        [options]="countriesOpportunity" appendTo="body" class="ui-state-filled"
+                        emptyFilterMessage="No se han encontrado resultados" filter="filter"
+                        formControlName="oppoCountry"
+                        id="oppoCountry" inputId="oppoCountry"
+                        optionLabel="name">
+            </p-dropdown>
+            <label for="oppoCountry">País <strong class="text-requerid">*</strong></label>
+          </span>
+        </div>
+      </div>
+      <div class="mb-2 row">
+        <div *ngIf="!hiddenDepartmentOpportunity" class="mb-2 col-lg-6 p-2">
+          <span class="p-float-label">
+            <p-dropdown (onChange)="reseatDropdownCities()" (onClick)="getDepartmentOpportunities()"
+                        [autoDisplayFirst]="false"
+                        [options]="departmentOpportunity" appendTo="body" class="ui-state-filled"
+                        emptyFilterMessage="No se han encontrado resultados" filter="filter"
+                        formControlName="oppoDepartment"
+                        id="oppoDepartment" inputId="oppoDepartment"
+                        optionLabel="name">
+          </p-dropdown>
+            <label for="oppoDepartment">Estado o Departamento</label>
+          </span>
+        </div>
+        <div *ngIf="!hiddenMunicipalitiesOpportunity" class="col-lg-6 p-2">
+          <span class="p-float-label">
+            <p-dropdown (onClick)="getMunicipalityOpportunity()" [autoDisplayFirst]="false"
+                        [options]="municipalitiesOpportunity"
+                        appendTo="body" class="ui-state-filled"
+                        emptyFilterMessage="No se han encontrado resultados"
+                        filter="filter" formControlName="oppoMunicipality" id="oppoMunicipality"
+                        inputId="oppoMunicipality" optionLabel="name">
+            </p-dropdown>
+            <label for="oppoMunicipality">Ciudad, Municipio</label>
+          </span>
+        </div>
+      </div>
+      <div *ngIf="this.imgChange" class="border">
+        <div class="col-lg-12 al-end pt-2 pb-2">
+          <button (click)="this.clearFilesUpload()" icon="bi bi-x-circle" iconPos="right" label=" " class="btn-circle"
+                  pButton type="button"></button>
+        </div>
+        <div class="ui-g-12 ui-md-3 ui-lg-3 pb-2">
+          <div [style.background-image]="'url('+imgChange+')'" class="img img-publication"></div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="row footer-dialog-upload mb-3">
+      <div [formGroup]="form" class="pl-2">
+        <p-fileUpload #photo [auto]="false" accept=".png,.jpg,.jpeg" chooseIcon="pi pi-image color-icon-fill"
+                      chooseLabel="Agregar imagen (png, jpg, jpeg)"
+                      (onSelect)="onSelectFile($event, photo)" [showCancelButton]="false" [showUploadButton]="false"
+                      customUpload="true" mode="basic" name="fileImg"></p-fileUpload>
+      </div>
+      <div class="col p-2 al-end">
+        <button (click)="addOrEditOpportunity()" [disabled]="!form.valid || buttonFormActioned" class="btn-new"
+                label="{{ opportunity ? 'Editar' : 'Crear' }}" pButton type="button">
+          <p-progressSpinner [hidden]="!buttonFormActioned"
+                             [style]="{width: '20px', height: '20px'}"></p-progressSpinner>
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>

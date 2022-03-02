@@ -1,0 +1,12 @@
+class CustomMessages:
+    ACCOUNT_CONFIRMED_SUCCESSFULLY = 'La cuenta ha sido confirmada con éxito.'
+    ACCOUNT_DOES_NOT_EXIST = 'La cuenta que intentas confirmar, no esta registrada.'
+    LOGGED_IN_SUCCESSFULLY = 'Has iniciado sesión exitosamente.'
+    NECESSARY_CONFIRM_ACCOUNT = 'Es necesario que confirmes la cuenta para realizar esta acción.'
+    INCOMPLETE_INFORMATION_USER = 'Información del usuario incompleta.'
+    FORGOT_PASSWORD_SUBJECT = 'Código para restablecer contraseña en Joinus'
+    FORGOT_PASSWORD_CODE = 'Código de recuperación de contraseña enviado, por favor revisa tu email.'
+    PASSWORD_UPDATED = 'Tu contraseña ha sido actualizada correctamente.'
+    COULD_NOT_LOG_OUT = 'No ha sido posible cerrar sesión.'
+    LOG_OUT_SUCCESSFULLY = 'Has cerrado sesión exitosamente.'
+    REFRESH_TOKEN_SUCCESSFULLY = 'Token de refresco actualizado con éxito.'

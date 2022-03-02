@@ -1,0 +1,33 @@
+<div class="col mb-4 mx-1 px-sm-4 px-md-3 px-lg-3 px-xl-4 align-content-center">
+  <div class="card liner">
+    <div class="p-2">
+      <div (click)="this.goToTheCommunity()" class="cursor col-12 mb-2 p-0">
+        <div [style.background-image]="'url('+ this.utilitiesConfigString.getImage(this.community?.commPhotoId) +')'"
+             class="img content-img-card-community">
+        </div>
+      </div>
+      <div (click)="this.goToTheCommunity()" class="cursor col-12 p-0">
+        <h4 class="mb-0 content-card-community"  pTooltip="{{this.community.commName}}" tooltipPosition="top"
+            (mouseover)="utilitiesConfigString.seeTooltipText($event, this.community.commName.length)"
+            [tooltipDisabled]="utilitiesConfigString.activeTooltip">{{this.community.commName}}</h4>
+      </div>
+      <div class="col-12 p-0">
+        <h5 class="mb-0 content-card-community"  pTooltip="{{this.community.commCategoryName}}" tooltipPosition="top"
+            (mouseover)="utilitiesConfigString.seeTooltipText($event, this.community.commCategoryName.length)"
+            [tooltipDisabled]="utilitiesConfigString.activeTooltip">{{this.community.commCategoryName}}</h5>
+      </div>
+      <div class="col-12 p-0">
+        <div *ngIf="this.community?.commPrivacy; else elseBlock">
+          <h5 class="mb-0">{{community.commAmountMember}} miembro(s) · Comunidad privada</h5>
+        </div>
+        <ng-template #elseBlock>
+          <h5 class="mb-0">{{community.commAmountMember}} miembro(s) · Comunidad publica</h5>
+        </ng-template>
+      </div>
+      <div class="col-12 p-0 mt-3">
+        <button (click)="evaluateRequest()" id="btn-request_join_community" class="btn btn-join" pButton type="button"
+                label="{{ this.labelButton }}"></button>
+      </div>
+    </div>
+  </div>
+</div>

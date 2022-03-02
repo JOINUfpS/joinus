@@ -1,0 +1,40 @@
+<div class="row follow px-1 mr-lg-2">
+  <div class="col-12 mt-2">
+    <div class="row justify-content-between align-items-center ">
+      <div class="col-auto">
+        <p class="text-header mb-0 bi bi-calendar-check">{{ projectModel?.startDate }} - {{projectModel?.endDate }}</p>
+      </div>
+      <div class="col">
+        <div class="row justify-content-end">
+          <div class="col-auto px-0">
+            <button (click)="editProject()" class="btn-table btn-delete center" icon="bi bi-pencil-square" iconPos="left"
+              pButton pTooltip="Editar" type="button"></button>
+          </div>
+          <div class="col-auto px-0">
+            <button (click)="deleteProject()" class="btn-table btn-delete" icon="pi pi-times-circle" iconPos="left" pButton
+              pTooltip="Eliminar" type="button"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <p class="text-header">{{projectModel?.title}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 mt-2">
+    <div>
+      <p [innerHTML]="projectAbstract" class="keep-format-text"></p>
+      <p (click)="seeDescription()" class="text-sm see-more-less" id="element">{{labelSeeAbstract}}</p>
+    </div>
+    <div class="col row mt-2 p-0 m-0 mb-2">
+      <span class="text-sm text-header mr-1"><em class="bi bi-link-45deg"></em>Soporte:
+        <a *ngIf="projectModel?.link !== ''" href="{{projectModel?.link}}" rel="noopener"
+          target="_blank">{{projectModel?.link}}</a>
+        <a *ngIf="projectModel?.link == ''">No especificado</a>
+      </span>
+    </div>
+  </div>
+</div>

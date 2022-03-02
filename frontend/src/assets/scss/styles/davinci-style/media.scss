@@ -1,0 +1,796 @@
+.content-login {
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 100%;
+}
+
+@media screen and (min-width: 1700px) and (max-width: 1920px) {
+  .login {
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  .main-content {
+    margin-left: 0 !important;
+    padding: 6rem 2rem 3rem 1rem !important;
+    height: 100%;
+  }
+  .account-content {
+    margin-left: 0 !important;
+    overflow: overlay !important;
+  }
+  .content-login {
+    margin-right: 10%;
+    right: 0;
+    position: absolute !important;
+  }
+  .content-backgroup-login {
+    width: 69%;
+    top: -11rem;
+    left: -283px;
+    height: auto;
+    position: fixed;
+  }
+  .layout-nav-slider {
+    visibility: hidden;
+  }
+  .btn-funti-rol {
+    display: flex !important;
+  }
+  .funti-rol {
+    display: contents;
+  }
+  .doc-sidebar {
+    margin-right: 0.5rem;
+  }
+  .p-mr-xl-7 {
+    margin-right: 8rem !important;
+  }
+  .sidebar-wrapper-right {
+    position: fixed !important;
+    right: 1rem;
+  }
+  .content-img-page {
+    width: 100%;
+    height: 102%;
+    background-size: contain;
+    background-position: -19%;
+    background-repeat: no-repeat;
+    position: fixed;
+  }
+  .content-page {
+    width: 70%;
+    background: #f8f9fe;
+    height: 146%;
+    position: fixed;
+    z-index: 6;
+    top: -7vw;
+    right: -23vw;
+    border-radius: 50%;
+  }
+  .content-text {
+    width: 37rem;
+    z-index: 7;
+    position: absolute;
+    right: 6rem;
+    margin-top: 21rem;
+    margin-bottom: auto;
+  }
+  .content-img-sm {
+    width: 20rem;
+    height: 20rem;
+    background-size: contain;
+    background-position: -19%;
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: 8;
+    margin: auto;
+    right: 38vw;
+    top: 19rem;
+    visibility: visible;
+  }
+}
+
+@media screen and (min-width: 1500px) and (max-width: 1700px) {
+  .login {
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  .main-content {
+    margin-left: 0 !important;
+    padding: 6rem 2rem 3rem 1rem !important;
+    height: 100%;
+  }
+  .account-content {
+    margin-left: 0 !important;
+    overflow: overlay !important;
+  }
+  .content-login {
+    margin-right: 10%;
+    right: 0;
+    position: absolute !important;
+  }
+  .content-backgroup-login {
+    width: 69%;
+    top: -11rem;
+    left: -283px;
+    height: auto;
+    position: fixed;
+  }
+  .layout-nav-slider {
+    visibility: hidden;
+  }
+  .btn-funti-rol {
+    display: flex !important;
+  }
+  .funti-rol {
+    display: contents;
+  }
+  .doc-sidebar {
+    margin-right: 0.5rem;
+  }
+  .p-mr-xl-7 {
+    margin-right: 8rem !important;
+  }
+  .sidebar-wrapper-right {
+    position: fixed !important;
+    right: 1rem;
+  }
+  .content-img-page {
+    width: 100%;
+    height: 101%;
+    background-size: contain;
+    background-position: -19%;
+    background-repeat: no-repeat;
+    position: fixed;
+  }
+  .content-page {
+    width: 71%;
+    background: #f8f9fe;
+    height: 150%;
+    position: fixed;
+    z-index: 6;
+    top: -7vw;
+    right: -23vw;
+    border-radius: 50%;
+  }
+  .content-text {
+    width: 35rem;
+    z-index: 7;
+    position: absolute;
+    right: 2rem;
+    margin-top: 20rem;
+    margin-bottom: auto;
+  }
+  .content-img-sm {
+    width: 20rem;
+    height: 20rem;
+    background-size: contain;
+    background-position: -19%;
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: 8;
+    margin: auto;
+    right: 38vw;
+    top: 15rem;
+    visibility: visible;
+  }
+}
+
+@media screen and (min-width: 1300px) and (max-width: 1500px) {
+  .login {
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  .main-content {
+    margin-left: 0 !important;
+    padding: 6rem 2rem 3rem 1rem !important;
+    height: 100%;
+  }
+  .account-content {
+    margin-left: 0 !important;
+    overflow: overlay !important;
+  }
+  .content-login {
+    margin-right: 10%;
+    right: 0;
+    position: absolute !important;
+  }
+  .content-backgroup-login {
+    width: 69%;
+    top: 25%;
+    left: 19%;
+    height: auto;
+    position: fixed;
+  }
+
+  .container-logo-recovery{
+    top: -4%;
+    left: 9%;
+  }
+  .layout-nav-slider {
+    visibility: hidden;
+  }
+  .btn-funti-rol > .p-button-label {
+    display: none;
+  }
+  .funti-rol {
+    display: flex;
+    align-self: center;
+  }
+  .p-mr-xl-7 {
+    margin-right: 7rem !important;
+  }
+  .sidebar-wrapper-right {
+    position: fixed !important;
+    right: 1rem;
+  }
+  .content-img-page {
+    width: 160%;
+    height: 101%;
+    background-size: contain;
+    background-position: -19%;
+    background-repeat: no-repeat;
+    position: fixed;
+    left: 0rem;
+  }
+  .content-page {
+    width: 92%;
+    background: #f8f9fe;
+    height: 152%;
+    position: fixed;
+    z-index: 6;
+    top: -12vw;
+    right: -36vw;
+    border-radius: 50%;
+  }
+  .content-text {
+    width: 37rem;
+    z-index: 7;
+    position: absolute;
+    right: 1rem;
+    margin-top: 20rem;
+    margin-bottom: auto;
+  }
+  .content-img-sm {
+    width: 20rem;
+    height: 20rem;
+    background-size: contain;
+    background-position: -19%;
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: 8;
+    margin: auto;
+    right: 39rem;
+    top: 17rem;
+    visibility: visible;
+  }
+}
+
+@media screen and (min-width: 1100px) and (max-width: 1300px) {
+  .login {
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  .main-content {
+    margin-left: 0 !important;
+    padding: 6rem 2rem 3rem 1rem !important;
+    height: 100%;
+  }
+  .account-content {
+    margin-left: 0 !important;
+    overflow: overlay !important;
+  }
+  .content-login {
+    margin-right: 10%;
+    right: 0;
+    position: absolute !important;
+  }
+  .content-backgroup-login {
+    width: 69%;
+    top: -11rem;
+    left: -283px;
+    height: auto;
+    position: fixed;
+  }
+  .layout-nav-slider {
+    visibility: hidden;
+  }
+  .btn-funti-rol > .p-button-label {
+    display: none;
+  }
+  .funti-rol {
+    display: flex;
+    align-self: center;
+  }
+  .p-mr-xl-7 {
+    margin-right: 7rem !important;
+  }
+  .sidebar-wrapper-right {
+    position: fixed !important;
+    right: 1rem;
+  }
+  .content-img-page {
+    width: 160%;
+    height: 101%;
+    background-size: contain;
+    background-position: -19%;
+    background-repeat: no-repeat;
+    position: fixed;
+    left: -10rem;
+  }
+  .content-page {
+    width: 92%;
+    background: #f8f9fe;
+    height: 152%;
+    position: fixed;
+    z-index: 6;
+    top: -12vw;
+    right: -36vw;
+    border-radius: 50%;
+  }
+  .content-text {
+    width: 28rem;
+    z-index: 7;
+    position: absolute;
+    right: 2rem;
+    margin-top: 20rem;
+    margin-bottom: auto;
+  }
+  .content-img-sm {
+    width: 20rem;
+    height: 20rem;
+    background-size: contain;
+    background-position: -19%;
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: 8;
+    margin: auto;
+    right: 32rem;
+    top: 17rem;
+    visibility: visible;
+  }
+}
+
+@media screen and (min-width: 900px) and (max-width: 1100px) {
+  .login {
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  .main-content {
+    margin-left: 0 !important;
+    padding: 6rem 2rem 3rem 1rem !important;
+    height: 100%;
+  }
+  .account-content {
+    margin-left: 0 !important;
+    overflow: overlay !important;
+  }
+  .content-login {
+    margin-right: 5%;
+    right: 0;
+    position: absolute !important;
+  }
+  .content-backgroup-login {
+    width: 89%;
+    top: 19%;
+    left: 18%;
+    height: auto;
+    position: fixed;
+  }
+
+  .container-logo-recovery{
+    top: -5%;
+    left: 2%;
+  }
+  .btn-funti-rol > .p-button-label {
+    display: none;
+  }
+  .funti-rol {
+    display: flex;
+    align-self: center;
+  }
+  .p-mr-lg-7 {
+    margin-right: 7rem !important;
+  }
+  .content-img-page {
+    width: 141%;
+    height: 99%;
+    background-size: contain;
+    background-position: -19%;
+    background-repeat: no-repeat;
+    position: fixed;
+    bottom: 5rem;
+  }
+  .content-page {
+    width: 114%;
+    background: #f8f9fe;
+    height: 116%;
+    position: fixed;
+    z-index: 6;
+    bottom: -49vw;
+    right: -22vw;
+    border-radius: 50%;
+  }
+  .content-text {
+    width: 37rem;
+    z-index: 7;
+    position: absolute;
+    right: 4rem;
+    margin-top: 16rem;
+    margin-bottom: auto;
+    bottom: 2rem;
+  }
+  .content-img-sm {
+    width: 27rem;
+    height: 27rem;
+    background-size: contain;
+    background-position: -19%;
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: 8;
+    margin: auto;
+    right: 42rem;
+    top: 27rem;
+    visibility: visible;
+  }
+
+  .btn-inner--text{
+    font-size: 11px !important;
+  }
+
+  .login-img {
+    width:100% !important;
+  }
+
+}
+
+@media screen and (min-width: 700px) and (max-width: 900px) {
+  .login {
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  .main-content {
+    margin-left: 0 !important;
+    padding: 6rem 2rem 3rem 1rem !important;
+    height: 100%;
+  }
+  .account-content {
+    margin-left: 0 !important;
+    overflow: overlay !important;
+  }
+  .content-login {
+    margin-right: 5%;
+    right: 0;
+    position: absolute !important;
+  }
+  .content-backgroup-login > img {
+    display: none;
+  }
+
+  // .container-logo-joinus{
+  //      margin-right: 21%;
+  // }
+
+  .btn-funti-rol > .p-button-label {
+    display: none;
+  }
+  .funti-rol {
+    display: flex;
+    align-self: center;
+  }
+  .p-mr-lg-7 {
+    margin-right: 7rem !important;
+  }
+  .content-img-page {
+    width: 142%;
+    height: 92%;
+    background-size: contain;
+    background-position: -19%;
+    background-repeat: no-repeat;
+    position: fixed;
+    bottom: 9rem;
+  }
+  .content-page {
+    width: 135%;
+    background: #f8f9fe;
+    height: 108%;
+    position: fixed;
+    z-index: 6;
+    bottom: -56vw;
+    right: -22vw;
+    border-radius: 50%;
+  }
+  .content-text {
+    width: 37rem;
+    z-index: 7;
+    position: absolute;
+    right: 4rem;
+    margin-top: 16rem;
+    margin-bottom: auto;
+    bottom: 2rem;
+  }
+  .content-img-sm {
+    width: 27rem;
+    height: 27rem;
+    background-size: contain;
+    background-position: -19%;
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: 8;
+    margin: auto;
+    right: 42rem;
+    top: 27rem;
+    visibility: visible;
+  }
+}
+
+@media screen and (min-width: 500px) and (max-width: 700px) {
+  .login {
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  .main-content {
+    margin-left: 0 !important;
+    padding: 6rem 2rem 3rem 1rem !important;
+    //overflow: overlay !important;
+    height: 100%;
+  }
+  .account-content {
+    margin-left: 0 !important;
+    overflow: overlay !important;
+  }
+  .content-login {
+    margin-right: 5%;
+    right: 0;
+    position: absolute !important;
+  }
+  .content-backgroup-login {
+    width: 107%;
+    top: -10rem;
+    left: -15rem;
+    height: auto;
+    position: fixed;
+  }
+  .layout-nav-slider {
+    visibility: visible;
+  }
+  .layout-nav {
+    display: none;
+  }
+  .btn-funti-rol > .p-button-label {
+    display: none;
+  }
+  .funti-rol {
+    display: flex;
+    align-self: center;
+  }
+  .content-img-page {
+    width: 141%;
+    height: 64%;
+    background-size: contain;
+    background-position: -19%;
+    background-repeat: no-repeat;
+    position: fixed;
+  }
+  .content-page {
+    width: 177%;
+    background: #f8f9fe;
+    height: 106%;
+    position: fixed;
+    z-index: 6;
+    top: 58vw;
+    right: -39vw;
+    border-radius: 50%;
+  }
+  .content-text {
+    width: 95%;
+    z-index: 7;
+    position: absolute;
+    margin-top: 16rem;
+    margin-bottom: auto;
+    bottom: 3rem;
+    margin-left: 10px;
+  }
+  .content-img-sm {
+    width: 27rem;
+    height: 27rem;
+    background-size: contain;
+    background-position: -19%;
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: 8;
+    margin: auto;
+    right: 42rem;
+    top: 27rem;
+    display: none;
+  }
+  .chat {
+    width: 30px;
+    height: 30px;
+  }
+
+  .bell {
+    width: 30px;
+    height: 30px;
+  }
+  .navbar-nav .nav-search .nav-link-search {
+    font-size: 18px;
+  }
+  .avatar-profile {
+    height: 42px;
+    width: 42px;
+  }
+}
+
+@media screen and (min-width: 300px) and (max-width: 500px) {
+  .login {
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  .content-backgroup-login {
+    min-width: 0;
+  }
+  .main-content {
+    margin-left: 0 !important;
+    padding: 7rem 1rem 0 1rem !important;
+    height: 100%;
+  }
+  .account-content {
+    margin-left: 0 !important;
+    overflow: overlay !important;
+  }
+  .content-login {
+    margin-right: 0;
+    position: relative !important;
+  }
+  .content-backgroup-login {
+    visibility: hidden;
+    position: fixed;
+  }
+  .m-user {
+    margin-top: 1rem;
+  }
+  .layout-nav-slider {
+    visibility: visible;
+  }
+  .layout-nav {
+    display: none;
+  }
+  .btn-funti-rol {
+    display: flex !important;
+  }
+  .btn-funti-rol > .p-button-label {
+    display: none;
+  }
+  .funti-rol {
+    display: flex;
+    align-self: center;
+  }
+  .content-img-page {
+    width: 128vw;
+    height: 48%;
+    background-size: contain;
+    background-position: -68%;
+    background-repeat: no-repeat;
+    position: fixed;
+    visibility: visible;
+  }
+  .content-page {
+    width: 169vw;
+    background: #f8f9fe;
+    height: 100vw;
+    position: fixed;
+    z-index: 6;
+    top: 55vw;
+    right: -34vw;
+    border-radius: 50%;
+    visibility: visible;
+  }
+  .content-text {
+    width: 100%;
+    z-index: 7;
+    position: absolute;
+    margin-top: 6rem;
+    margin-bottom: auto;
+    bottom: 6rem;
+    padding: 1rem;
+  }
+  .content-img-sm {
+    width: 27rem;
+    height: 27rem;
+    background-size: contain;
+    background-position: -19%;
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: 8;
+    margin: auto;
+    right: 42rem;
+    top: 27rem;
+    visibility: hidden;
+  }
+  .chat {
+    width: 30px;
+    height: 30px;
+  }
+
+  .bell {
+    width: 30px;
+    height: 30px;
+  }
+  .navbar-nav .nav-search .nav-link-search {
+    font-size: 18px;
+  }
+  .avatar-profile {
+    height: 42px;
+    width: 42px;
+  }
+  .nav-item {
+    margin-left: 9px;
+    margin-right: 9px;
+  }
+}
+
+// PANTALLAS MUY GRANDES
+
+@media screen and (min-width: 1600px) and (max-width: 1920px) and (min-height: 790px) {
+  .content-backgroup-login {
+    width: 70%;
+    top: -11rem;
+    left: -283px;
+    height: auto;
+    position: fixed;
+  }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1600px) and (min-height: 790px) {
+  .content-backgroup-login {
+    width: 89%;
+    top: -14rem;
+    left: -283px;
+    height: auto;
+    position: fixed;
+  }
+  .btn-funti-rol {
+    display: flex !important;
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px) and (min-height: 790px) {
+  .content-backgroup-login {
+    width: 116%;
+    top: -11rem;
+    left: -17rem;
+    height: auto;
+    position: fixed;
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 992px) and (min-height: 790px) {
+  .content-backgroup-login {
+    visibility: hidden;
+    position: fixed;
+  }
+}
+
+@media screen and (min-width: 400px) and (max-width: 576px) and (min-height: 790px) {
+  .content-backgroup-login {
+    visibility: hidden;
+    position: fixed;
+  }
+}

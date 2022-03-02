@@ -1,0 +1,338 @@
+<div *ngIf="!isLoadingDataPublication" class="row justify-content-center">
+  <div class="col-xl-8 col-lg-10 col-md-11 col-sm-12 order-xl-2">
+    <div class="card bg-secondary shadow">
+      <div class="card-body bg-white px-3 pb-0">
+        <div class="row pb-2">
+          <div class="col-auto">
+            <div [routerLink]="['/perfil/', publication.userId]"
+              [style.background-image]="'url('+ this.utilitiesString.getImage(publication?.userPhoto, 'perfil') +')'"
+              class="cursor img img-perfil-public">
+            </div>
+          </div>
+
+          <div class="col px-2">
+            <span [routerLink]="['/perfil/', publication.userId]"
+              class="mb-0 text-sm font-weight-bold cursor">{{publication?.userName}}
+            </span>
+            <span *ngIf="publication?.commId !== null">
+              <em class="bi bi-caret-right"></em>
+              <span [routerLink]="['/usuarios/comunidad', this.publication.commId]"
+                class="mb-0 text-sm font-weight-bold cursor">{{publication?.commName}}</span>
+            </span>
+            <div class="col-12 p-0">
+              <button (click)="privacy.toggle($event)" *ngIf="userSession.id === this.publication?.userId"
+                class="btn-privacy p-0 mr-2" icon="{{this.publication.publPrivacy ? 'bi bi-lock': 'bi bi-globe'}}"
+                pButton type="button"></button>
+              <p-menu #privacy [hideTransitionOptions]="'0ms'" [model]="privacyOptions" [popup]="true"
+                class="p-menu-float">
+              </p-menu>
+              <em *ngIf="userSession.id !== this.publication.userId" class="btn-privacy p-0 mr-2 bi bi-globe"></em>
+              <span class="mb-0 text-sm">{{publication?.createdDate}}</span>
+              <span *ngIf="!publication?.publStandard"
+                class="content-chip chip-category-publication mr-2 ml-2">Pregunta</span>
+              <span *ngIf="publication?.cateId !== null"
+                class="content-chip chip-category-publication mr-2 ml-2">{{publication?.cateName}}</span>
+              <img *ngIf="publication?.publProject.title" pTooltip="Esta publicación esta relacionada a un proyecto."
+                tooltipPosition="top" alt="Bombilla de proyecto" src="assets/img/brand/lightbulb.svg" />
+            </div>
+          </div>
+
+          <div class="col-auto">
+
+            <div *ngIf="publication?.userId == userSession.id" class="col-1 al-end p-0">
+              <button (click)="menu.toggle($event)" class="btn-ico-user" icon="pi pi-ellipsis-h" pButton
+                pTooltip="Edita o elimina tu publicación" type="button"></button>
+              <p-menu #menu [hideTransitionOptions]="'0ms'" [model]="items" [popup]="true"
+                [showTransitionOptions]="'0ms'" class="p-menu-float">
+              </p-menu>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="card-header bg-white border-0 pb-md-2">
+        <div class="row">
+            <div class="col-auto">
+              <h2 class="text-header mb-0">{{this.publication?.publTitle}}</h2>
+            </div>
+        </div>
+        <div class="col row mt-2 p-0 m-0">
+          <span *ngIf="this.publication?.publLinkDoi !== ''"><em class="bi bi-link-45deg"></em>
+            <a [href]="this.publication?.publLinkDoi" target="_blank"> {{this.publication?.publLinkDoi}}</a>
+          </span>
+        </div>
+        <div class="col row mt-2 p-0 m-0">
+          <div *ngFor="let author of publication?.publAuthors" class="content-chip my-3 mr-2">
+            <div class="media align-items-center">
+              <div [style.background-image]="'url('+ this.utilitiesString.getImage(author?.authorPhoto, 'perfil') +')'"
+                class="img img-author">
+              </div>
+              <div (click)="viewProfileUser(author?.id)" class="media-body ml-1 cursor">
+                <h5 class="chip-text-author mb-0">{{author?.authorName}}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body card-footer-menu pb-0 pt-3 line-top">
+        <div class="row align-items-center mb-1 custom-justify-evenly">
+          <div class="col-auto px-2">
+            <button (click)="activeIndex = 0" class="cursor button-tab px-0" label="General" pButton
+              type="button">
+              <span class="btn-info-{{ activeIndex }}"></span>
+            </button>
+          </div>
+
+          <div class="col-auto px-1">
+            <button (click)="activeIndex = 1" class="cursor button-tab px-0" label="Estadisticas" pButton
+              type="button">
+              <span class="btn-followers-{{ activeIndex }}"></span>
+            </button>
+
+          </div>
+          <div class="col-auto px-1">
+            <button (click)="activeIndex = 2" class="cursor button-tab px-0" label="Comentarios" pButton
+              type="button">
+              <span class="btn-publications-{{ activeIndex }}"></span>
+            </button>
+
+          </div>
+          <div class="col-auto px-1">
+            <button (click)="getPublicationsRelated()" class="cursor button-tab px-0" label="Proyecto" pButton
+              type="button">
+              <span class="btn-project-academic-{{ activeIndex }}"></span>
+            </button>
+          </div>
+
+          <div class="col-auto px-0">
+            <button *ngIf="hasPDFToDownload && ((this.publication?.publFullText && this.publication?.publAttachments.length > 0) ||
+                      (this.publication?.userId === userSession.id && this.publication?.publAttachments.length > 0))"
+              (click)="downloadPdf()" class="btn-table btn-delete" icon="bi bi-box-arrow-down" pButton
+              pTooltip="Descargar" type="button" tooltipPosition="top"></button>
+            <button class="btn btn-table btn-delete color-icon-fill mr-0 px-0 custom-btn-padding" pButton pTooltip="Guardar cómo favorita"
+              type="button" tooltipPosition="top" (click)="triggerSaved()"
+              icon="{{publicationSaved ? 'bi bi-bookmark-fill' : 'bi bi-bookmark'}}"></button>
+            <button *ngIf="hasPDFToDownload && this.publication?.userId !== userSession.id && this.publication?.publStandard &&
+                            !this.publication?.publFullText &&
+                            !this.publication.publPermissionViewFullText.includes(userSession.userEmail)"
+              (click)="requestPullRequest()" [label]="'Solicitar archivo'" class="btn-request-file" pButton
+              type="button" icon="pi pi-paperclip"></button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="pt-0 pb-0 mt-4 mb-4">
+      <p-tabView [(activeIndex)]="activeIndex">
+        <p-tabPanel>
+          <div class="card shadow p-3">
+            <h3 class="mb-0 pb-2 line text-blod">Descripción</h3>
+            <div class="justifyText mt-3 keep-format-text">
+              <p [innerHTML]="publicationDescription" class="keep-format-text"></p>
+              <p (click)="seeDescriptionPublication()" class="text-sm see-more-less">{{labelSeePublicationDescription}}
+              </p>
+            </div>
+            <div class="col-12">
+              <div class="row">
+                <div *ngFor="let attachment of publication?.publAttachments" class="col-12 p-0">
+                  <div class="row justify-content-center" *ngIf="attachment.fileType==='video/mp4'">
+                    <div class="col-12">
+                      <video style="height: 100%; width: 100%;" controls>
+                        <source [src]="this.utilitiesString.getImage(attachment.id)" type="video/mp4">
+                        <track default kind="captions" label="Español" src="" srclang="es">
+                      </video>
+                    </div>
+                  </div>
+                  <div class="row justify-content-center" *ngIf="attachment.fileType==='image/png'">
+                    <div class="col-12">
+                      <figure>
+                        <img class="publication-image" [src]="this.utilitiesString.getImage(attachment.id)"
+                          alt="imagen" />
+                      </figure>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div *ngFor="let attachment of publication?.publAttachments" class="background-white">
+                  <div class="row" *ngIf="this.publication?.userId === userSession.id || this.publication?.publFullText ||
+                      this.publication.publPermissionViewFullText.includes(userSession.userEmail)">
+                    <pdf-viewer *ngIf="attachment.fileType==='application/pdf'" [page]="1" [render-text]="true"
+                      [show-all]="this.viewFullText" [src]="this.utilitiesString.getImage(attachment.id)"
+                      style="display: block;background: white;"></pdf-viewer>
+                    <div *ngIf="!this.viewFullText && attachment.fileType==='application/pdf'"
+                      class="col p-2 al-center">
+                      <button (click)="showFullText()" class="al-center btn-new" label="Ver texto completo" pButton
+                        type="button"></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                *ngIf="hasPDFToDownload && this.publication?.userId !== userSession.id &&this.publication?.publStandard &&
+              !this.publication?.publFullText &&!this.publication.publPermissionViewFullText.includes(userSession.userEmail)"
+                class="col">
+                <div class="al-center">
+                  <img alt="Image placeholder" src="assets/img/brand/pdf-communi.svg" />
+                  <h3 class="my-2">Solicite una copia de esta investigación directamente a los autores. </h3>
+                  <button (click)="requestPullRequest()" [label]="'Solicitar archivo'"
+                    class="btn-request-file btn-archive" icon="pi pi-paperclip" pButton type="button"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </p-tabPanel>
+        <p-tabPanel>
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-3 mb-2">
+              <div class="card shadow card-profile-stats d-flex justify-content-center liner">
+                <div class="p-2">
+                  <p class="mb-3">{{this.publication?.publInterestedList.length}}</p>
+                  <h1 class="mb-1 text-blod">Interesados</h1>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3 mb-2">
+              <div class="card shadow card-profile-stats d-flex justify-content-center liner">
+                <div class="p-2">
+                  <p class="mb-3">{{this.publication?.publComment.length}}</p>
+                  <h1 class="mb-1 text-blod">Comentarios</h1>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3 mb-2">
+              <div class="card shadow card-profile-stats d-flex justify-content-center liner">
+                <div class="p-2">
+                  <p class="mb-3">{{this.publication?.publAmountShared}}</p>
+                  <h1 class="mb-1 text-blod">Compartidos</h1>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3 mb-2">
+              <div class="card shadow card-profile-stats d-flex justify-content-center liner">
+                <div class="p-2">
+                  <p class="mb-3">{{this.publication?.publAmountDownload}}</p>
+                  <h1 class="mb-1 text-blod">Descargas</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </p-tabPanel>
+        <p-tabPanel>
+          <div class="card shadow p-3">
+            <div class="row align-items-center justify-content-between px-3 line">
+              <div class="col-auto mb-3  p-0">
+                <h3 class="mb-0 text-blod">Comentarios en esta publicación</h3>
+              </div>
+              <div class="col-auto mb-3 p-0">
+                <h4 class="text-blod mb-0">{{this.publication?.publComment.length}}</h4>
+              </div>
+            </div>
+            <div class="row align-items-center pt-3">
+              <div class="col-auto">
+                <div
+                  [style.background-image]="'url('+ this.utilitiesString.getImage(userSession?.userPhoto, 'perfil') +')'"
+                  class="img img-user-pub">
+                </div>
+              </div>
+              <div class="col pl-0">
+                <input (blur)="focus = false" (focus)="true" (keyup.enter)="createComment()" [(ngModel)]="comment"
+                  class="input-comment" id="textAreaComment" pInputText placeholder="Escribe tu comentario" type="text">
+              </div>
+            </div>
+            <div class="col-12 p-0">
+              <app-card-comment *ngFor="let comment of this.publication?.publComment" [comment]="comment"
+                [publication]="publication" class="col-12 pl-md-5 content-inco"></app-card-comment>
+            </div>
+          </div>
+        </p-tabPanel>
+        <p-tabPanel>
+          <div *ngIf="publication?.publProject?.title" class="card shadow">
+            <div class="card-header p-3">
+              <p class="text-header bi bi-calendar-check">{{ publication?.publProject.startDate }}
+                - {{publication?.publProject.endDate }}</p>
+              <h2 class="mb-0 text-header">{{publication?.publProject.title}}</h2>
+              <div class="col row mt-2 p-0 m-0">
+                <span class="text-sm text-header mr-1"><em class="bi bi-link-45deg"></em>Soporte:
+                  <a *ngIf="publication.publProject?.link !== ''" href="{{publication.publProject?.link}}"
+                    rel="noopener" target="_blank">{{publication.publProject?.link}}</a>
+                  <a *ngIf="publication.publProject?.link == ''">No especificado</a>
+                </span>
+              </div>
+            </div>
+            <div class="card-body p-3">
+              <p [innerHTML]="projectAbstract" class="keep-format-text"></p>
+              <p (click)="seeAbstractProject()" class="text-sm see-more-less" id="element">{{labelSeeAbstractProject}}
+              </p>
+            </div>
+          </div>
+          <div class="card shadow mt-4">
+            <div class="card-header p-3">
+              <div class="row">
+                <div class="card-header col-xl-10 col-lg-10 col-md-10 col-sm-12">
+                  <h2 class="mb-0 mt-2 text-header">Publicaciones relacionadas</h2>
+                </div>
+              </div>
+              <app-card-publication-related *ngFor="let publicationRelated of publicationsRelated"
+                [publication]="publicationRelated"></app-card-publication-related>
+              <app-skeleton-publication *ngIf="isLoadingPublications"></app-skeleton-publication>
+              <div *ngIf="!isLoadingPublications && publicationsRelated?.length===0" class="mt-2">
+                <div class="card shadow">
+                  <div class="card-body pt-0 pb-3 pt-3 al-center">
+                    <div class="col-12 mb-2">
+                      <div class="align-content-lg-center">
+                        <div class="home m-auto"></div>
+                      </div>
+                      <h2 *ngIf="publication.publProject.title" class="mt-2 col-12 text-header">No hay
+                        publicaciones que esten asociadas al mismo proyecto.</h2>
+                      <h2 *ngIf="!publication.publProject.title" class="mt-2 col-12 text-header">Esta
+                        publicación o pregunta no tiene un proyecto asociado.</h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </p-tabPanel>
+      </p-tabView>
+    </div>
+  </div>
+</div>
+<app-create-edit-publication #modalCreateEditPublication (updatePublication)="updatePublication($event)"
+  [showCreateEditButton]="false"></app-create-edit-publication>
+<div *ngIf="isLoadingDataPublication" class="row justify-content-center">
+  <div class="col-xl-8 col-lg-10 col-md-11 col-sm-12 order-xl-2">
+    <div class="card bg-secondary shadow">
+      <div class="card-body bg-white px-3 pb-0">
+        <div class="row pb-2">
+          <div class="col-1 pr-0 media align-items-center">
+            <p class="skeleton-round"></p>
+          </div>
+          <div class="col pl-0 media-body ml-2 d-lg-block">
+            <p class="skeleton-right-small"></p>
+            <p class="skeleton-right-small"></p>
+          </div>
+        </div>
+      </div>
+      <div class="card-header bg-white border-0">
+        <div class="col row align-items-center">
+          <p class="skeleton-right-small"></p>
+        </div>
+        <div class="row mt-2 line-top align-bottom">
+          <div class="col mt-4 mr-3">
+            <p class="skeleton-button-small pr-2"></p>
+          </div>
+          <div class="col mt-4 mr-3">
+            <p class="skeleton-button-small pr-2"></p>
+          </div>
+          <div class="col mt-4 mr-3">
+            <p class="skeleton-button-small pr-2"></p>
+          </div>
+          <div class="col mt-4">
+            <p class="skeleton-button-small pr-2"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

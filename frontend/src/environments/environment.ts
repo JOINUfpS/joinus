@@ -1,0 +1,18 @@
+export const environment = {
+  production: false,
+  urlChat: 'http://localhost:8097/chats/api/',
+  chatWebsocket: 'ws://localhost:8097/ws/',
+  notificationUrl: 'http://127.0.0.1:8098/notifications/api/',
+  notificationWebSocket: 'ws://localhost:8098/ws/',
+  file: 'https://studentsprojects.cloud.ufps.edu.co/asn_balancing/api_gateway/asn_file/files/api/file/get_object/',
+  fileUrl: 'https://studentsprojects.cloud.ufps.edu.co/asn_balancing/api_gateway/asn_file/files/api/',
+  // file: 'http://127.0.0.1:8096/files/api/file/get_object/',
+  // fileUrl: 'http://127.0.0.1:8096/files/api/',
+  institutionUrl: 'http://127.0.0.1:8091/institutions/api/',
+  publicationUrl: 'http://127.0.0.1:8093/publications/api/',
+  securityUrl: 'http://127.0.0.1:8094/securities/api/',
+  userUrl: 'http://127.0.0.1:8092/users/api/',
+  utilityUrl: 'http://127.0.0.1:8095/utilities/api/',
+  defaultImage: '3fa85f64-5717-4562-b3fc-2c963f66afa6.jpg',
+  imgUser: '992f149f-b056-484b-bc0b-573eca93f90f.jpg',
+};

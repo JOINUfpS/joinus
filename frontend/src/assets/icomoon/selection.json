@@ -1,0 +1,184 @@
+{
+  "IcoMoonType": "selection",
+  "icons": [
+    {
+      "icon": {
+        "paths": [
+          "M956.009 67.991c-7.484-7.491-18.721-9.796-28.546-5.859l-850.588 340.23c-9.734 3.891-16.251 13.161-16.623 23.636-0.373 10.478 5.472 20.185 14.901 24.76l335.411 162.674 162.674 335.411c4.436 9.15 13.704 14.92 23.811 14.92 0.316 0 0.632-0.006 0.946-0.018 10.478-0.37 19.745-6.888 23.636-16.622l340.239-850.584c3.933-9.831 1.626-21.062-5.861-28.549z",
+          "M956.076 66.382l-545.428 546.419 162.668 336.020c4.436 9.165 13.701 14.944 23.811 14.944 0.313 0 0.629-0.006 0.946-0.018 10.475-0.373 19.742-6.9 23.636-16.652l340.224-852.112c3.933-9.849 1.629-21.1-5.858-28.601z"
+        ],
+        "attrs": [
+          {
+            "fill": "rgb(25, 65, 99)",
+            "opacity": 0.5
+          },
+          {
+            "fill": "rgb(255, 255, 255)",
+            "opacity": 0.63
+          }
+        ],
+        "isMulticolor": true,
+        "isMulticolor2": true,
+        "grid": 0,
+        "tags": [
+          "send"
+        ],
+        "colorPermutations": {
+          "25525525512565991": [
+            {
+              "f": 0
+            },
+            {
+              "f": 1
+            }
+          ]
+        }
+      },
+      "attrs": [
+        {
+          "fill": "rgb(25, 65, 99)",
+          "opacity": 0.5
+        },
+        {
+          "fill": "rgb(255, 255, 255)",
+          "opacity": 0.63
+        }
+      ],
+      "properties": {
+        "order": 201,
+        "id": 1,
+        "name": "send",
+        "prevSize": 32,
+        "code": 59648,
+        "codes": [
+          59648,
+          59649
+        ]
+      },
+      "setIdx": 0,
+      "setId": 10,
+      "iconIdx": 0
+    },
+    {
+      "icon": {
+        "paths": [
+          "M1024 590.444l-512-397.426-512 397.428v-162.038l512-397.426 512 397.428zM896 576v384h-256v-256h-256v256h-256v-384l384-288z"
+        ],
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "home",
+          "house"
+        ],
+        "defaultCode": 59648,
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "ligatures": "home, house",
+        "name": "sales",
+        "order": 27,
+        "id": 0,
+        "prevSize": 32,
+        "code": 59708
+      },
+      "setIdx": 3,
+      "setId": 7,
+      "iconIdx": 0
+    },
+    {
+      "icon": {
+        "paths": [
+          "M1024 608l-192-192v-288h-128v160l-192-192-512 512v32h128v320h320v-192h128v192h320v-320h128z"
+        ],
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "home",
+          "house"
+        ],
+        "defaultCode": 59650,
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "ligatures": "home3, house3",
+        "name": "customers",
+        "order": 29,
+        "id": 1,
+        "prevSize": 32,
+        "code": 59710
+      },
+      "setIdx": 3,
+      "setId": 7,
+      "iconIdx": 1
+    },
+    {
+      "icon": {
+        "paths": [
+          "M0 1024h512v-1024h-512v1024zM320 128h128v128h-128v-128zM320 384h128v128h-128v-128zM320 640h128v128h-128v-128zM64 128h128v128h-128v-128zM64 384h128v128h-128v-128zM64 640h128v128h-128v-128zM576 320h448v64h-448zM576 1024h128v-256h192v256h128v-576h-448z"
+        ],
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "office",
+          "buildings",
+          "work"
+        ],
+        "defaultCode": 59651,
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "ligatures": "office, buildings",
+        "name": "sellers",
+        "order": 30,
+        "id": 2,
+        "prevSize": 32,
+        "code": 59711
+      },
+      "setIdx": 3,
+      "setId": 7,
+      "iconIdx": 2
+    }
+  ],
+  "height": 1024,
+  "metadata": {
+    "name": "icomoon"
+  },
+  "preferences": {
+    "showGlyphs": true,
+    "showQuickUse": true,
+    "showQuickUse2": true,
+    "showSVGs": true,
+    "fontPref": {
+      "prefix": "icon-",
+      "metadata": {
+        "fontFamily": "icomoon",
+        "majorVersion": 1,
+        "minorVersion": 0
+      },
+      "metrics": {
+        "emSize": 1024,
+        "baseline": 6.25,
+        "whitespace": 50
+      },
+      "embed": false
+    },
+    "imagePref": {
+      "prefix": "icon-",
+      "png": true,
+      "useClassSelector": true,
+      "color": 0,
+      "bgColor": 16777215,
+      "classSelector": ".icon",
+      "name": "icomoon"
+    },
+    "historySize": 50,
+    "showCodes": true,
+    "gridSize": 16
+  }
+}

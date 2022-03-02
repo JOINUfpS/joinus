@@ -1,0 +1,21 @@
+:host ::ng-deep .p-multiselect {
+  min-width: 15rem;
+}
+
+:host ::ng-deep .multiselect-custom-virtual-scroll .p-multiselect {
+  min-width: 20rem;
+}
+
+:host ::ng-deep .multiselect-custom .p-multiselect-label {
+
+  padding-top: .25rem;
+  padding-bottom: .25rem;
+}
+
+
+
+
+
+
+
+

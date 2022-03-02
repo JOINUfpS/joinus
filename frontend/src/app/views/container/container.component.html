@@ -1,0 +1,18 @@
+<div class="main-content">
+  <!-- Top navbar -->
+  <app-navbar></app-navbar>
+  <!-- Pages-->
+  <router-outlet></router-outlet>
+
+  <div class="container-fluid">
+  </div>
+</div>
+
+<p-confirmDialog [closable]="false" acceptLabel="Si" class="confirm-orange" acceptButtonStyleClass="btn btn-join" header="Confirmación"
+                 icon="confirm-icon icon-information" rejectLabel="No" rejectButtonStyleClass="btn btn-new">
+</p-confirmDialog>
+<div class="row justify-content-center ">
+  <div class="col-8 col-lg-auto">
+    <p-toast position="bottom-center"></p-toast>
+  </div>
+</div>

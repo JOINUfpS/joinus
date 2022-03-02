@@ -1,0 +1,11 @@
+django:
+  application:
+    name: asn_user
+    port: 8092
+    base_url: /api/
+    context_path: users/
+    api_gateway: api_gateway/
+    eureka_server: http://10.128.0.11:8090/eureka/
+    static_url: /static/
+  profiles:
+    active: loc

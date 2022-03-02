@@ -1,0 +1,37 @@
+<div class="col-12 mb-1">
+  <div class="row text-center">
+    <button (click)="activeIndex = 0" class="col mr-2 cursor button-tab" label="Seguidores" pButton
+            type="button">
+      <span class="btn-info-{{ activeIndex }}"></span>
+    </button>
+    <button (click)="activeIndex = 1" class="col cursor button-tab" label="Seguidos" pButton
+            type="button">
+      <span class="btn-followers-{{ activeIndex }}"></span>
+    </button>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <p-tabView [(activeIndex)]="activeIndex" styleClass="tabview-custom">
+      <p-tabPanel header="Seguidores">
+        <div class="">
+          <h3 *ngIf="followersUsers?.length === 0">Aún no hay usuarios seguidores</h3>
+          <app-follow-user-card (updateList)="getUsersFollowedAndFollowers(user.instId, user.id)"
+                                *ngFor="let followUser of this.followersUsers;"
+                                [follow]="true" [observerUserId]="observerUserId"
+                                [suggestedUser]="followUser"></app-follow-user-card>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Seguidos">
+        <div class="">
+          <h3 *ngIf="followedUsers?.length === 0">Aún no hay usuarios seguidos</h3>
+          <app-follow-user-card #cardFollowUser (updateList)="getUsersFollowedAndFollowers(user.instId, user.id)"
+                                *ngFor="let followedUser of this.followedUsers;"
+                                [follow]="false" [observerUserId]="observerUserId"
+                                [suggestedUser]="followedUser"></app-follow-user-card>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</div>
+

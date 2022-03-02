@@ -1,0 +1,16 @@
+Antes que nada, eliminar la carpeta de dist y common_structure_microservices.egg-info
+
+Aumentar la versión en el archivo setup.py
+
+Este es para hacer el paquete para distribuir:
+python setup.py sdist
+
+Se supone que con este se genera el paquete para distribuir y se sube tambien:
+twine upload dist/*
+
+Este es para subir: twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
+solicitara un user y clave, los cuales estan en el archivo: .pypirc
+
+Para subir a control de versiones:
+    1. Eliminar la carpeta de dist y common_structure_microservices.egg-info
+    2. Subir

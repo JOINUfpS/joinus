@@ -1,0 +1,87 @@
+<div class="row justify-content-center">
+  <div class="col-md-11 col-12">
+    <div class="card shadow p-lg-4">
+      <div class="card-body">
+        <div class="row p-2">
+          <div class="col-12 col-xl-10 col-lg-10 col-md-9 p-2">
+            <div class="p-inputgroup filter-ico mb-0">
+              <span class="p-inputgroup-addon pi pi-search"></span>
+              <label></label>
+              <input class="input-search filter-icono" type="text" pInputText placeholder="Buscar"
+                     (input)="dt.filterGlobal($event.target.value, 'contains')">
+            </div>
+          </div>
+          <div class="col-12 col-xl-2 col-lg-2 col-md-3 p-2">
+            <button type="button" pButton icon="pi pi-plus" tooltipPosition="top" iconPos="left"
+                    (click)="addOrEdit(null)" label="Nuevo" class="btn btn-new"
+                    *ngIf="permissions.includes(constPermissions.CREATE)"></button>
+          </div>
+        </div>
+        <div class="row">
+          <p-toolbar class="col-12">
+            <div class="ui-toolbar-group-left toolbar">
+              <h3 class="total-record mb-0">Registros: {{totalRecords}}</h3>
+            </div>
+          </p-toolbar>
+          <div class="col-12 px-0">
+
+            <p-table #dt [columns]="cols" [value]="inviteRoles"
+                     [paginator]="configTables.paginator" [rows]="configTables.rowCount"
+                     [rowsPerPageOptions]="configTables.rowsPerPage" sortField="user_name" sortMode="single">
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field" id="invite-role">
+                    <p class="text-center">
+
+                      {{col.header}}
+                      <p-sortIcon *ngIf="col.field !== 'actions' && col.field !=='status'" [field]="col.field">
+                      </p-sortIcon>
+                    </p>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                  <td *ngFor="let col of columns" (mouseover)="utilitiesString.calcWidth($event)"
+                      pTooltip="{{rowData[col.field]}}" tooltipPosition="top"
+                      [tooltipDisabled]="utilitiesString.activeTooltip">
+                    <span *ngIf="col.field !== 'actions'">
+                      {{rowData[col.field]}}
+                    </span>
+                    <span *ngIf="col.field === 'status'">
+                      <button pButton type="button" [class]="'center status-' + rowData.inroStatus"
+                              label="{{rowData.inroStatus}}"></button>
+                    </span>
+                    <span *ngIf="col.field === 'actions'">
+                      <button class="btn-table" pTooltip="Autorizar" type="button" pButton icon="pi pi-check"
+                              (click)="authorizeRole(rowData)" [disabled]="rowData.inroStatus === 'Autorizada'"
+                              iconPos="left" *ngIf="permissions.includes(constPermissions.AUTHORIZE_ROLE)"></button>
+                      <button class="btn-table" pTooltip="Editar" type="button" pButton icon="pi pi-pencil" iconPos="left"
+                              (click)="addOrEdit(rowData)" [disabled]="rowData.inroStatus === 'Autorizada'"
+                              *ngIf="permissions.includes(constPermissions.EDIT)"></button>
+                      <button class="btn-table" pTooltip="Eliminar" type="button" pButton icon="pi pi-times-circle"
+                              iconPos="left" (click)="delete(rowData)"
+                              *ngIf="permissions.includes(constPermissions.DELETE)"></button>
+                    </span>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr *ngIf="inviteRoles.length === 0">
+                  <td [attr.colspan]="columns.length">
+                    {{utilitiesString.msgEmptyTable}}
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-create-edit-inivte-role #modalInviteRole [permissions]="permissions"
+                             (updateList)="getInviteRoles()"></app-create-edit-inivte-role>
