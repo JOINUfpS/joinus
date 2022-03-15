@@ -26,33 +26,37 @@
           <div class="row pt-2">
             <div class="col-lg-6 p-2">
               <label class="form-control-label" for="instName">Nombre</label>
-              <input formControlName="instName" id="instName" maxlength="100" pInputText type="text"
-                      (change)="changeErrorClassInstName()" [ngClass]="errorClassInstName">
+              <input formControlName="instName" id="instName" minlength="3" maxlength="100" pInputText type="text"
+                     (change)="changeErrorClassInstName()" [ngClass]="errorClassInstName">
               <small *ngIf="errors.has('inst_name')" class="error-field">{{errors.get('inst_name')}}</small>
             </div>
             <div class="col-lg-6 p-2">
               <label class="form-control-label" for="instAddress">Dirección</label>
-              <input formControlName="instAddress" id="instAddress" maxlength="100" pInputText type="text">
+              <input formControlName="instAddress" id="instAddress" minlength="3" maxlength="100" pInputText
+                     type="text">
             </div>
           </div>
           <div class="row pt-2">
             <div class="col-lg-6 p-2">
               <label class="form-control-label" for="instHead">Rector</label>
-              <input formControlName="instHead" id="instHead" maxlength="100" pInputText type="text">
+              <input formControlName="instHead" id="instHead" minlength="3" maxlength="100" pInputText type="text">
             </div>
             <div class="col-lg-6 p-2">
               <label class="form-control-label" for="instCountry">País</label>
-              <input formControlName="instCountry" id="instCountry" maxlength="100" pInputText type="text">
+              <input formControlName="instCountry" id="instCountry" minlength="3" maxlength="100" pInputText
+                     type="text">
             </div>
           </div>
           <div class="row pt-2">
             <div class="col-lg-6 p-2">
               <label class="form-control-label" for="instDepartment">Departamento</label>
-              <input formControlName="instDepartment" id="instDepartment" maxlength="100" pInputText type="text">
+              <input formControlName="instDepartment" id="instDepartment" minlength="3" maxlength="100" pInputText
+                     type="text">
             </div>
             <div class="col-lg-6 p-2">
               <label class="form-control-label" for="instMunicipality">Municipio</label>
-              <input formControlName="instMunicipality" id="instMunicipality" maxlength="100" pInputText type="text">
+              <input formControlName="instMunicipality" id="instMunicipality" minlength="3" maxlength="100" pInputText
+                     type="text">
             </div>
           </div>
           <div class="row line">
@@ -61,24 +65,24 @@
           <div class="row pt-2">
             <div class="col-lg-6 p-2">
               <label class="form-control-label" for="instWebsite">Página web</label>
-              <input formControlName="instWebsite" id="instWebsite" maxlength="100" pInputText
+              <input formControlName="instWebsite" id="instWebsite" minlength="3" maxlength="100" pInputText
                      placeholder="https://www.mi-sitio-web.co/" type="text">
               <small *ngIf="form.get('instWebsite').hasError('pattern')" class="text-requerid">Página
                 web inválida.</small>
             </div>
             <div class="col-lg-6 p-2">
               <label class="form-control-label" for="instPhone">Teléfono</label>
-              <input formControlName="instPhone" id="instPhone" maxlength="10" pInputText type="text">
+              <input formControlName="instPhone" id="instPhone" minlength="3" maxlength="10" pInputText type="text">
             </div>
             <div class="col-lg-6 p-2">
               <label class="form-control-label" for="instFax">Fax</label>
-              <input formControlName="instFax" id="instFax" maxlength="10" pInputText type="text">
+              <input formControlName="instFax" id="instFax" minlength="3" maxlength="10" pInputText type="text">
             </div>
           </div>
         </form>
         <div class="row" *ngIf="this.permissions.includes(this.constPermissions.EDIT)">
           <div class="col-lg-12 p-2 footer-dialog">
-            <button (click)="formEnable()" *ngIf="!this.form.enabled" class="btn-new" label="Editar" pButton
+            <button (click)="form.enable()" *ngIf="!this.form.enabled" class="btn-new" label="Editar" pButton
                     type="button">
             </button>
             <button (click)="updateInstitution()" *ngIf="this.form.enabled" [disabled]="!form.valid" class="btn-new"

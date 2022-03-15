@@ -5,6 +5,7 @@ limpia (Clean Architecture) para llevar a cabo la estructura que se tenia en men
 responsabilidad en su respectivo modulo y permitiendo que el código se pueda escalar.
 
 ## Tabla de contenidos:
+
 ___
 
 - [Tecnologías](#tecnologías)
@@ -15,7 +16,7 @@ ___
   - [Adaptadores](#adaptadores)
   - [Interceptor](#interceptor)
   - [Rutas](#rutas)
-  - [Módulos](#módulos)
+  - [Módulos](#modulos)
   - [Componentes](#componentes)
 - [Ejecución](#ejecución)
 - [Pruebas](#pruebas)
@@ -50,7 +51,12 @@ El proyecto crea paquetes para encapsular aquellas clases que se relacionan entr
 clases necesarias para la comunicación y el procesamiento de las acciones del usuario en la red. A continuación, se
 profundizará en aquellas clases más importantes en el código.
 
-![img.png](images/components.png)
+<p align="center">
+  <img src="images/components.png"/>
+  <br>
+  <i>Figura 1. Paquetes del proyecto<br>
+  Fuente: Elaboración propia</i>
+</p>
 
 ### Servicios e inyección de dependencias
 
@@ -66,7 +72,12 @@ modelos agrupados por la similitud de las funcionalidades en donde son usados, u
 continuación, aquí se reciben sus atributos por inyección de dependencia a través del constructor y para ser fiel a las
 características de modelos no contienen ninguna lógica.
 
-![img.png](images/models.png)
+<p align="center">
+  <img src="images/models.png"/>
+  <br>
+  <i>Figura 2. Modelos<br>
+  Fuente: Elaboración propia</i>
+</p>
 
 ### Servicios
 
@@ -76,7 +87,12 @@ resultado de la consulta. Adicional todos los datos o lógica que no está asoci
 utilizar en diferentes partes de la aplicación y entre diferentes componentes, puede ser escrita en un servicio. Tal
 como un componente, los servicios son exportados como clases.
 
-![img_1.png](images/services.png)
+<p align="center">
+  <img src="images/services.png"/>
+  <br>
+  <i>Figura 3. Servicios<br>
+  Fuente: Elaboración propia</i>
+</p>
 
 Como se puede observar en la figura anterior los servicios reciben por inyección de dependencias a través de su
 constructor una instancia de la clase HttpClient, el cual es el que realiza la petición REST dentro de los métodos de la
@@ -89,7 +105,12 @@ Los adapters o adaptadores son aquellas clases que traducen la respuesta recibid
 formato Json a un objeto models, es decir transforman la respuesta de Json a Objeto, y de manera inversa traducen de
 Modelo a Json para guardar o actualizar los datos.
 
-![img.png](images/adapters.png)
+<p align="center">
+  <img src="images/adapters.png"/>
+  <br>
+  <i>Figura 4. Adaptadores<br>
+  Fuente: Elaboración propia</i>
+</p>
 
 Como se refleja en la figura anterior las clases adaptadoras implementan la interfaz Adapter, la cual sirve de contrato
 para que las clases específicas implementen sus métodos, retornando un objeto T el cual es el tipo de Objeto que
@@ -101,7 +122,12 @@ En este se encuentra la clase HttpErrorInterceptor la cual implementa de HttpInt
 interceptor y como su nombre lo dice, lo que hace es interceptar todas las respuestas que lleguen ya sean erróneas o no,
 y realiza las acciones correspondientes dependiendo del caso.
 
-![img.png](images/interceptor.png)
+<p align="center">
+  <img src="images/interceptor.png"/>
+  <br>
+  <i>Figura 5. Interceptores<br>
+  Fuente: Elaboración propia</i>
+</p>
 
 Esta clase captura los errores antes de llegar al método que hizo la petición originalmente a través de su método
 implementado intercept y que por medio de validateError determina como procesar la excepción, por ejemplo, una solución
@@ -120,7 +146,12 @@ Los Módulos o técnicamente llamados NgModules sirven para registrar los compon
 componente que se crea deberá declararse dentro de un Module. Existe también un NgModule principal “AppModule” que es el
 encargado de establecer el mecanismo de ejecución que inicia la aplicación.
 
-![img.png](images/modules.png)
+<p align="center">
+  <img src="images/modules.png"/>
+  <br>
+  <i>Figura 6. Modulos<br>
+  Fuente: Elaboración propia</i>
+</p>
 
 Existen componentes que se usan en más de un flujo, por tanto, estos no pueden estar acoplados a un solo Módulo. Se crea
 un módulo compartido “SharedModule” para importar desde allí esos componentes y además los widgets de PrimeNG que
@@ -136,7 +167,12 @@ El componente base es nombrado como ‘container’ y este en su template permit
 cualquier página web en la que se encuentre el usuario, a su vez agrega a <router-outlet> el cual permite que haya el
 cambio visual de una página a otra mediante el cambio de la ruta en el navegador.
 
-![img_1.png](images/container.png)
+<p align="center">
+  <img src="images/container.png"/>
+  <br>
+  <i>Figura 7. Containers<br>
+  Fuente: Elaboración propia</i>
+</p>
 
 La mayoría de componentes implementan de OnInit para sobrescribir el método ngOnInit del ciclo de vida de estos, de esta
 forma podemos inicializar los datos y/o recibirlos por un @Input antes de mostrarlos en el template, evitando hacer
@@ -145,7 +181,12 @@ llamadas remotas o construir objetos pesados en el constructor.
 Algunos componentes tardan en obtener la información para mostrarla, por tanto, se creó un componente nombrado Skeleton
 para que haga de efecto cargando mientras se procesa la información.
 
-![img.png](images/skeleton.png)
+<p align="center">
+  <img src="images/skeleton.png"/>
+  <br>
+  <i>Figura 8. Skeleton<br>
+  Fuente: Elaboración propia</i>
+</p>
 
 A lo largo del código fuente se encuentran diferentes componentes con sus respectivos Templates, el proyecto Frontend
 está organizado de tal forma que cada componente y subcomponente se manejan como algo aislado, por ejemplo en el caso de
@@ -169,19 +210,38 @@ creara una carpeta llamada node_modules, la cual tendra las dependencias que nec
 
 ### Ejecutar proyecto
 
+Antes de ejecutar el proyecto debe conocer acerca del directorio `enviroments` en la raiz del directorio `src`. En este
+directorio se almacena los archivos que ofrecen los 3 ambientes a los que puede conectarse el frontend: local,
+producción debug, y producción release.
+
+En el archivo `environment.ts` encontrara las distintas urls de los microservicios de backend en localhost.
+
+En el archivo `environment.stag.ts` puede observar las urls de los microservicios de backend en la nube. Este ambiente
+permite usar los datos de producción y realizar debug del frontend, esto es un ambiente pre-productivo.
+
+En el archivo `environment.prod.ts` tambien se encuentran las urls de los microservicios de backend en la nube; sin
+embargo este ambiente no permite realizar debug.
+
 Para ejecutar el proyecto de manera local simplemente ejecute el comando `ng serve`. El IDE ofrece una manera más
 grafica de hacerlo y es dado click al botón ejecutar que aparece en la parte superior de color verde, cómo se ve en la
 siguiente imagen:
 
-![img.png](images/button_play.png)
+<p align="center">
+  <img src="images/button_play.png"/>
+  <br>
+  <i>Figura 9. Butón para iniciar proyecto<br>
+  Fuente: Elaboración propia</i>
+</p>
 
-De cualquier de la dos formas que realice, el proyecto se ejecutara en `http://localhost:4200/`, la aplicación se
-recargara automaticamente a medida que usted inserte o modifique archivos.
+De cualquier de la dos formas que realice, el proyecto se ejecutara en `http://localhost:4200/` usando los
+microservicios del archivo `environtment.ts`, la aplicación se recargara automaticamente a medida que usted inserte o
+modifique archivos.
 
 ### Despliegue
 
-Una vez se desea lanzar los cambios a producción, basta con realizar el comando `ng build --prod`. Los artefactos
-construidos se almacenan en la carpeta `dist/`, estos cambios son los que debe llevar al servidor.
+Una vez se desea lanzar los cambios a producción, basta con realizar el comando `ng build --prod`, este comando usara
+las urls de los microservicios en la nube definidos en el archivo `ng build --prod`. Los artefactos construidos se
+almacenan en la carpeta `dist/`, estos cambios son los que debe llevar al servidor.
 
 ## Pruebas unitarias
 
