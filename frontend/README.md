@@ -16,7 +16,7 @@ ___
   - [Adaptadores](#adaptadores)
   - [Interceptor](#interceptor)
   - [Rutas](#rutas)
-  - [Módulos](#modulos)
+  - [Módulos](#módulos)
   - [Componentes](#componentes)
 - [Ejecución](#ejecución)
 - [Pruebas](#pruebas)
