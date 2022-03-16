@@ -10,7 +10,7 @@ ___
 
 - [Tecnologías](#tecnologías)
 - [Arquitectura](#arquitectura)
-  - [Servicios e inyección de dependencias](#servicios)
+  - [Servicios e inyección de dependencias](#servicios-e-inyección-de-dependencias)
   - [Modelos](#modelos)
   - [Servicios](#servicios)
   - [Adaptadores](#adaptadores)
@@ -18,8 +18,8 @@ ___
   - [Rutas](#rutas)
   - [Módulos](#módulos)
   - [Componentes](#componentes)
-- [Ejecución](#ejecución)
-- [Pruebas](#pruebas)
+- [Despliegue](#despliegue)
+- [Pruebas unitarias](#pruebas-unitarias)
 
 ## Tecnologías
 
