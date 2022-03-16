@@ -1,5 +1,5 @@
 <h1 align="center">Joinus</h1>
-<p align="center"><img src="https://studentsprojects.cloud.ufps.edu.co/asn_balancing/api_gateway/asn_file/files/api/file/get_object/3c9cdf6f-93b2-4872-8ca3-21d58b3fbea1/"/></p> 
+<p align="center"><img src="images/joinus.png"/></p>
 
 ## Tabla de contenidos:
 ---
@@ -43,7 +43,7 @@ El objetivo de esta sección es mostrar brevemente la arquitectura del proyecto 
 
 La plataforma esta conformada principalmente por dos capas, llamadas backend y frontend, para esta última se usa el framework angular, el cual tiene una arquitectura que se describe a continuación, la cual es la arquitectura recomendada por la documentación oficial de angular.
 
-<p align="center"><img src="https://studentsprojects.cloud.ufps.edu.co/asn_balancing/api_gateway/asn_file/files/api/file/get_object/e5144df8-e7e3-4fb1-a4d4-449cb028a838/"/></p>
+<p align="center"><img src="images/Arquitectura%20frontend.png"/></p>
 <p align="center"><i>Figura 1. Arquitectura de un proyecto en angular. <br>
 Fuente: Elaboración angular.io (Angular, 2021)</i></p>
 
@@ -58,7 +58,7 @@ En conclusión podemos decir que Angular cuando inicia hace un análisis de sus 
 
 Para la capa de backend se utilizan principalmente dos frameworks, a saber, spring boot y rest framework, a continuación se describe con más detalle la arquitectura correspondiente a esta capa:
 
-<p align="center"><img src="https://studentsprojects.cloud.ufps.edu.co/asn_balancing/api_gateway/asn_file/files/api/file/get_object/a7bc062a-36ff-442c-b336-cd1f99584cf8/"/></p>
+<p align="center"><img src="images/Arquitectura%20backend.png"/></p>
 <p align="center"><i>Figura 2. Arquitectura de backend. <br>
 Fuente: Elaboración propia (2021)</i></p>
 
