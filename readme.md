@@ -2,17 +2,16 @@
 <p align="center"><img src="images/joinus.png"/></p>
 
 ## Tabla de contenidos:
----
 
 - [¿Que es joinus?](#¿Que-es-joinus?)
-    - [Nombre: Unidos por el saber](#Nombre:-Unidos-por-el-saber)
-    - [Logo: Una unión interdisciplinaria](#Logo:-Una-unión-interdisciplinaria)
+    - [Nombre: Unidos por el saber](#Nombre:Unidos-por-el-saber)
+    - [Logo: Una unión interdisciplinaria](#Logo:Una-unión-interdisciplinaria)
 - [Arquitectura y tecnologías](#Arquitectura-y-tecnologías)
     - [Arquitectura](#Arquitectura)
     - [Tecnologías](#Tecnologías)
 
 ## ¿Que es joinus?
----
+
 Joinus pretende ser una plataforma de Red Social Académica abierta para todos los miembros de la UFPS, por medio de la cual a través de distintas formas puedan compartir el conocimiento interno de cada uno, subiendo proyectos académicos en los cuales ha trabajado o presentado.
 
 Joinus permite la comunicación sin barreras o fronteras entre estudiantes o profesores de distintas áreas académicas, al igual que crear comunidades de aprendizaje o llevar nuestros grupos de la presencia física a la presencia virtual, mostrando estos a muchas más personas que puedan llegar a estar interesadas en unirse y aportar mayor conocimiento.
@@ -21,19 +20,18 @@ Las oportunidades de poner nuestros conocimientos en práctica puede estar al al
 
 Para una presentación acerca de la solución tecnológica creada se ha dispuesto un canal en la red social YouTube, https://bit.ly/3o5eMb3, en donde se da respuesta a preguntas cómo ¿Qué es Joinus?, ¿Por qué Joinus?, ¿Para que Joinus?, y además un breve recorrido por la misma, para verlo
 
-### Nombre: Unidos por el saber
----
+### Nombre:Unidos por el saber
 
 Lo primero que conocemos de un producto es su nombre, y este al igual que veremos con el logo debe transmitir lo que el producto o servicio ha de ofrecer. Este producto es una innovación tecnológica para la UFPS y está dirigido para los miembros de la UFPS, por tanto con el nombre queremos mostrar que este proyecto quiere reavivar el aspecto colaborativo entre los estudiantes, despejando cualquier frontera o barrera que se lo impida, por esta razón y para promover la unión entre toda la UFPS (nosotros) se decidió llamarla: JOINUS.
 
-### Logo: Una unión interdisciplinaria
----
+### Logo:Una unión interdisciplinaria
+
 Joinus es sin lugar a dudas un esfuerzo porque las diferentes disciplinas y áreas del saber puedan trabajar de la mano, contribuyendo entre ellos, liberando el conocimiento implícito que cada quien lleva en sí, o dentro de sus aulas de clase por ejemplo, para convertirlo en algo explícito y que se pueda propagar en otros lugares. Fabuloso podría ser que un proyecto creado desde una carrera de ingeniería pueda impactar en otros estudiantes, y estos a su vez aporten valor y evolucione nuestro proyecto llevándolo a otro nivel.
 
 En la larga búsqueda hacia el logo ideal, encontramos que el símbolo de infinito contiene lo que queríamos representar, lo vimos como dos caminos que en un punto se unen y que después ya no podemos saber con ciencia cierta donde inician o terminan, sin embargo logran verse cómo uno solo. Pero faltaba algo que le diera un aspecto humano, y es allí donde con cuatro manos logramos reflejar la unión entre dos cosas distintas que se unen formando una fuente “infinita” de conocimiento.
 
 ## Arquitectura y tecnologías
----
+
 El objetivo de esta sección es mostrar brevemente la arquitectura del proyecto y el listado de tecnologías utilizadas en el mismo.
 
 ### Arquitectura
@@ -71,7 +69,6 @@ Cómo se logra apreciar en la imagen, la capa de backend está conformado princi
 <strong>Nivel de base de datos:</strong> En este nivel se encuentran las bases de datos correspondientes a cada uno de los microservicios, cada microservicio que existe tiene de manera independiente una base de datos asociada.
 
 ### Tecnologías
----
 
 <h3>Tecnologías base de datos</h3>
 
