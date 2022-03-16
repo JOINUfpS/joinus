@@ -69,22 +69,21 @@ Cómo se logra apreciar en la imagen, la capa de backend está conformado princi
 
 ### Tecnologías
 
-<h3>Tecnologías base de datos</h3>
+1. <h3>Tecnologías base de datos</h3>
 
-- Mongodb ![coverage](https://img.shields.io/badge/version-4.0.8-yellowgreen)
+   - Mongodb ![coverage](https://img.shields.io/badge/version-4.0.8-yellowgreen)
 
-<h3>Tecnologías backend</h3>
+2. <h3>Tecnologías backend</h3>
 
-- Python ![coverage](https://img.shields.io/badge/version-3.7-yellow)
-- Rest Framework ![version](https://img.shields.io/badge/version-3.11.1-blue)
-- Java ![gem](https://img.shields.io/badge/version-8-red)
-- Docker ![codacy](https://img.shields.io/badge/version-20.10-blue)
+   - Python ![coverage](https://img.shields.io/badge/version-3.7-yellow)
+   - Rest Framework ![version](https://img.shields.io/badge/version-3.11.1-blue)
+   - Java ![gem](https://img.shields.io/badge/version-8-red)
+   - Docker ![codacy](https://img.shields.io/badge/version-20.10-blue)
+   
+3. <h3>Tecnologías frontend</h3>
 
-
-<h3>Tecnologías frontend</h3>
-
-- Angular CLI ![version](https://img.shields.io/badge/version-10.1.3-red)
-- Node ![version](https://img.shields.io/badge/version-14.5.5-green)
-- Typescript ![version](https://img.shields.io/badge/version-4.0.3-blue)
-- Bootstrap ![version](https://img.shields.io/badge/version-5.1.3-blueviolet)
-- Primeng ![version](https://img.shields.io/badge/version-13.2.1-red)
+   - Angular CLI ![version](https://img.shields.io/badge/version-10.1.3-red)
+   - Node ![version](https://img.shields.io/badge/version-14.5.5-green)
+   - Typescript ![version](https://img.shields.io/badge/version-4.0.3-blue)
+   - Bootstrap ![version](https://img.shields.io/badge/version-5.1.3-blueviolet)
+   - Primeng ![version](https://img.shields.io/badge/version-13.2.1-red)
