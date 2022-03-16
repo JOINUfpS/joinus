@@ -4,8 +4,8 @@
 ## Tabla de contenidos:
 
 - [¿Que es joinus?](#¿Que-es-joinus?)
-    - [Nombre: Unidos por el saber](#Nombre:Unidos-por-el-saber)
-    - [Logo: Una unión interdisciplinaria](#Logo:Una-unión-interdisciplinaria)
+    - [Nombre: Unidos por el saber](#Nombre-unidos-por-el-saber)
+    - [Logo: Una unión interdisciplinaria](#Logo-una-unión-interdisciplinaria)
 - [Arquitectura y tecnologías](#Arquitectura-y-tecnologías)
     - [Arquitectura](#Arquitectura)
     - [Tecnologías](#Tecnologías)
@@ -20,11 +20,11 @@ Las oportunidades de poner nuestros conocimientos en práctica puede estar al al
 
 Para una presentación acerca de la solución tecnológica creada se ha dispuesto un canal en la red social YouTube, https://bit.ly/3o5eMb3, en donde se da respuesta a preguntas cómo ¿Qué es Joinus?, ¿Por qué Joinus?, ¿Para que Joinus?, y además un breve recorrido por la misma, para verlo
 
-### Nombre:Unidos por el saber
+### Nombre unidos por el saber
 
 Lo primero que conocemos de un producto es su nombre, y este al igual que veremos con el logo debe transmitir lo que el producto o servicio ha de ofrecer. Este producto es una innovación tecnológica para la UFPS y está dirigido para los miembros de la UFPS, por tanto con el nombre queremos mostrar que este proyecto quiere reavivar el aspecto colaborativo entre los estudiantes, despejando cualquier frontera o barrera que se lo impida, por esta razón y para promover la unión entre toda la UFPS (nosotros) se decidió llamarla: JOINUS.
 
-### Logo:Una unión interdisciplinaria
+### Logo una unión interdisciplinaria
 
 Joinus es sin lugar a dudas un esfuerzo porque las diferentes disciplinas y áreas del saber puedan trabajar de la mano, contribuyendo entre ellos, liberando el conocimiento implícito que cada quien lleva en sí, o dentro de sus aulas de clase por ejemplo, para convertirlo en algo explícito y que se pueda propagar en otros lugares. Fabuloso podría ser que un proyecto creado desde una carrera de ingeniería pueda impactar en otros estudiantes, y estos a su vez aporten valor y evolucione nuestro proyecto llevándolo a otro nivel.
 
@@ -35,7 +35,6 @@ En la larga búsqueda hacia el logo ideal, encontramos que el símbolo de infini
 El objetivo de esta sección es mostrar brevemente la arquitectura del proyecto y el listado de tecnologías utilizadas en el mismo.
 
 ### Arquitectura
----
 
 <h3 align="center"><strong>Capa de Frontend</strong></h3>
 
