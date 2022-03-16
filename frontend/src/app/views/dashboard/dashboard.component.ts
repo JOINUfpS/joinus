@@ -56,7 +56,7 @@ export class DashboardComponent implements OnInit {
     if (this.modelGrouped.length !== 0) {
       this.modelGrouped.forEach(role => {
         if (role.moduName === this.constModule.ROLES || role.moduName === this.constModule.CATEGORIES
-          || role.moduName === this.constModule.INSTITUTIONS || role.moduName === this.constModule.AUTHORIZE_ROLE) {
+          || role.moduName === ConstModules.INSTITUTIONS || role.moduName === this.constModule.AUTHORIZE_ROLE) {
           this.showRolesFunctions = true;
         }
       });

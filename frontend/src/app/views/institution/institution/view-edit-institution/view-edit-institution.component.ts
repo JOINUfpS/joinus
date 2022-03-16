@@ -20,37 +20,38 @@ import {ConstString} from '../../../../utilities/string/const-string';
 })
 export class ViewEditInstitutionComponent implements OnInit {
 
-  public institution: InstitutionModel;
-  public user: UserModel;
-  public form: FormGroup;
-  public updatePhoto: boolean;
-  public validFile: boolean;
-  public uploadedFiles: any[];
-  public imgChange: any;
-  public errors = new Map();
-  public permissions: string[];
-  public errorClassInstName = 'ui-inputtext';
+  institution: InstitutionModel;
+  user: UserModel;
+  form: FormGroup;
+  updatePhoto: boolean;
+  validFile: boolean;
+  imgChange: any;
+  errors: Map<any, any>;
+  permissions: string[];
+  errorClassInstName: string;
+  private uploadedFiles: any[];
 
   constructor(
     private institutionAdapter: InstitutionAdapter,
     private institutionService: InstitutionService,
-    private constModules: ConstModules,
     public utilitiesConfigString: UtilitiesConfigString,
     public constPermissions: ConstPermissions,
-    public fileService: FileService,
+    private fileService: FileService,
     private messagerService: MessagerService) {
+    this.errors = new Map();
+    this.errorClassInstName = 'ui-inputtext';
     this.user = utilitiesConfigString.ls.get('user');
     this.permissions = utilitiesConfigString.ls.get('permissions')
-      .find(element => element.moduName === constModules.INSTITUTIONS).moduPermissions;
+      .find(element => element.moduName === ConstModules.INSTITUTIONS).moduPermissions;
+    this.buildForm();
   }
 
   ngOnInit(): void {
     this.getInstitution();
-    this.buildForm();
     this.setData();
   }
 
-  buildForm(): void {
+  private buildForm(): void {
     this.form = new FormGroup({
       instName: new FormControl({value: null}, [Validators.required, Validators.maxLength(100)]),
       instAddress: new FormControl({value: null}, [Validators.maxLength(100)]),
@@ -61,11 +62,19 @@ export class ViewEditInstitutionComponent implements OnInit {
       instWebsite: new FormControl({value: null}, [Validators.required, Validators.maxLength(100),
         Validators.pattern(/^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/)]),
       instPhone: new FormControl({value: null}, [Validators.required, Validators.maxLength(10)]),
-      instFax: new FormControl({value: null}, [Validators.required, Validators.maxLength(10)]),
+      instFax: new FormControl({value: null}, [Validators.maxLength(10)]),
     });
   }
 
-  setData(): void {
+  private getInstitution(): void {
+    this.institutionService.getInfoInstitution(this.user.instId)
+      .then(resp => {
+        this.institution = this.institutionAdapter.adaptObjectReceive(resp.data);
+        this.setData();
+      });
+  }
+
+  private setData(): void {
     this.form.get('instName').setValue(this.institution ? this.institution?.instName : 'Desconocido');
     this.form.get('instAddress').setValue(this.institution ? this.institution?.instAddress : 'Desconocida');
     this.form.get('instHead').setValue(this.institution ? this.institution?.instHead : 'Desconocido');
@@ -78,25 +87,13 @@ export class ViewEditInstitutionComponent implements OnInit {
     this.form.disable();
   }
 
-  getInstitution(): void {
-    this.institutionService.getInfoInstitution(this.user.instId)
-      .then(resp => {
-        this.institution = this.institutionAdapter.adaptObjectReceive(resp.data);
-        this.setData();
-      });
-  }
-
-  formEnable(): void {
-    this.form.enable();
-  }
-
   updateInstitution(): void {
     const institutionForm = this.form.value;
     institutionForm.id = this.institution.id;
     this.institutionService.updateInstitution(this.institutionAdapter.adaptObjectSend(institutionForm))
       .then(res => {
         if (res.status) {
-          this.messagerService.showToast(EnumLevelMessage.SUCCESS, 'Institución creada');
+          this.messagerService.showToast(EnumLevelMessage.SUCCESS, 'Institución actualizada');
           this.form.disable();
         } else {
           this.messagerService.showToast(EnumLevelMessage.ERROR, res.message);

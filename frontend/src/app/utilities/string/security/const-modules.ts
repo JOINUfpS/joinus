@@ -1,6 +1,6 @@
 export class ConstModules {
+  static readonly INSTITUTIONS = 'Instituciones';
   readonly CATEGORIES = 'Categorias';
-  readonly INSTITUTIONS = 'Instituciones';
   readonly ROLES = 'Roles';
   readonly USERS = 'Usuarios';
   readonly ROLE_INVITATION = 'Invitación de roles';
