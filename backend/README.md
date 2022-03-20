@@ -4,7 +4,7 @@
     - [Colección Publications](#Colección-publications)
 - [Implementación del Backend](#Implementación-del-backend)
     - [Common structure microservices](#Common-structure-microservices)
-        - [Componente de configuración(#Componente-de-configuracion) 
+        - [Componente de configuration(#Componente-de-configuration) 
         - [Componente de authentication](#Componente-de-authentication)
         - [Componente de view](#Componente-de-view)
 - [Microservicios](#Microservicios)
