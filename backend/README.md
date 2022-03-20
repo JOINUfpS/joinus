@@ -95,7 +95,7 @@ Lo primero que debe conocer es que en toda aplicación que desee enviar un mensa
  
 En el primero de ellos, connect, se debe sobreescribir la lógica para conectar el cliente a un grupo (room), una vez conectado, el consumidor puede procesar peticiones mediante el método receive, aquí se crea un json el cual contiene los datos que le fueron entregados y  entre ellos asigna un campo type el cual indica al consumer qué método debe realizar después, para este caso se invoca a un método llamado chat_message el cual envía el mensaje por medio del método send (note que no se debe realizar una logica para especificar que se debe hacer con los datos recibidos en la petición, porque la misma petición en el type que se mencionaba indica cual es el paso o método a seguir); el cliente que está escuchando por ese websocket y a ese room, recibe el mensaje, lo procesa y lo envía a frontend. Por último se encuentra el método disconnect que se invoca una vez la conversación ha sido cerrada o la conexión del websocket se pierde.
  
-<p align="center"><img src="./images/Asincrono%20de%20chat.png"/></p>
+<p align="center"><img src="../images/Asincrono%20de%20chat.png"/></p>
 <p align="center"><i>Figura 1.  Clases correspondientes a componente asíncrono de chat. <br>
 Fuente: Elaboración propia</i></p>
  
@@ -137,7 +137,7 @@ El proyecto en backend conformado por todo los microservicios que hacen parte de
  
 El archivo settings.py es el encargado de cargar todas las configuraciones dentro de la aplicación, en este caso de leer el archivo profiles.py quien es el encargado de determinar sobre qué ambiente se corre la aplicación.
  
-<p align="center"><img src="./images/Determinar%20ambiente.png"/></p>
+<p align="center"><img src="../images/Determinar%20ambiente.png"/></p>
 <p align="center"><i>Figura 2.  Clases involucradas en determinar en que ambiente se levanta la aplicación. <br>
 Fuente: Elaboración propia</i></p>
  
