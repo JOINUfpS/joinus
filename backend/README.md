@@ -4,6 +4,7 @@
     - [Colección Publications](#Colección-publications)
 - [Implementación del Backend](#Implementación-del-backend)
     - [Common structure microservices](#Common-structure-microservices)
+        - [Componente de configuración(#Componente-de-configuracion) 
         - [Componente de authentication](#Componente-de-authentication)
         - [Componente de view](#Componente-de-view)
 - [Microservicios](#Microservicios)
@@ -55,8 +56,8 @@ La idea principal de este proyecto es que se deposite allí todo el codigo que p
  
 Una vez se suban los cambios al repositorios de binarios (pypi), se recomienda que se esperen unos 10 minutos para que se complete el proceso de despliegue del repositorio en esta plataforma. Posteriormente se hace necesario que se haga el proceso de reinicio (stop y start) en los dockers que están involucrados en el cambio. Recordar que cualquier cambio vital que se haga en este repositorio puede llegar afectar el correcto funcionamiento de toda la aplicación.
  
-#### Componente de configuration
----
+### Componente de configuration
+
 En este componente observamos archivos que tiene donde se maneja de manera general las respuestas que da el backend, además del manejador de excepciones que backend entrega a quien consulte sus endpoints.
  
 La clase Profiles nos ayuda a determinar en qué ambiente estamos y a obtener las configuraciones necesarias para  levantar el microservicio de acuerdo a las reglas definidas por ambiente. La clase de RemoteModel es la que me permite la comunicación entre microservicios, podríamos decir que esta es una de las clases más importantes dentro de la librería, ya que sin esta no habría comunicación entre los microservicios.
