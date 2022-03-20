@@ -5,7 +5,7 @@
 
 - [¿Que es joinus?](#¿Que-es-joinus?)
     - [Nombre: Unidos por el saber](#Nombre:-unidos-por-el-saber)
-    - [Logo: Una unión interdisciplinaria](#Logo:-una-unión-interdisciplinaria)
+    - [Logo: Una unión interdisciplinaria](#Logo\:-una-unión-interdisciplinaria)
 - [Arquitectura y tecnologías](#Arquitectura-y-tecnologías)
     - [Arquitectura](#Arquitectura)
     - [Tecnologías](#Tecnologías)
