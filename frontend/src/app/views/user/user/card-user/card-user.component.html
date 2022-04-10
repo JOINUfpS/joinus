@@ -23,22 +23,17 @@
               <div class="row align-items-center justify-content-center">
                 <div class="col-auto px-2">
                   <button *ngIf="optionAssignRole" (click)="assignRole()" [disabled]="false"
-                    class="btn-new-institution mr-lg-2" icon="bi bi-grid-fill" pButton type="button" label=" "
-                    pTooltip="Asignar rol" iconPos="right"></button>
+                          class="btn-new-institution mr-lg-2" icon="bi bi-grid-fill" pButton type="button" label=" "
+                          pTooltip="Asignar rol(es)" iconPos="right"></button>
 
-                  <button *ngIf="!optionAssignRole" [disabled]="false" [routerLink]="['/perfil/', user.id]"
-                    iconPos="right" class="btn-new-institution" label=" " icon="bi bi-eye-fill" pButton type="button"
-                    pTooltip="Ver perfil">
+                  <button [disabled]="false" [routerLink]="['/perfil/', user.id]"
+                          iconPos="right" class="btn-new-institution" label=" " icon="bi bi-eye-fill" pButton
+                          type="button"
+                          pTooltip="Ver perfil">
                   </button>
-
-                  <button *ngIf="optionAssignRole" (click)="becomeAdministrator()" [disabled]="false"
-                    class="btn-new-institution" pTooltip="Administrador de la red" icon="bi bi-gear-fill" pButton
-                    type="button" label=" " iconPos="right"></button>
                 </div>
               </div>
             </div>
-
-
           </div>
         </div>
       </div>

@@ -3,8 +3,7 @@
           [modal]="true" [styleClass]="'col-xl-5 col-lg-7 col-md-8 col-sm-12 col-11 '"
           [style]="{maxWidth: '60rem'}">
   <p-header>
-    <h2 class="title-dialog" *ngIf="!becomeAdministrator">Invitación de rol</h2>
-    <h2 class="title-dialog" *ngIf="becomeAdministrator">Convertir en administrador</h2>
+    <h2 class="title-dialog">Asignación de roles</h2>
   </p-header>
   <div class="pr-4 pl-4">
     <form [formGroup]="form">
@@ -16,19 +15,16 @@
         </div>
       </div>
       <div class="row line ">
-        <h4 class="cl mb-0 form-control-label">INFORMACIÓN IMPORTANTE</h4>
+        <h4 class="cl mb-0 form-control-label">Información importante</h4>
       </div>
-      <div class="row pb-2">
-        <div class="col-lg-12 p-2" *ngIf="!becomeAdministrator">
-          <p>En esta sección podrás asignar o des asignar al usuario seleccionado un rol que podrá o dejará de usar en la
-            plataforma.</p>
-        </div>
-        <div class="col-lg-12 p-2" *ngIf="becomeAdministrator">
-          <p>En esta sección podrás asignar a un usuario como administrador de la red</p>
+      <div class="row">
+        <div class="col-lg-12 p-2">
+          <p>En esta sección puedes asignar o revocar roles, tambien puedes convertir al usuario en permanente dentro de
+            la red.</p>
         </div>
       </div>
       <div class="row line">
-        <h4 class="cl mb-0">INFORMACIÓN DE USUARIO</h4>
+        <h4 class="cl mb-0">Información de usuario</h4>
       </div>
       <div class="row pt-2">
         <div class="col-lg-6 p-2">
@@ -47,50 +43,51 @@
           <input formControlName="userPhone" id="userPhone" maxlength="10" minlength="8" pInputText type="text"
                  (input)="utilitiesString.convertOnlyNumber($event);">
         </div>
-        <div class="col-lg-6 p-2" *ngIf="!becomeAdministrator">
-          <label class="form-control-label" for="roleName">Rol</label>
+        <div class="col-lg-6 p-2">
+          <label class="form-control-label" for="userDegree">Carrera universitaria</label>
+          <input formControlName="userDegree" id="userDegree" pInputText type="text">
+        </div>
+      </div>
+      <div class="row line">
+        <h4 class="cl mb-0 text-blod">Selecciona los roles que vas asignar o remueve aquellos a revocar</h4>
+      </div>
+      <div class="row pt-2">
+        <div class="col-lg-6 p-2">
+          <label class="form-control-label" for="roleName">Roles</label>
           <p-multiSelect [options]="roles" defaultLabel="Seleccione un rol" appendTo="body"
                          formControlName="userRole" id="roleName" optionLabel="roleName">
           </p-multiSelect>
         </div>
       </div>
-      <div class="row line">
-        <h4 class="cl mb-0" *ngIf="!becomeAdministrator">INFORMACIÓN DE LA CARRERA</h4>
-        <h4 class="cl mb-0 text-blod" *ngIf="becomeAdministrator">INFORMACIÓN DEL ROL ADMINISTRADOR</h4>
-      </div>
-      <div class="row pt-2" *ngIf="!becomeAdministrator">
-        <div class="col-lg-6 p-2">
-          <label class="form-control-label" for="userDegree">Carrera universitaria</label>
-          <input formControlName="userDegree" id="userDegree" pInputText type="text">
-        </div>
-        <div class="col-lg-6 p-2">
-          <label class="form-control-label" for="status">Estado</label>
-          <p-dropdown appendTo="body" formControlName="userStatus" [options]="statusOptions" optionLabel="name"
-                      [autoDisplayFirst]="false" editable="true" id="status"></p-dropdown>
-        </div>
-      </div>
-      <div class="row pt-2" *ngIf="becomeAdministrator">
-        <div class="pr-4 pl-4">
-          <p>Dentro de las funcionalidades de este rol están: </p>
-          <ul>
-            <li>Aprobar solicitudes de nuevos roles.</li>
-            <li>Otorgar nuevos roles a los usuarios de la comunidad.</li>
-          </ul>
-        </div>
-        <div class="col-lg-12 p-2" *ngIf="becomeAdministrator">
-          <p-checkbox binary="true" formControlName="userAdmin" inputId="binary">
-          </p-checkbox>
-          <label class="text-blod mb-0 pl-2" pTooltip="">Convertir en administrador de la red</label>
+      <div class="row pt-2">
+        <div class="col p-2 field-checkbox">
+          <label class="text-blod mb-0 pr-2" pTooltip="">Convertir en usuario permanente de la red</label>
+          <p-checkbox (click)="showExplainUserAdmin()" [(ngModel)]="checkedUserAdmin" binary="true"
+                      [ngModelOptions]="{standalone: true}"
+                      inputId="binary"></p-checkbox>
         </div>
       </div>
     </form>
   </div>
   <p-footer>
     <div class="col-lg-12 p-2 footer-dialog">
-      <button (click)="save()" [disabled]="!form.valid" *ngIf="!becomeAdministrator" label="Enviar invitación"
+      <button (click)="processUpdateRoles()" [disabled]="!form.valid || buttonActioned"
+              label="Asignar rol(es)"
               pButton class="btn-new" type="button"></button>
-      <button (click)="save()" [disabled]="!form.valid" *ngIf="becomeAdministrator" label="Volver administrador"
-              pButton class="btn-new" type="button"></button>
+      <p-progressSpinner [hidden]="!buttonActioned"
+                         [style]="{width: '20px', height: '20px'}"></p-progressSpinner>
     </div>
   </p-footer>
+</p-dialog>
+
+<p-dialog [(visible)]="displayDialog" [modal]="true"
+          [draggable]="false" [resizable]="false" [styleClass]="'col-xl-5 col-lg-7 col-md-8 col-sm-12 col-11'"
+          [style]="{maxWidth: '60rem'}" [closable]="false">
+  <ng-template pTemplate="header">
+    Usuarios permanentes
+  </ng-template>
+  Si activas esta opción, este usuario no se podra dar de baja en la red y sera permanente.
+  <ng-template pTemplate="footer">
+    <button (click)="showExplainUserAdmin()" type="button" class="btn-new" label="Entendido" pButton autofocus></button>
+  </ng-template>
 </p-dialog>

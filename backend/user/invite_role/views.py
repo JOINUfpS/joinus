@@ -8,7 +8,7 @@ from rest_framework.response import Response
 
 from asn_user.messages import CustomMessages
 from invite_role.models import InviteRoleModel
-from invite_role.serializer import InviteRoleSerializer
+from invite_role.serializer import InviteRoleSerializer, AssignRolesSerializer, RevokeRolesSerializer
 
 
 class InviteRoleView(ModelViewSet):
@@ -53,3 +53,18 @@ class InviteRoleView(ModelViewSet):
         serializer = self.get_serializer(instance)
         serializer.authorize_role(invite_role=serializer)
         return Response(response(message=Messages.UPDATED_SUCCESSFULLY))
+
+    @action(methods=['post'], url_path="assign_roles", detail=False, serializer_class=AssignRolesSerializer)
+    def assign_roles(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        respond = serializer.assign_roles(serializer.data)
+        return Response(response(data=respond, message=CustomMessages.ROLES_ASSIGN))
+
+    @action(methods=['patch'], url_path="revoke_roles/(?P<user_id>[^/.]+)", detail=False,
+            serializer_class=RevokeRolesSerializer)
+    def revoke_roles(self, request, user_id, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        respond = serializer.revoke_roles(user_id)
+        return Response(response(data=respond, message=CustomMessages.ROLES_REVOKE))

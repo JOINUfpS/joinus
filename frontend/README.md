@@ -16,7 +16,7 @@ ___
   - [Adaptadores](#adaptadores)
   - [Interceptor](#interceptor)
   - [Rutas](#rutas)
-  - [Módulos](#módulos)
+  - [Módulos](#modulos)
   - [Componentes](#componentes)
 - [Despliegue](#despliegue)
 - [Pruebas unitarias](#pruebas-unitarias)
@@ -223,7 +223,7 @@ En el archivo `environment.prod.ts` tambien se encuentran las urls de los micros
 embargo este ambiente no permite realizar debug.
 
 Para ejecutar el proyecto de manera local simplemente ejecute el comando `ng serve`. El IDE ofrece una manera más
-grafica de hacerlo y es dado click al botón ejecutar que aparece en la parte superior de color verde, cómo se ve en la
+grafica de hacerlo y es dado click al botón ejecutar que aparece en la parte superior de color verde, como se ve en la
 siguiente imagen:
 
 <p align="center">

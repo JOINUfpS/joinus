@@ -11,6 +11,7 @@ import {MessagerService} from '../../../../../messenger/messager.service';
 import {ConstModules} from '../../../../../utilities/string/security/const-modules';
 import {ConstPermissions} from '../../../../../utilities/string/security/const-permissions';
 import {EnumLevelMessage} from '../../../../../messenger/enum-level-message.enum';
+import {ConstString} from '../../../../../utilities/string/const-string';
 
 @Component({
   selector: 'app-list-invite-role',
@@ -29,7 +30,6 @@ export class ListInviteRoleComponent implements OnInit {
 
   constructor(
     private confirmationService: ConfirmationService,
-    private constModules: ConstModules,
     public utilitiesString: UtilitiesConfigString,
     private inviteRoleService: InviteRoleService,
     private inviteRoleAdapter: InviteRoleAdapter,
@@ -38,7 +38,7 @@ export class ListInviteRoleComponent implements OnInit {
     private messagerService: MessagerService) {
     this.inviteRoles = [];
     this.permissions = utilitiesString.ls.get('permissions')
-      .find(element => element.moduName === constModules.ROLE_INVITATION).moduPermissions;
+      .find(element => element.moduName === ConstModules.ROLE_INVITATION).moduPermissions;
   }
 
   ngOnInit(): void {
@@ -82,18 +82,26 @@ export class ListInviteRoleComponent implements OnInit {
     }
   }
 
-  delete(iniviteRole: InviteRoleModel): void {
+  delete(inviteRole: InviteRoleModel): void {
     this.confirmationService.confirm({
-      message: this.utilitiesString.msgConfirmDelete + 'la inivitación a ' + iniviteRole.userName + '?',
+      message: ConstString.CONFIRM_DELETE + 'la invitación a ' + inviteRole.userName + '?',
       icon: 'bi bi-exclamation-triangle-fill color-icon-fill-yellow',
       accept: () => {
-        this.inviteRoleService.deleteInviteRole(iniviteRole.id)
+        this.inviteRoleService.deleteInviteRole(inviteRole.id)
           .then(_ => {
+            this.deleteInviteRoleFromView(inviteRole);
             this.messagerService.showToast(EnumLevelMessage.SUCCESS, 'Invitación eliminada');
-            this.getInviteRoles();
           });
       }
     });
+  }
+
+  private deleteInviteRoleFromView(inviteRole: InviteRoleModel): void {
+    let inviteRolesCloned: InviteRoleModel [] = [];
+    inviteRolesCloned = inviteRolesCloned.concat(this.inviteRoles);
+    const indexInviteRole = inviteRolesCloned.findIndex(inviteRoleFind => inviteRoleFind.id === inviteRole.id);
+    inviteRolesCloned.splice(indexInviteRole, 1);
+    this.inviteRoles = inviteRolesCloned;
   }
 
   authorizeRole(inviteRole: InviteRoleModel): void {
@@ -103,7 +111,7 @@ export class ListInviteRoleComponent implements OnInit {
       this.inviteRoleService.authorizeRole(this.inviteRoleAdapter.adaptObjectSend(inviteRole))
         .then(_ => {
           this.messagerService.showToast(EnumLevelMessage.SUCCESS,
-            this.utilitiesString.msgToastSuccessfullAuthorization + inviteRole.userName +
+            'La invitación a' + inviteRole.userName +
             ' fue autorizada con éxito.');
           this.getInviteRoles();
         });

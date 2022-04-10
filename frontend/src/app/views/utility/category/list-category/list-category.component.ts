@@ -10,6 +10,7 @@ import {MessagerService} from '../../../../messenger/messager.service';
 import {ConstModules} from '../../../../utilities/string/security/const-modules';
 import {ConstPermissions} from '../../../../utilities/string/security/const-permissions';
 import {EnumLevelMessage} from '../../../../messenger/enum-level-message.enum';
+import {ConstString} from "../../../../utilities/string/const-string";
 
 @Component({
   selector: 'app-list-category',
@@ -27,9 +28,7 @@ export class ListCategoryComponent implements OnInit {
   @ViewChild('dt', {static: false}) dt: any;
   @ViewChild('modalCategory', {static: false}) modalCategory: CreateEditCategoryComponent;
 
-
   constructor(
-    private constModules: ConstModules,
     private confirmationService: ConfirmationService,
     public utilitiesString: UtilitiesConfigString,
     public constPermissions: ConstPermissions,
@@ -48,7 +47,7 @@ export class ListCategoryComponent implements OnInit {
 
   private initPermissions(): void {
     this.permissions = this.utilitiesString.ls.get('permissions')
-      .find(element => element.moduName === this.constModules.CATEGORIES).moduPermissions;
+      .find(element => element.moduName === ConstModules.CATEGORIES).moduPermissions;
   }
 
   private initColumns(): void {
@@ -106,7 +105,7 @@ export class ListCategoryComponent implements OnInit {
 
   delete(category: CategoryModel): void {
     this.confirmationService.confirm({
-      message: this.utilitiesString.msgConfirmDelete + 'la categoria ' + category.cateName + '?',
+      message: ConstString.CONFIRM_DELETE + 'la categoria ' + category.cateName + '?',
       accept: () => {
         this.categoryService.deleteCategory(category.id)
           .then(_ => {

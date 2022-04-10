@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserModel} from '../../../../models/user/user.model';
 import {UtilitiesConfigString} from '../../../../utilities/utilities-config-string.service';
-import {SelectItem} from 'primeng/api';
+import {ConfirmationService, SelectItem} from 'primeng/api';
 import {Status} from '../../../../utilities/status';
 import {RoleService} from '../../../../services/user/role.service';
 import {RoleAdapter} from '../../../../adapters/implementation/user/role.adapter';
@@ -21,33 +21,37 @@ import {EnumLevelMessage} from '../../../../messenger/enum-level-message.enum';
 })
 export class EditUserComponent implements OnInit {
 
-  public user: UserModel;
-  public form: FormGroup;
-  public display: boolean;
-  public rolesInfo: SelectItem[] = [];
-  public statusOptions: any = Object.keys(Status).map(key => ({id: key, name: Status[key]}));
-  public uploadedFiles;
-  public imgChange: string;
+  user: UserModel;
+  form: FormGroup;
+  display: boolean;
+  rolesInfo: SelectItem[] = [];
+  statusOptions: any = Object.keys(Status).map(key => ({id: key, name: Status[key]}));
+  uploadedFiles;
+  imgChange: string;
   @Output()
-  updateList: EventEmitter<any> = new EventEmitter();
-  showEditBtn: boolean;
+  updateUser: EventEmitter<UserModel> = new EventEmitter();
   @Input()
   permissions: any;
-  public roles: RoleModel[];
-  public listUniversityCareers: Array<any>;
-  public becomeAdministrator: boolean;
+  roles: RoleModel[];
+  listUniversityCareers: Array<any>;
+  buttonActioned: boolean;
+  displayDialog: boolean;
+  checkedUserAdmin: boolean;
+  private userHadRoles: boolean;
 
   constructor(
     private messagerService: MessagerService,
     public utilitiesString: UtilitiesConfigString,
     public roleService: RoleService,
-    private roleAdapter: RoleAdapter,
     private inviteRoleService: InviteRoleService,
-    private inviteRoleAdapter: InviteRoleAdapter,
+    private confirmationService: ConfirmationService,
     private userService: UsersService,
-    private userAdapter: UserAdapter) {
+    private userAdapter: UserAdapter,
+    private inviteRoleAdapter: InviteRoleAdapter) {
     this.display = false;
-    this.becomeAdministrator = false;
+    this.buttonActioned = false;
+    this.displayDialog = false;
+    this.checkedUserAdmin = false;
   }
 
   ngOnInit(): void {
@@ -56,38 +60,37 @@ export class EditUserComponent implements OnInit {
       userEmail: new FormControl({value: null, disabled: true}, [Validators.required, Validators.maxLength(100)]),
       userPhone: new FormControl({value: null, disabled: true}, [Validators.required, Validators.maxLength(100)]),
       userRole: new FormControl({value: null, disabled: false}, []),
-      userAdmin: new FormControl({value: null, disabled: false}, []),
       userDegree: new FormControl({value: null, disabled: true}, [Validators.required, Validators.maxLength(100)]),
       userStatus: new FormControl({value: null, disabled: true}, [Validators.required, Validators.maxLength(100)]),
     });
   }
 
-  show(data): void {
-    this.display = true;
-    this.becomeAdministrator = data.becomeAdministrator;
-    this.setData(data.user);
-    this.user = data.user;
+  show(user): void {
+    this.user = user;
+    this.setData();
+    this.userHadRoles = this.user.userRole.length > 0 || this.user.userAdmin;
     this.imgChange = this.utilitiesString.getImage(this.user.userPhoto + '/');
-    this.showEditBtn = true;
+    this.display = true;
   }
 
-  setData(data): void {
-    this.form.get('userName').setValue(data ? data.userName : null);
-    this.form.get('userEmail').setValue(data ? data.userEmail : null);
-    this.form.get('userPhone').setValue(data ? data.userPhone : null);
-    this.form.get('userAdmin').setValue(data ? data.userAdmin : null);
-    this.form.get('userDegree').setValue(data ? data.userDegree.careerName : null);
-    this.form.get('userStatus').setValue(data ? data.userStatus : null);
-    this.getRoles(data);
+  setData(): void {
+    this.form.get('userName').setValue(this.user ? this.user.userName : null);
+    this.form.get('userEmail').setValue(this.user ? this.user.userEmail : null);
+    this.form.get('userPhone').setValue(this.user ? this.user.userPhone : null);
+    this.form.get('userDegree').setValue(this.user ? this.user.userDegree.careerName : null);
+    this.form.get('userStatus').setValue(this.user ? this.user.userStatus : null);
+    this.checkedUserAdmin = this.user.userAdmin;
+    this.getRoles(this.user);
   }
 
   getRoles(data): void {
+    const roleAdapter = new RoleAdapter(this.utilitiesString);
     this.roleService.listRoles().then(res => {
-      this.roles = this.roleAdapter.adaptList(res.data);
+      this.roles = roleAdapter.adaptList(res.data);
       const userRoleShow = [];
       this.roles.forEach(role => {
         data.userRole.forEach(userRole => {
-          if (role.roleName === userRole.roleName){
+          if (role.roleName === userRole.roleName) {
             userRoleShow.unshift(role);
           }
         });
@@ -96,30 +99,69 @@ export class EditUserComponent implements OnInit {
     });
   }
 
-  save(): void {
-    if (this.becomeAdministrator) {
-      this.user.userAdmin = this.form.value.userAdmin;
-      this.userService.updateUser(this.userAdapter.adaptObjectSend(this.user)).then(res => {
-        if (res.status) {
-          this.messagerService.showToast(EnumLevelMessage.SUCCESS, '¡El usuario es ahora administrador!');
-          this.display = false;
-        }
-      });
+  processUpdateRoles(): void {
+    this.buttonActioned = true;
+    const rolesForm = this.form.get('userRole').value;
+    if (this.userHadRoles && rolesForm.length === 0 && !this.checkedUserAdmin) {
+      this.revokeRoles();
+    } else if (rolesForm.length > 0 || this.checkedUserAdmin) {
+      const dataRoles = {roles: rolesForm, user: this.user};
+      this.assignRoleOrRoles(dataRoles);
     } else {
-      const data = {
-        role: this.form.get('userRole').value[0],
-        user: this.user
-      };
-      this.inviteRoleService.inviteTakeRole(this.inviteRoleAdapter.adaptObjectSendToPost(data))
-        .then(res => {
-          if (res.status) {
-            this.messagerService.showToast(EnumLevelMessage.SUCCESS, '¡Invitación enviada!');
-            this.display = false;
-          } else {
-            this.messagerService.showToast(EnumLevelMessage.ERROR, res.message);
-          }
-        });
+      this.buttonActioned = false;
+      this.messagerService.showToastLarge(EnumLevelMessage.INFO, 'Debe realizar algún cambio en la secciones de roles. De lo contrario cierre esta ventana');
     }
   }
 
+  private assignRoleOrRoles(dataRoles): void {
+    const body = this.inviteRoleAdapter.adaptBodyToAssignRoles(this.user.id, this.checkedUserAdmin, dataRoles);
+    this.inviteRoleService.assignRoles(body)
+      .then(res => {
+        if (res.status) {
+          this.user = this.userAdapter.adaptObjectReceive(res.data);
+          this.messagerService.showToast(EnumLevelMessage.SUCCESS, res.message);
+          this.updateUser.emit(this.user);
+          this.display = false;
+        } else {
+          this.messagerService.showToast(EnumLevelMessage.ERROR, res.message);
+        }
+      }).finally(() => {
+      this.buttonActioned = false;
+    });
+  }
+
+  private revokeRoles(): void {
+    this.confirmationService.confirm({
+      message: 'Si no seleccionas ningún rol, el usuario perderá todos los roles que tenía. Por favor confirma esta decisión',
+      header: 'Confirmar revocación de roles',
+      icon: 'bi bi-exclamation-triangle-fill color-icon-fill-yellow',
+      accept: () => {
+        const body = this.inviteRoleAdapter.adaptObjectToRevokeRoles();
+        this.inviteRoleService.revokeRoles(this.user.id, body)
+          .then(res => {
+            if (res.status) {
+              this.user = this.userAdapter.adaptObjectReceive(res.data);
+              this.updateUser.emit(this.user);
+              this.messagerService.showToast(EnumLevelMessage.SUCCESS, res.message);
+              this.display = false;
+            } else {
+              this.messagerService.showToast(EnumLevelMessage.ERROR, res.message);
+            }
+          })
+          .finally(() => {
+            this.buttonActioned = false;
+          });
+      }, reject: () => {
+        this.buttonActioned = false;
+      }
+    });
+  }
+
+  showExplainUserAdmin(): void {
+    if (!this.checkedUserAdmin) {
+      this.displayDialog = false;
+    } else {
+      this.displayDialog = !this.displayDialog;
+    }
+  }
 }

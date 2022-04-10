@@ -104,10 +104,11 @@ export class UserAdapter implements Adapter<UserModel> {
     return {user_curriculum_vitae: curriculumVitae};
   }
 
-  adaptChangePassword(user: any): any {
+  adaptChangePassword(changePasswordBody: any): any {
     return {
-      current_password: user.currentPassword,
-      new_password: user.newPassword,
+      user_id: this.user.id,
+      current_password: changePasswordBody.currentPassword,
+      new_password: changePasswordBody.newPassword
     };
   }
 

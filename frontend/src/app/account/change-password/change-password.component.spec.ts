@@ -13,11 +13,14 @@ import {DialogModule} from 'primeng/dialog';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {RouterTestingModule} from '@angular/router/testing';
+import {Router} from '@angular/router';
 
 describe('ChangePasswordComponent', () => {
   let component: ChangePasswordComponent;
   let fixture: ComponentFixture<ChangePasswordComponent>;
   let utilities: UtilitiesConfigString;
+  let router: Router;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -25,6 +28,7 @@ describe('ChangePasswordComponent', () => {
       imports: [DialogModule,
         FormsModule,
         ReactiveFormsModule,
+        RouterTestingModule.withRoutes([]),
         HttpClientTestingModule],
       providers: [UtilitiesConfigString,
         UsersService,
@@ -41,6 +45,7 @@ describe('ChangePasswordComponent', () => {
         component = fixture.componentInstance;
         utilities = TestBed.inject(UtilitiesConfigString);
         fixture.detectChanges();
+        router = TestBed.get(Router);
       });
   });
 

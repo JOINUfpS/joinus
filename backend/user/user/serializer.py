@@ -2,12 +2,6 @@ import json
 import uuid
 
 import rstr
-from django.contrib.auth.hashers import make_password, check_password
-from munch import Munch
-from rest_framework import serializers, status
-from rest_framework.validators import UniqueValidator
-
-from asn_user.messages import CustomMessages
 from common_structure_microservices.entity_url import EntityUrlMap
 from common_structure_microservices.exception import GenericMicroserviceError
 from common_structure_microservices.messages import Messages
@@ -15,6 +9,12 @@ from common_structure_microservices.remote import RemoteModel
 from common_structure_microservices.send_email import send_email
 from common_structure_microservices.serializer import AuditorySerializer
 from common_structure_microservices.utilities import Enums
+from django.contrib.auth.hashers import make_password, check_password
+from munch import Munch
+from rest_framework import serializers, status
+from rest_framework.validators import UniqueValidator
+
+from asn_user.messages import CustomMessages
 from follow_user.models import FollowUserModel
 from role.serializer import RoleSerializer
 from user.models import UserModel
@@ -85,6 +85,8 @@ class UserSerializer(AuditorySerializer):
                                                  role_id=validated_data['role_active'])
             validated_data['user_role_structure'] = role['role_structure']
         validated_data.update({'user_status': Enums.INACTIVO})
+        validated_data['user_email'] = validated_data['user_email'].lower()
+        validated_data['user_name'] = validated_data['user_name'].title()
         user = super().create(validated_data)
         temporal_password = rstr.xeger(r'[a-z]\d[A-Z]\d[0-9]\d[?=.!@#%&,><’:;|_~*]\d')
 
@@ -174,8 +176,9 @@ class ValidateUserGoogleSerializer(serializers.Serializer):
 
     def validate_google_user(self):
         user = self.validated_data.get('user_google')
+        user_email = user['email'].lower()
         try:
-            user_exist = UserModel.objects.get(user_email=user['email'])
+            user_exist = UserModel.objects.get(user_email=user_email)
             user_serializer = UserSerializer(user_exist).data
 
             return user_serializer
@@ -188,8 +191,8 @@ class ValidateUserGoogleSerializer(serializers.Serializer):
             user_model = UserModel(id=user_id,
                                    inst_id=institution['id'],
                                    inst_name=institution['inst_name'],
-                                   user_name=user['name'],
-                                   user_email=user['email'],
+                                   user_name=user['name'].title(),
+                                   user_email=user_email,
                                    user_password=None,
                                    user_provider=Enums.GOOGLE_PROVIDER,
                                    user_role=[],
@@ -210,38 +213,33 @@ class ValidateUserGoogleSerializer(serializers.Serializer):
 
 
 class ChangePasswordSerializer(serializers.Serializer):
-    user = serializers.CharField(required=False)
+    user_id = serializers.UUIDField(required=False)
     current_password = serializers.CharField(required=True)
     new_password = serializers.CharField(required=True)
 
     def change_password(self):
-        user = self.validated_data.get('user', None)
+        user_id = self.validated_data.get('user_id', None)
         current_password = self.validated_data.get('current_password')
         new_password = self.validated_data.get('new_password')
 
         try:
-            if user is not None:
-                user_exist = UserModel.objects.get(user_email=user)
-                user_password = make_password(user_exist.user_password)
-            else:
-                user = self.context['request'].auth.key
-                user_exist = UserModel.objects.get(user_email=user['user_email'])
+            if user_id is not None:
+                user_exist = UserModel.objects.get(id=user_id)
                 user_password = user_exist.user_password
 
-            user_new_password = make_password(new_password)
+                if not check_password(current_password, user_password):
+                    raise GenericMicroserviceError(status=status.HTTP_400_BAD_REQUEST,
+                                                   detail='La contraseña actual es incorrecta.')
 
-            if not check_password(current_password, user_password):
-                raise GenericMicroserviceError(status=status.HTTP_400_BAD_REQUEST,
-                                               detail='Contraseña actual es incorrecta.')
+                elif check_password(new_password, user_password):
+                    raise GenericMicroserviceError(status=status.HTTP_400_BAD_REQUEST,
+                                                   detail='La nueva contraseña debe ser diferente a la actual.')
 
-            elif check_password(new_password, user_password):
-                raise GenericMicroserviceError(status=status.HTTP_400_BAD_REQUEST,
-                                               detail='La nueva contraseña debe ser diferente a la actual.')
-
-            kwargs = {'user_password': user_new_password}
-            user_update = UserSerializer(user_exist, data=kwargs, partial=True)
-            user_update.is_valid(raise_exception=True)
-            user_update.save()
+                user_new_password = make_password(new_password)
+                kwargs = {'user_password': user_new_password}
+                user_update = UserSerializer(user_exist, data=kwargs, partial=True)
+                user_update.is_valid(raise_exception=True)
+                user_update.save()
 
         except UserModel.DoesNotExist:
             raise GenericMicroserviceError(status=status.HTTP_404_NOT_FOUND,

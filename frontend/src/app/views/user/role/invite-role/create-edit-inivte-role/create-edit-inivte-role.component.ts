@@ -24,15 +24,16 @@ export class CreateEditInivteRoleComponent implements OnInit {
   updateList: EventEmitter<any> = new EventEmitter();
   @Input()
   permissions: string[];
-  public display: boolean;
-  public inviteRole: InviteRoleModel;
-  public form: FormGroup;
-  public showEditBtn: boolean;
-  public userOptions: UserModel[];
-  public roleOptions: RoleModel[];
-  public statusOptions: any = Object.keys(AuthorizeRole).map(key => ({id: key, name: AuthorizeRole[key]}));
-  public submitted: boolean;
-  public buttonCreateInviteRoleActioned = false;
+  display: boolean;
+  inviteRole: InviteRoleModel;
+  form: FormGroup;
+  showEditBtn: boolean;
+  userOptions: UserModel[];
+  roleOptions: RoleModel[];
+  statusOptions: any = Object.keys(AuthorizeRole).map(key => ({id: key, name: AuthorizeRole[key]}));
+  submitted: boolean;
+  buttonCreateInviteRoleActioned = false;
+  private paginator: any;
 
   constructor(public utilitiesString: UtilitiesConfigString,
               private inviteRoleService: InviteRoleService,
@@ -53,32 +54,85 @@ export class CreateEditInivteRoleComponent implements OnInit {
     });
   }
 
-  show(data): void {
-    this.display = true;
-    this.inviteRole = data;
-    this.setData(data);
-    this.showEditBtn = data !== null;
+  show(inviteRole: InviteRoleModel): void {
+    this.form.reset();
+    this.form.enable();
+    this.inviteRole = inviteRole;
+    this.showEditBtn = inviteRole !== null;
     if (this.showEditBtn) {
-      this.form.get('user').disable();
+      this.setDataToEditInviteRole();
     } else {
-      this.form.reset();
-      this.form.enable();
+      this.setDataToCreateInviteRole();
     }
+    this.buttonCreateInviteRoleActioned = false;
+    this.display = true;
   }
 
-  setData(data): void {
+  private setDataToCreateInviteRole(): void {
     this.userService.listUsers()
       .then(res => {
         this.userOptions = this.userAdapter.adaptList(res.data);
-        const userSelected = this.userOptions.filter(user => user.userName === data?.userName);
+        this.paginator = res.paginator;
+        this.bringPaginatedUsers();
+        const userSelected = this.userOptions.filter(user => user.userName === this.inviteRole?.userName);
         this.form.get('user').setValue(userSelected[0] ? userSelected[0] : null);
       });
 
+    this.getRoles();
+  }
+
+  private bringPaginatedUsers(): void {
+    if (this.paginator.next !== null && this.paginator.next !== undefined) {
+      this.userService.getUserWithPaginator(this.paginator).then(res => {
+        this.userOptions = this.userOptions.concat(this.userAdapter.adaptList(res.data));
+        this.paginator = res.paginator;
+      }).finally(() => {
+        this.bringPaginatedUsers();
+      });
+    }
+  }
+
+  private getRoles(): void {
     this.roleService.listRoles()
       .then(res => {
         this.roleOptions = this.roleAdapter.adaptList(res.data);
-        const roleSelected = this.roleOptions.filter(role => role.roleName === data?.roleName);
+        const roleSelected = this.roleOptions.filter(role => role.roleName === this.inviteRole?.roleName);
         this.form.get('role').setValue(roleSelected[0] ? roleSelected[0] : null);
+      });
+  }
+
+  private setDataToEditInviteRole(): void {
+    this.form.get('user').disable();
+    this.getUserToEdit();
+    if (this.inviteRole.roleId !== null) {
+      this.form.get('role').disable();
+      this.getRoleToEdit();
+    } else {
+      this.getRoles();
+    }
+  }
+
+  private getUserToEdit(): void {
+    this.userService.getInfoUser(this.inviteRole.userId)
+      .then(response => {
+        const userToEdit: UserModel [] = this.userAdapter.adaptList([response.data]);
+        if (this.userOptions === undefined) {
+          this.userOptions = [];
+        }
+        this.userOptions = this.userOptions.concat(userToEdit);
+        this.form.get('user').setValue(userToEdit[0]);
+      });
+  }
+
+  private getRoleToEdit(): void {
+    this.roleService.getRole(this.inviteRole.roleId)
+      .then(response => {
+        const roleToEdit: RoleModel = this.roleAdapter.adaptObjectReceive(response.data);
+        if (this.roleOptions === undefined) {
+          this.roleOptions = [];
+        }
+        this.roleOptions.push(roleToEdit);
+        this.form.get('role').setValue(roleToEdit);
       });
   }
 

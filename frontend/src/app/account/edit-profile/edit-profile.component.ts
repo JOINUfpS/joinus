@@ -110,6 +110,8 @@ export class EditProfileComponent implements OnInit {
       this.states = new Array<any>();
       this.states.push(this.userSession.userDepartment);
       this.hiddenStates = false;
+    } else if (this.userSession.userCountry.name !== undefined) {
+      this.getStates();
     } else {
       this.states = new Array<any>();
       this.hiddenStates = true;
@@ -168,6 +170,7 @@ export class EditProfileComponent implements OnInit {
     this.geographicalLocationService.getStates(this.formGeneral.value.user_country.iso2)
       .then(res => {
         if (res.length > 0) {
+          this.hiddenStates = false;
           this.availableStates = res;
           this.formatStates();
         } else {
@@ -425,11 +428,22 @@ export class EditProfileComponent implements OnInit {
   }
 
   private initCareerUniversity(): void {
-    this.universityCareerService.getAllUniversityCareer().then(res => {
-      if (res.status) {
-        this.listUniversityCareers = this.universityCareerAdapter.adaptList(res.data);
-      }
-    });
+    this.universityCareerService.getAllUniversityCareer()
+      .then(response => {
+        if (response.status) {
+          this.listUniversityCareers = this.universityCareerAdapter.adaptList(response.data);
+        } else {
+          this.addUniversityCareersDefault();
+        }
+      })
+      .catch(_ => {
+        this.addUniversityCareersDefault();
+      });
+  }
+
+  private addUniversityCareersDefault(): void {
+    this.listUniversityCareers = new Array<UniversityCareerModel>();
+    this.listUniversityCareers.push(this.userSession.userDegree);
   }
 
   private saveNewProject(): void {

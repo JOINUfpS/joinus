@@ -1,9 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {ListInviteRoleComponent} from './list-invite-role.component';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {MessagerService} from '../../../../../messenger/messager.service';
-import {ConstModules} from '../../../../../utilities/string/security/const-modules';
 import {UtilitiesConfigString} from '../../../../../utilities/utilities-config-string.service';
 import {InviteRoleService} from '../../../../../services/user/invite-role.service';
 import {InviteRoleAdapter} from '../../../../../adapters/implementation/user/invite-role.adapter';
@@ -21,7 +19,6 @@ xdescribe('ListInviteRoleComponent', () => {
       imports: [HttpClientTestingModule],
       declarations: [ListInviteRoleComponent],
       providers: [ConfirmationService,
-        ConstModules,
         UtilitiesConfigString,
         InviteRoleService,
         InviteRoleAdapter,

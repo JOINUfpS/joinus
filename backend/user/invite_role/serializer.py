@@ -1,16 +1,16 @@
 import uuid
 
-from munch import Munch
-from rest_framework import serializers, status
-
-from asn_user.messages import CustomMessages
 from common_structure_microservices.exception import GenericMicroserviceError
 from common_structure_microservices.messages import Messages
 from common_structure_microservices.notification import SendNotification
 from common_structure_microservices.send_email import send_email
 from common_structure_microservices.serializer import AuditorySerializer
 from common_structure_microservices.type_notification import TypeNotification
-from common_structure_microservices.utilities import Enums, Constants
+from common_structure_microservices.utilities import Enums
+from munch import Munch
+from rest_framework import serializers, status
+
+from asn_user.messages import CustomMessages
 from community_user.models import CommunityUserModel
 from community_user.serializer import CommunityUserSerializer
 from invite_role.models import InviteRoleModel
@@ -71,6 +71,9 @@ class InviteRoleSerializer(AuditorySerializer):
 
         self.sending_notification(notification_body)
         return invite_role
+
+    def only_create(self, invite_role):
+        super().create(invite_role)
 
     def request_role(self, invite_role):
         super().create(invite_role)
@@ -226,3 +229,99 @@ class InviteRoleSerializer(AuditorySerializer):
     def sending_notification(self, notification_body):
         send_notification = SendNotification()
         send_notification.task_send_notification(request=self.context['request'], notification_body=notification_body)
+
+    def get_request_role(self):
+        return 'request_role.html'
+
+
+class AssignRolesSerializer(serializers.Serializer):
+    user_id = serializers.UUIDField(required=True, allow_null=False)
+    user_admin = serializers.BooleanField(required=True, allow_null=False)
+    invite_roles = serializers.ListField(required=True, child=serializers.JSONField())
+
+    def assign_roles(self, body):
+        user_roles = list()
+        invite_roles = body['invite_roles']
+        string_roles = ''
+        try:
+            user_instance = UserModel.objects.get(id=body['user_id'])
+            for i in range(len(invite_roles)):
+                user_roles.append({'roleId': invite_roles[i]['role_id'], 'roleName': invite_roles[i]['role_name']})
+                InviteRoleSerializer(invite_roles[i]).only_create(invite_roles[i])
+                if len(invite_roles) == 1 or i == 0:
+                    string_roles = invite_roles[i]['role_name']
+                elif i > 0:
+                    string_roles += ', {}'.format(invite_roles[i]['role_name'])
+
+            if self.__is_role_active_in_new_roles(user_instance, body['invite_roles']):
+                kwargs = {'user_role': user_roles, 'user_admin': body['user_admin']}
+            else:
+                kwargs = {'user_role': user_roles, 'role_active': None, 'user_role_structure': [],
+                          'user_admin': body['user_admin']}
+
+            user = UserSerializer(user_instance, data=kwargs, partial=True)
+            user.is_valid(raise_exception=True)
+            user.save()
+
+            title = '¡Se te ha asignado un nuevo rol o roles!'
+            context = {'title': title,
+                       'role_name': string_roles}
+            send_email(file='invite_take_role.html', send_to_list=[user.data['user_email']], context=context,
+                       subject=title)
+
+            notification_body = {
+                'noti_receiver_id': str(body["user_id"]),
+                'noti_path': f'/perfil/{body["user_id"]}',
+                'noti_type': TypeNotification.USER.value,
+                'noti_issue': 'Se te otorgo nuevos roles, entra a tu perfil para revisar cuales son.',
+                'noti_author_photo': None,
+                'noti_author_name': '',
+                'noti_author_id': str(body["user_id"]),
+                'noti_destination_name': ''
+            }
+            send_notification = SendNotification()
+            send_notification.task_send_notification(request=self.context['request'],
+                                                     notification_body=notification_body)
+            return user.data
+        except UserModel.DoesNotExist:
+            raise GenericMicroserviceError(detail=Messages.INSTANCE_DOES_NOT_EXIST % 'Usuario',
+                                           status=status.HTTP_404_NOT_FOUND)
+
+    def __is_role_active_in_new_roles(self, user: UserModel, roles):
+        for role in roles:
+            if role['id'] == user.role_active:
+                return True
+        return False
+
+
+class RevokeRolesSerializer(serializers.Serializer):
+    user_role = serializers.ListField(child=serializers.JSONField(), allow_null=True, default=[{}])
+    user_admin = serializers.BooleanField(required=True, allow_null=False)
+    user_role_structure = serializers.JSONField(required=False, allow_null=True)
+    role_active = serializers.UUIDField(required=False, allow_null=True)
+
+    def revoke_roles(self, user_id):
+        try:
+            user_instance = UserModel.objects.get(id=user_id)
+            kwargs = {'user_role': [], 'role_active': None, 'user_role_structure': [], 'user_admin': False}
+            user = UserSerializer(user_instance, data=kwargs, partial=True)
+            user.is_valid(raise_exception=True)
+            user.save()
+
+            notification_body = {
+                'noti_receiver_id': user_id,
+                'noti_path': f'/perfil/{user_id}',
+                'noti_type': TypeNotification.USER.value,
+                'noti_issue': 'Se te han revocado los roles que tenias.',
+                'noti_author_photo': None,
+                'noti_author_name': '',
+                'noti_author_id': user_id,
+                'noti_destination_name': ''
+            }
+            send_notification = SendNotification()
+            send_notification.task_send_notification(request=self.context['request'],
+                                                     notification_body=notification_body)
+            return user.data
+        except UserModel.DoesNotExist:
+            raise GenericMicroserviceError(detail=Messages.INSTANCE_DOES_NOT_EXIST % 'Usuario',
+                                           status=status.HTTP_404_NOT_FOUND)

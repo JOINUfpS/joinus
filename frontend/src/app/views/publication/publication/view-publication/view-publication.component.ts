@@ -236,7 +236,7 @@ export class ViewPublicationComponent implements OnInit {
 
   private deletePublication(publication: PublicationModel): void {
     this.confirmationService.confirm({
-      message: this.utilitiesString.msgConfirmDelete + 'la publicación ' + publication.publTitle + '?',
+      message: ConstString.CONFIRM_DELETE + 'la publicación ' + publication.publTitle + '?',
       accept: () => {
         this.publicationService.deletePublication(publication.id)
           .then(_ => {

@@ -1,12 +1,10 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {DashboardComponent} from './dashboard.component';
 import {FollowUserServices} from '../../services/user/follow_user.services';
 import {FollowUserAdapter} from '../../adapters/implementation/user/follow-user.adapter';
 import {LoadingService} from '../../services/loading/loading.service';
 import {PublicationService} from '../../services/publication/publication.service';
 import {PublicationAdapter} from '../../adapters/implementation/publication/publication.adapter';
-import {ConstModules} from '../../utilities/string/security/const-modules';
 import {UtilitiesConfigString} from '../../utilities/utilities-config-string.service';
 import {DatePipe} from '@angular/common';
 import {ProjectAdapter} from '../../adapters/implementation/user/project.adapter';
@@ -30,8 +28,7 @@ describe('DashboardComponent', () => {
         PublicationAdapter,
         ProjectAdapter,
         DatePipe,
-        ConstString,
-        ConstModules]
+        ConstString]
     })
       .compileComponents();
   });

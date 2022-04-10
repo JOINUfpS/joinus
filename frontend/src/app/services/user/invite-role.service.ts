@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {UtilitiesConfigString} from '../../utilities/utilities-config-string.service';
 import {environment} from '../../../environments/environment';
+import {v4 as uuid} from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +48,16 @@ export class InviteRoleService {
   inviteTakeRole(inviteRole): Promise<any> {
     const URL_API = `${this.URL_API}invite_take_role/`;
     return this.http.post(URL_API, inviteRole).toPromise();
+  }
+
+  assignRoles(bodyAssignRoles): Promise<any> {
+    const URL_API = `${this.URL_API}assign_roles/`;
+    return this.http.post(URL_API, bodyAssignRoles).toPromise();
+  }
+
+  revokeRoles(userId: uuid, body): Promise<any> {
+    const URL_API = `${this.URL_API}revoke_roles/${userId}/`;
+    return this.http.patch(URL_API, body).toPromise();
   }
 
   requestRole(inviteRole): Promise<any> {

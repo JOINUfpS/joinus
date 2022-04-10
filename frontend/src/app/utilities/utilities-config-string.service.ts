@@ -1,7 +1,3 @@
-/**
- * This service contains methods and variables to process text data
- */
-
 import {Injectable} from '@angular/core';
 import * as SecureLS from 'secure-ls';
 import {environment} from '../../environments/environment';
@@ -9,23 +5,13 @@ import {ConstString} from './string/const-string';
 
 @Injectable()
 export class UtilitiesConfigString {
-
-  public msgConfirmDelete = '¿Está seguro de que desea eliminar ';
-  public msgConfirmLeave = '¿Está seguro de que desea abandonar ';
-  public msgToastSuccessfullAuthorization = 'La invitación a ';
-  public msgToastError = 'Ha ocurrido un error en el proceso';
-  public msgEmptyTable = 'No se encontraron registros';
-  public modal = true;
-  public blockScroll = true;
-  public dismissableMask = true;
   ls = new SecureLS({encodingType: 'aes', isCompression: false});
-  public formatCurrency = '';
-  public symbolCurrency = '';
-  public activeTooltip = false;
-  public maxLengthShow = 61;
-  public maxLengthUserName = 8;
+  activeTooltip = false;
+  readonly maxLengthShow = 61;
+  readonly maxLengthUserName = 8;
+  readonly msgEmptyTable = 'No se encontraron registros';
 
-  public language = {
+  language = {
     firstDayOfWeek: 0,
     dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
     dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],

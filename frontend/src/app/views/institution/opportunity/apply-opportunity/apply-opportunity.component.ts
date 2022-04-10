@@ -69,7 +69,7 @@ export class ApplyOpportunityComponent {
         if (resolve) {
           this.goToApplyOpportunityService();
         } else {
-          this.messagerService.showToast(EnumLevelMessage.ERROR, this.utilitiesString.msgToastError);
+          this.messagerService.showToast(EnumLevelMessage.ERROR, 'Ha ocurrido un error en el proceso');
           this.buttonFormActioned = false;
         }
       });

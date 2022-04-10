@@ -58,6 +58,7 @@ export class CardPublicationComponent implements OnInit {
               private publicationService: PublicationService,
               private followUserService: FollowUserServices,
               private followUserAdapter: FollowUserAdapter,
+              private confirmationService: ConfirmationService,
               private router: Router) {
     this.user = this.utilitiesString.ls.get('user');
     this.likeButton = true;
@@ -160,9 +161,8 @@ export class CardPublicationComponent implements OnInit {
   }
 
   private deletePublication(publication: PublicationModel): void {
-    const confirmationService = new ConfirmationService();
-    confirmationService.confirm({
-      message: this.utilitiesString.msgConfirmDelete + 'la publicación ' + publication.publTitle + '?',
+    this.confirmationService.confirm({
+      message: ConstString.CONFIRM_DELETE + 'la publicación ' + publication.publTitle + '?',
       accept: () => {
         this.eventDelete.emit(this.indexPublication);
         this.publicationService.deletePublication(publication.id).then(res => {

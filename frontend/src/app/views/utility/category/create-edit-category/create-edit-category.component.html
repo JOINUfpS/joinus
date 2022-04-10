@@ -1,6 +1,6 @@
-<p-dialog [(visible)]="display" [blockScroll]="utilitiesString.blockScroll" [draggable]="false"
-          [dismissableMask]="utilitiesString.dismissableMask" [maximizable]="false" [minY]="70"
-          [modal]="utilitiesString.modal" [styleClass]="'col-sm-10 col-md-7 col-lg-6 col-xl-5 col-11'"
+<p-dialog [(visible)]="display" [blockScroll]="true" [draggable]="false"
+          [dismissableMask]="true" [maximizable]="false" [minY]="70"
+          [modal]="true" [styleClass]="'col-sm-10 col-md-7 col-lg-6 col-xl-5 col-11'"
           [style]="{maxWidth: '60rem'}">
   <p-header>
     <h2 *ngIf="category" class="title-dialog">Editar categoria</h2>

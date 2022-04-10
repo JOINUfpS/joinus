@@ -6,6 +6,9 @@ import {UserAdapter} from '../../adapters/implementation/user/user.adapter';
 import {MessagerService} from '../../messenger/messager.service';
 import {EnumLevelMessage} from '../../messenger/enum-level-message.enum';
 import {ConstString} from '../../utilities/string/const-string';
+import {Router} from '@angular/router';
+import {SecurityService} from '../../services/security/security.service';
+import {SecurityAdapter} from '../../adapters/implementation/security/security.adapter';
 
 @Component({
   selector: 'app-change-password',
@@ -24,7 +27,10 @@ export class ChangePasswordComponent {
               public constString: ConstString,
               private userServices: UsersService,
               private userAdapter: UserAdapter,
-              private messagerService: MessagerService
+              private messagerService: MessagerService,
+              private router: Router,
+              private securityService: SecurityService,
+              private securityAdapter: SecurityAdapter
   ) {
     this.buildForm();
   }
@@ -75,6 +81,13 @@ export class ChangePasswordComponent {
         .then(res => {
           if (res.status) {
             this.messagerService.showToast(EnumLevelMessage.SUCCESS, res.message);
+            const user = this.utilitiesString.ls.get('user');
+            this.securityService.logout(this.securityAdapter.adaptLogout(user.userEmail)).then(response => {
+              if (response.status) {
+                this.utilitiesString.ls.removeAll();
+                this.router.navigate(['iniciar-sesion']);
+              }
+            });
             this.display = false;
           } else {
             this.setData();

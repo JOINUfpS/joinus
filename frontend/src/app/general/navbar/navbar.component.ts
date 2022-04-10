@@ -17,7 +17,6 @@ import {EnumLevelMessage} from '../../messenger/enum-level-message.enum';
 import {ModulesModel} from 'src/app/models/user/modules.model';
 import {ConstModules} from 'src/app/utilities/string/security/const-modules';
 
-
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html'
@@ -33,16 +32,11 @@ export class NavbarComponent implements OnInit {
   toggleSlider: string;
   classNotification = 'bell';
   userNameToShow;
-  buttonChangeRolePress = false;
+  modelGrouped: ModulesModel[];
+  showRolesFunctions = false;
   private listTitles: any[];
-
-
-  public modelGrouped: ModulesModel[];
-  public showRolesFunctions = false;
-
   @ViewChild('listNotification', {static: true}) listNotification: ListNotificationComponent;
   @ViewChild('modalChangePassword', {static: false}) modalChangePassword: ChangePasswordComponent;
-
 
   constructor(private location: Location,
               private messagerService: MessagerService,
@@ -54,12 +48,10 @@ export class NavbarComponent implements OnInit {
               private inviteRoleAdapter: InviteRoleAdapter,
               private securityService: SecurityService,
               private securityAdapter: SecurityAdapter,
-              private constModule: ConstModules
   ) {
     this.location = location;
     this.user = this.utilitiesString.ls.get('user');
     this.userNameToShow = this.user.userName.split(' ')[0];
-
     this.modelGrouped = [];
   }
 
@@ -68,7 +60,7 @@ export class NavbarComponent implements OnInit {
     this.showRoleFunctions();
   }
 
-  loadMenu(): void {
+  private loadMenu(): void {
     const roleStructure = this.utilitiesString.ls.get('permissions');
     if (roleStructure != null) {
       this.modelGrouped = roleStructure;
@@ -94,7 +86,7 @@ export class NavbarComponent implements OnInit {
   }
 
   roleChange(role): void {
-    this.buttonChangeRolePress = true;
+    this.messagerService.showToast(EnumLevelMessage.INFO, 'Cambiando de rol...');
     this.user.userRoleActive = role.roleId;
     this.userService.updateUser(this.userAdapter.adaptObjectSend(this.user))
       .then(res => {
@@ -104,9 +96,7 @@ export class NavbarComponent implements OnInit {
         } else {
           this.messagerService.showToast(EnumLevelMessage.ERROR, res.message);
         }
-      }).finally(() => {
-      this.buttonChangeRolePress = false;
-    });
+      });
   }
 
   requestRole(): void {
@@ -154,11 +144,11 @@ export class NavbarComponent implements OnInit {
   }
 
 
-  showRoleFunctions(): void {
+  private showRoleFunctions(): void {
     if (this.modelGrouped.length !== 0) {
       this.modelGrouped.forEach(role => {
-        if (role.moduName === this.constModule.ROLES || role.moduName === this.constModule.CATEGORIES
-          || role.moduName === ConstModules.INSTITUTIONS || role.moduName === this.constModule.AUTHORIZE_ROLE) {
+        if (role.moduName === ConstModules.ROLES || role.moduName === ConstModules.CATEGORIES
+          || role.moduName === ConstModules.INSTITUTIONS || role.moduName === ConstModules.AUTHORIZE_ROLE) {
           this.showRolesFunctions = true;
         }
       });

@@ -15,3 +15,5 @@ class CustomMessages:
     LOGGED_IN_SUCCESSFULLY = 'Ha iniciado sesión exitosamente.'
     PASSWORD_CHANGE_SUCCESSFUL = 'La contraseña ha sido actualizada con éxito.'
     NEW_ROLE = 'Se te ha autorizado un nuevo rol, cierra sesión y vuelve a ingresar para poder cambiarte de rol.'
+    ROLES_ASSIGN = '¡Roles asignados con éxito!'
+    ROLES_REVOKE = '¡Los roles del usuario han sido revocados!'

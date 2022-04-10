@@ -1,8 +1,8 @@
-export class ConstModules {
-  static readonly INSTITUTIONS = 'Instituciones';
-  readonly CATEGORIES = 'Categorias';
-  readonly ROLES = 'Roles';
-  readonly USERS = 'Usuarios';
-  readonly ROLE_INVITATION = 'Invitación de roles';
-  readonly AUTHORIZE_ROLE = 'Autorizar rol';
+export enum ConstModules {
+  INSTITUTIONS = 'Instituciones',
+  CATEGORIES = 'Categorias',
+  ROLES = 'Roles',
+  USERS = 'Usuarios',
+  ROLE_INVITATION = 'Invitación de roles',
+  AUTHORIZE_ROLE = 'Autorizar rol'
 }

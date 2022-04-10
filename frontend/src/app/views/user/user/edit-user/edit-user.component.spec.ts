@@ -8,7 +8,7 @@ import {InviteRoleService} from '../../../../services/user/invite-role.service';
 import {InviteRoleAdapter} from '../../../../adapters/implementation/user/invite-role.adapter';
 import {UsersService} from '../../../../services/user/user.service';
 import {UserAdapter} from '../../../../adapters/implementation/user/user.adapter';
-import {MessageService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 import {DatePipe} from '@angular/common';
 import {ProjectAdapter} from '../../../../adapters/implementation/user/project.adapter';
 import {ConstString} from '../../../../utilities/string/const-string';
@@ -33,7 +33,8 @@ describe('EditUserComponent', () => {
         ProjectAdapter,
         DatePipe,
         ConstString,
-        MessageService]
+        MessageService,
+        ConfirmationService]
     })
       .compileComponents();
   });
@@ -52,8 +53,7 @@ describe('EditUserComponent', () => {
     component.ngOnInit();
     const editFormUser = component.form;
     const editFormUserValues = {
-      userRole: null,
-      userAdmin: null
+      userRole: null
     };
     expect(editFormUser.value).toEqual(editFormUserValues);
   });
@@ -104,10 +104,9 @@ describe('EditUserComponent', () => {
         user_status: 'Activo'
       }
     };
-    component.show(data);
+    component.show(data.user);
     expect((component as any).display).toEqual(true);
     expect((component as any).user).toEqual(data.user);
-    expect((component as any).showEditBtn).toEqual(true);
   });
 
 });

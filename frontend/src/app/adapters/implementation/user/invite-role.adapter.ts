@@ -79,13 +79,22 @@ export class InviteRoleAdapter implements Adapter<InviteRoleModel> {
     };
   }
 
+  adaptRolesToSend(dataRoles: any): any {
+    const listRolesAdapted: Array<any> = [];
+    dataRoles.roles.forEach(roleItem => {
+      const dataRole = {user: dataRoles.user, role: roleItem};
+      listRolesAdapted.push(this.adaptObjectSendToPost(dataRole));
+    });
+    return listRolesAdapted;
+  }
+
   adaptObjectSendToUpdate(item: any): any {
     return {
       id: item.id ? item.id : null,
       inst_id: item.user.instId,
       user_id: item.user.id,
       role_id: item.role.id,
-      inro_status: item.inroStatus ? item.inroStatus : null,
+      inro_status: item.inroStatus ? item.inroStatus : AuthorizeRole.AUTHORIZED,
       inro_type: item.inroType ? item.inroType : TypeInviteRole.STANDARD,
       user_name: item.user.userName,
       role_name: item.role.roleName,
@@ -110,6 +119,23 @@ export class InviteRoleAdapter implements Adapter<InviteRoleModel> {
       comm_id: user.commId,
       cous_id: user.id,
       comm_name: user.commName,
+    };
+  }
+
+  adaptObjectToRevokeRoles(): any {
+    return {
+      user_role: [],
+      user_admin: false,
+      role_active: null,
+      user_role_structure: []
+    };
+  }
+
+  adaptBodyToAssignRoles(userId: boolean, userAdmin: boolean, dataRoles: any): any {
+    return {
+      user_id: userId,
+      user_admin: userAdmin,
+      invite_roles: this.adaptRolesToSend(dataRoles),
     };
   }
 

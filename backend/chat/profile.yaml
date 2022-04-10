@@ -8,4 +8,4 @@ django:
     eureka_server: http://10.128.0.11:8090/eureka/
     static_url: /static/
   profiles:
-    active: loc
+    active: dev

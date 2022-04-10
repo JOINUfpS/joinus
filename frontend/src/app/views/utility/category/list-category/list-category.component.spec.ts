@@ -1,7 +1,5 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {ListCategoryComponent} from './list-category.component';
-import {ConstModules} from '../../../../utilities/string/security/const-modules';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {UtilitiesConfigString} from '../../../../utilities/utilities-config-string.service';
 import {ConstPermissions} from '../../../../utilities/string/security/const-permissions';
@@ -28,8 +26,7 @@ xdescribe('ListCategoryComponent', () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       declarations: [ListCategoryComponent],
-      providers: [ConstModules,
-        ConfirmationService,
+      providers: [ConfirmationService,
         UtilitiesConfigString,
         ConstPermissions,
         CategoryService,

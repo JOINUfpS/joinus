@@ -291,13 +291,9 @@ class UserTestCase(TestCase):
         self.assertEqual(result['message'], CustomMessages.LOGGED_IN_SUCCESSFULLY)
 
     def test_change_password(self):
-        json_change = {'auth':
-                           {'key':
-                                {'user': self.user_email,
-                                 'current_password': '12345',
-                                 'new_password': 'Joinus.2021'}
-                            }
-                       }
+        json_change = {'user_id': self.id,
+                       'current_password': '12345',
+                       'new_password': 'Joinus.2021'}
 
         response = self.client.put(f'{self.URL}change_password/', data=json_change, format='json')
         result = json.loads(response.content)

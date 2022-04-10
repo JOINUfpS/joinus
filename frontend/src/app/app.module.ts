@@ -13,7 +13,9 @@ import {UsersService} from './services/user/user.service';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {FollowUserViewComponent} from './views/user/follow-user/follow-user-view/follow-user-view.component';
 import {ListCommunityComponent} from './views/user/community/list-community/list-community.component';
-import {CreateEditCommunityComponent} from './views/user/community/create-edit-community/create-edit-community.component';
+import {
+  CreateEditCommunityComponent
+} from './views/user/community/create-edit-community/create-edit-community.component';
 import {ViewCommunityComponent} from './views/user/community/view-community/view-community.component';
 import {CommunityCardComponent} from './views/user/community/community-card/community-card.component';
 import {FollowUserCardComponent} from './views/user/follow-user/follow-user-card/follow-user-card.component';
@@ -53,7 +55,9 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import {MenuModule} from 'primeng/menu';
 import {StringNotification} from './utilities/string/notification/string-notification';
 import {ConfirmAccountComponent} from './account/confirm-account/confirm-account.component';
-import {CommunityUserCardComponent} from './views/user/community-user/community-user-card/community-user-card.component';
+import {
+  CommunityUserCardComponent
+} from './views/user/community-user/community-user-card/community-user-card.component';
 import {ToastModule} from 'primeng/toast';
 import {LoadingInterceptor} from './interceptors/error/loading.interceptor';
 import {LoadingService} from './services/loading/loading.service';
@@ -70,7 +74,6 @@ import {ConfirmForgotPasswordComponent} from './account/confirm-forgot-password/
 import {AccordionModule} from 'primeng/accordion';
 import {HttpErrorInterceptor} from './interceptors/error/http-error.interceptor';
 import {AuthenticationInterceptor} from './interceptors/authentication/authentication.interceptor';
-import {ConstModules} from './utilities/string/security/const-modules';
 import {ConstPermissions} from './utilities/string/security/const-permissions';
 import {MessagerService} from './messenger/messager.service';
 import {HelpComponent} from './general/help/help.component';
@@ -150,7 +153,6 @@ import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
     ConfirmationService,
     UtilitiesConfigString,
     ConstString,
-    ConstModules,
     ConstPermissions,
     StringNotification,
     StringCommunity,

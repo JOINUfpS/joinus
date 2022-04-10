@@ -14,6 +14,7 @@ import {MessagerService} from '../../../../messenger/messager.service';
 import {ConstModules} from '../../../../utilities/string/security/const-modules';
 import {ConstPermissions} from '../../../../utilities/string/security/const-permissions';
 import {EnumLevelMessage} from '../../../../messenger/enum-level-message.enum';
+import {ConstString} from '../../../../utilities/string/const-string';
 
 
 @Component({
@@ -46,7 +47,6 @@ export class ListRoleComponent implements OnInit {
               private modulesService: ModulesService,
               private adapter: RoleAdapter,
               private confirmationService: ConfirmationService,
-              private constModules: ConstModules,
               public utilitiesString: UtilitiesConfigString,
               public configTables: ConfigTables,
               public adapterModules: ModulesAdapter,
@@ -59,7 +59,7 @@ export class ListRoleComponent implements OnInit {
     this.isCreating = false;
     this.permissions = [];
     this.permissionStructure = utilitiesString.ls.get('permissions')
-      .find(element => element.moduName === constModules.ROLES).moduPermissions;
+      .find(element => element.moduName === ConstModules.ROLES).moduPermissions;
   }
 
   ngOnInit(): void {
@@ -103,7 +103,7 @@ export class ListRoleComponent implements OnInit {
 
   deleteRole(data): void {
     this.confirmationService.confirm({
-      message: this.utilitiesString.msgConfirmDelete + 'el rol ' + data.roleName + '?',
+      message: ConstString.CONFIRM_DELETE + 'el rol ' + data.roleName + '?',
       accept: () => {
         this.roleService.deleteRole(data.id)
           .then(_ => {

@@ -155,9 +155,9 @@
 <app-create-edit-publication #modalCreateEditPublication [showCreateEditButton]="false"
   (updatePublication)="updatePublication($event)"></app-create-edit-publication>
 
-<p-dialog [(visible)]="this.displayUserShare" [blockScroll]="this.utilitiesString.blockScroll"
-          [dismissableMask]="this.utilitiesString.dismissableMask" [draggable]="false" [maximizable]="false" [minY]="70"
-          [modal]="this.utilitiesString.modal" [style]="{ width: '582px', minWidth: '450px' }"
+<p-dialog [(visible)]="this.displayUserShare" [blockScroll]="true"
+          [dismissableMask]="true" [draggable]="false" [maximizable]="false" [minY]="70"
+          [modal]="true" [style]="{ width: '582px', minWidth: '450px' }"
           header="Enviar por {{this.wayToShare}}" id="userShareDialog">
 
   <div class="row p-2">

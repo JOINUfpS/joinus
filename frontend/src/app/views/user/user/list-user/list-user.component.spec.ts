@@ -1,10 +1,8 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {ListUserComponent} from './list-user.component';
 import {ConfirmationService} from 'primeng/api';
 import {UsersService} from '../../../../services/user/user.service';
 import {UserAdapter} from '../../../../adapters/implementation/user/user.adapter';
-import {ConstModules} from '../../../../utilities/string/security/const-modules';
 import {ConstPermissions} from '../../../../utilities/string/security/const-permissions';
 import {UtilitiesConfigString} from '../../../../utilities/utilities-config-string.service';
 import {ProjectAdapter} from '../../../../adapters/implementation/user/project.adapter';
@@ -26,7 +24,6 @@ describe('ListUserComponent', () => {
         ProjectAdapter,
         ConstString,
         DatePipe,
-        ConstModules,
         ConstPermissions,
         UtilitiesConfigString]
     })

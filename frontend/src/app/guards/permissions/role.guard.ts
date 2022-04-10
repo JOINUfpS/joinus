@@ -10,7 +10,6 @@ import {ConstModules} from '../../utilities/string/security/const-modules';
 export class RoleGuard implements CanActivate {
 
   constructor(private utilitiesConfigString: UtilitiesConfigString,
-              private constModules: ConstModules,
               private router: Router) {
   }
 
@@ -18,7 +17,7 @@ export class RoleGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const permissions = this.utilitiesConfigString.ls.get('permissions');
-    const exist = permissions.find(element => element.moduName === this.constModules.ROLES);
+    const exist = permissions.find(element => element.moduName === ConstModules.ROLES);
     if (!exist) {
       this.router.navigate(['']);
     } else {

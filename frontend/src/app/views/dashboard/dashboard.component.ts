@@ -37,8 +37,7 @@ export class DashboardComponent implements OnInit {
               private followUserAdapter: FollowUserAdapter,
               private loadingService: LoadingService,
               private publicationService: PublicationService,
-              private publicationAdapter: PublicationAdapter,
-              private constModule: ConstModules) {
+              private publicationAdapter: PublicationAdapter) {
     this.modelGrouped = [];
   }
 
@@ -55,8 +54,8 @@ export class DashboardComponent implements OnInit {
   showRoleFunctions(): void {
     if (this.modelGrouped.length !== 0) {
       this.modelGrouped.forEach(role => {
-        if (role.moduName === this.constModule.ROLES || role.moduName === this.constModule.CATEGORIES
-          || role.moduName === ConstModules.INSTITUTIONS || role.moduName === this.constModule.AUTHORIZE_ROLE) {
+        if (role.moduName === ConstModules.ROLES || role.moduName === ConstModules.CATEGORIES
+          || role.moduName === ConstModules.INSTITUTIONS || role.moduName === ConstModules.AUTHORIZE_ROLE) {
           this.showRolesFunctions = true;
         }
       });

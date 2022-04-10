@@ -40,7 +40,7 @@ export class SecurityAdapter implements AdapterWriteOnly<any> {
 
   adaptObjectSend(user: any): any {
     return {
-      user_email: user.userEmail ? user.userEmail : null,
+      user_email: user.userEmail ? user.userEmail.toLowerCase() : null,
       password: user.userPassword ? user.userPassword : null,
       provider: user.provider,
       user_google: user.userGoogle ? user.userGoogle : null

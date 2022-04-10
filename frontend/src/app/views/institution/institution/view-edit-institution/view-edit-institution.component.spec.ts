@@ -2,7 +2,6 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {ViewEditInstitutionComponent} from './view-edit-institution.component';
 import {InstitutionAdapter} from '../../../../adapters/implementation/institutions/institution.adapter';
 import {InstitutionService} from '../../../../services/institution/institution.service';
-import {ConstModules} from '../../../../utilities/string/security/const-modules';
 import {UtilitiesConfigString} from '../../../../utilities/utilities-config-string.service';
 import {ConstPermissions} from '../../../../utilities/string/security/const-permissions';
 import {FileService} from '../../../../services/file/file.service';
@@ -11,7 +10,6 @@ import {MessageService} from 'primeng/api';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {UserModel} from '../../../../models/user/user.model';
 import {ProjectModel} from '../../../../models/user/project.model';
-
 
 xdescribe('CreateEditInstitutionComponent', () => {
   let component: ViewEditInstitutionComponent;
@@ -24,7 +22,6 @@ xdescribe('CreateEditInstitutionComponent', () => {
       declarations: [ViewEditInstitutionComponent],
       providers: [InstitutionAdapter,
         InstitutionService,
-        ConstModules,
         UtilitiesConfigString,
         ConstPermissions,
         FileService,

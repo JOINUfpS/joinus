@@ -41,7 +41,8 @@
                       </div>
                       <div class="col-xl-12 col-lg-8 col-md-7 col-sm-10">
                         <p-accordion>
-                          <p-accordionTab header="Roles">
+                          <p-accordionTab header="Roles"
+                                          *ngIf="this.user && this.permissionList?.role.includes(this.constPermissions.CREATE)">
                             <div class="card-body">
                               <div class="row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 order-xl-1 mb-3 mb-xl-1">
@@ -84,7 +85,7 @@
                               </div>
                             </div>
                           </p-accordionTab>
-                          <!--<p-accordionTab header="Cambiar de rol">
+                          <p-accordionTab header="Cambiar de rol" *ngIf="this.user && this.permissionList.role">
                             <div class="card-body">
                               <div class="row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 order-xl-1 mb-3 mb-xl-1">
@@ -96,9 +97,9 @@
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 order-xl-1 mb-3 mb-xl-1">
                                   <div style="max-width: 100%;min-width: 500px; width: calc((100vh + -350px) * 2)">
                                     <div style="height: 100%;left: 0;width: calc(100%);">
-                                      <iframe width="560" height="315" src="https://www.youtube.com/embed/Ouru3zy63k8"
+                                      <iframe width="560" height="315" src="https://www.youtube.com/embed/i5z_WJkg5Sw"
                                               title="YouTube video player" frameborder="0" allow="accelerometer;
-                                            autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                              autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                               allowfullscreen></iframe>
                                     </div>
                                   </div>
@@ -106,7 +107,8 @@
                               </div>
                             </div>
                           </p-accordionTab>
-                          <p-accordionTab header="Autorizar un rol">
+                          <!--<p-accordionTab header="Autorizar un rol" *ngIf="this.user &&
+                          this.permissionList.roleInvitation.includes(this.constPermissions.AUTHORIZE_ROLE)">
                             <div class="card-body">
                               <div class="row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 order-xl-1 mb-3 mb-xl-1">
@@ -321,6 +323,30 @@
                           <div style="height: 100%;left: 0;width: calc(100%);">
                             <iframe width="560" height="315" src="https://www.youtube.com/embed/Fpw-60rbjpI"
                                     title="YouTube video player" allow="accelerometer; autoplay;
+                                    clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </p-accordionTab>
+                <p-accordionTab header="Instituciones"
+                                *ngIf="this.user && this.permissionList.institution.includes(this.constPermissions.EDIT)">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 order-xl-1 mb-3 mb-xl-1">
+                        <h3 class="text-blod">Instituciones</h3>
+                        <p>En esta opción el usuario podrá editar la información que existe actualmente de la
+                          institución a la que esta asignado. Podrá editar información general de la institución, y
+                          editar la imagen institucional de la misma.
+                        </p>
+                      </div>
+                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 order-xl-1 mb-3 mb-xl-1">
+                        <div style="max-width: 100%;min-width: 500px; width: calc((100vh + -350px) * 2)">
+                          <div style="height: 100%;left: 0;width: calc(100%);">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/lKd6XSc7Cj4"
+                                    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;
                                     clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen></iframe>
                           </div>

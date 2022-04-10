@@ -12,6 +12,7 @@ import {MessagerService} from '../../../../messenger/messager.service';
 import {EnumLevelMessage} from '../../../../messenger/enum-level-message.enum';
 import {Observable, Subscription} from 'rxjs';
 import {v4 as uuid} from 'uuid';
+import {ConstString} from '../../../../utilities/string/const-string';
 
 @Component({
   selector: 'app-card-opportunity',
@@ -135,7 +136,7 @@ export class CardOpportunityComponent implements OnInit {
 
   delete(): void {
     this.confirmationService.confirm({
-      message: this.utilitiesString.msgConfirmDelete + 'la oportunidad ' + this.opportunity.oppoTitle + '?',
+      message: ConstString.CONFIRM_DELETE + 'la oportunidad ' + this.opportunity.oppoTitle + '?',
       accept: () => {
         this.opportunityService.deleteOpportunity(this.opportunity.id)
           .then(_ => {

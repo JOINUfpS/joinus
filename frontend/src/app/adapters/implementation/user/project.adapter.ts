@@ -32,12 +32,12 @@ export class ProjectAdapter implements Adapter<ProjectModel> {
     );
   }
 
-  adaptArrayObjectSend(userProjects: ProjectModel[]): any {
+  adaptArrayObjectSend(userProjects: ProjectModel[]): any [] {
     const arrayUserProjects: any = [];
     userProjects.forEach(project => {
       arrayUserProjects.push(this.adaptObjectSend(project));
     });
-    return {user_projects: arrayUserProjects};
+    return arrayUserProjects;
   }
 
   adaptObjectSend(userProjectModel: ProjectModel): any {

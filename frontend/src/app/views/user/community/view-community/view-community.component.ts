@@ -286,7 +286,7 @@ export class ViewCommunityComponent implements OnInit {
 
   leaveCommunity(): void {
     this.confirmationService.confirm({
-      message: `${this.utilitiesConfigString.msgConfirmLeave} <b>${this.community.commName}</b>?`,
+      message: `¿Está seguro de que desea abandonar  <b>${this.community.commName}</b>?`,
       header: 'Confirmar abandonar comunidad',
       icon: 'bi bi-exclamation-triangle-fill color-icon-fill-yellow',
       accept: () => {
@@ -324,7 +324,7 @@ export class ViewCommunityComponent implements OnInit {
 
   deleteCommunity(): void {
     this.confirmationService.confirm({
-      message: this.utilitiesConfigString.msgConfirmDelete + this.community.commName.toUpperCase() + '?',
+      message: ConstString.CONFIRM_DELETE + this.community.commName.toUpperCase() + '?',
       accept: () => {
         this.communityService.deleteCommunity(this.commId)
           .then(_ => {

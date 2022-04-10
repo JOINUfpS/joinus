@@ -1,5 +1,4 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {ListRoleComponent} from './list-role.component';
 import {ContainerComponent} from '../../../container/container.component';
 import {MessagerService} from '../../../../messenger/messager.service';
@@ -7,7 +6,6 @@ import {RoleService} from '../../../../services/user/role.service';
 import {ModulesService} from '../../../../services/user/modules.service';
 import {RoleAdapter} from '../../../../adapters/implementation/user/role.adapter';
 import {ConfirmationService, MessageService} from 'primeng/api';
-import {ConstModules} from '../../../../utilities/string/security/const-modules';
 import {UtilitiesConfigString} from '../../../../utilities/utilities-config-string.service';
 import {ConfigTables} from '../../../../utilities/config-tables.service';
 import {ModulesAdapter} from '../../../../adapters/implementation/user/modules.adapter';
@@ -29,7 +27,6 @@ xdescribe('ListRoleComponent', () => {
         ModulesService,
         RoleAdapter,
         ConfirmationService,
-        ConstModules,
         UtilitiesConfigString,
         ConfigTables,
         ModulesAdapter,

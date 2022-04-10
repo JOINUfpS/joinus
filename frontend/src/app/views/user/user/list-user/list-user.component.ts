@@ -27,14 +27,13 @@ export class ListUserComponent implements OnInit {
   constructor(private confirmationService: ConfirmationService,
               private userService: UsersService,
               private userAdapter: UserAdapter,
-              private constModules: ConstModules,
               public constPermissions: ConstPermissions,
               public utilitiesString: UtilitiesConfigString) {
     this.users = [];
     this.permissions = utilitiesString.ls.get('permissions');
     if (this.permissions.length > 0) {
       this.permissions = utilitiesString.ls.get('permissions')
-        .find(element => element.moduName === constModules.USERS).moduPermissions;
+        .find(element => element.moduName === ConstModules.USERS).moduPermissions;
     } else {
       this.permissions = [];
     }
@@ -74,7 +73,7 @@ export class ListUserComponent implements OnInit {
 
   addOrEdit(data): any {
     if (data !== null) {
-      this.modalUser.show(data);
+      this.modalUser.show(data.user);
     } else {
       this.modalUser.show(null);
     }
@@ -95,5 +94,10 @@ export class ListUserComponent implements OnInit {
       this.getUsers();
       this.stringUserToSearch = undefined;
     }
+  }
+
+  updateUser(userToUpdate: UserModel): void {
+    const index = this.listOriginalUsers.indexOf(this.listOriginalUsers.filter(user => user.id === userToUpdate.id)[0], 0);
+    this.listOriginalUsers[index] = userToUpdate;
   }
 }

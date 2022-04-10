@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { HelpComponent } from './help.component';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {HelpComponent} from './help.component';
 import {UtilitiesConfigString} from '../../utilities/utilities-config-string.service';
 import {Location} from '@angular/common';
+import {ConstPermissions} from '../../utilities/string/security/const-permissions';
 
 describe('HelpComponent', () => {
   let component: HelpComponent;
@@ -10,9 +10,10 @@ describe('HelpComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HelpComponent ],
+      declarations: [HelpComponent],
       providers: [UtilitiesConfigString,
-        Location]
+        Location,
+        ConstPermissions]
     })
       .compileComponents();
   });

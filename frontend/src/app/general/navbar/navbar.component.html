@@ -4,10 +4,10 @@
     <!-- logo -->
     <a [routerLink]="['']" routerLinkActive="active">
       <div class="navbar-brand pt-0 content-nav px-2">
-        <img alt="Logo Joinus" class="nav-img-log mr-1" src="./assets/img/brand/joinus.svg" />
+        <img alt="Logo Joinus" class="nav-img-log mr-1" src="./assets/img/brand/joinus.svg"/>
         <picture>
           <source media="(max-width:425px)" srcset="./assets/img/brand/ufps-gray-logo-only.png">
-          <img alt="Logo Joinus" class="nav-img-log" src="./assets/img/brand/ufps-gray-logo.png" />
+          <img alt="Logo Joinus" class="nav-img-log" src="./assets/img/brand/ufps-gray-logo.png"/>
         </picture>
 
       </div>
@@ -18,7 +18,7 @@
         <div class="p-inputgroup filter-ico mb-0">
           <span class="p-inputgroup-addon bi bi-search icon-search-navbar"></span>
           <input (blur)="focus=false" (focus)="true" (keyup.enter)="search()" [(ngModel)]="searchField"
-            class="input-search" id="searchInput" name="searchInput" pInputText placeholder="Buscar" type="text" />
+                 class="input-search" id="searchInput" name="searchInput" pInputText placeholder="Buscar" type="text"/>
         </div>
       </div>
     </form>
@@ -31,31 +31,31 @@
             <div class="home"></div>
           </a>
           <div [routerLinkActiveOptions]="{exact: true}" [routerLink]="['']" class="active-home"
-            routerLinkActive="active"></div>
+               routerLinkActive="active"></div>
         </li>
         <li class="nav-item nav-items-general navbar-search-dark" pTooltip="Comunidades" tooltipPosition="bottom">
           <a [routerLinkActiveOptions]="{exact: true}" [routerLink]="'usuarios/comunidades/'" class="nav-link"
-            routerLinkActive="active">
+             routerLinkActive="active">
             <div class="community"></div>
           </a>
           <div [routerLinkActiveOptions]="{exact: true}" [routerLink]="'usuarios/comunidades/'" class="active-community"
-            routerLinkActive="active"></div>
+               routerLinkActive="active"></div>
         </li>
         <li class="nav-item nav-items-general navbar-search-dark" pTooltip="Usuarios" tooltipPosition="bottom">
           <a [routerLinkActiveOptions]="{exact: true}" [routerLink]="'usuarios/'" class="nav-link"
-            routerLinkActive="active">
+             routerLinkActive="active">
             <div class="user"></div>
           </a>
           <div [routerLinkActiveOptions]="{exact: true}" [routerLink]="'usuarios/'" class="active-user"
-            routerLinkActive="active"></div>
+               routerLinkActive="active"></div>
         </li>
         <li class="nav-item nav-items-general navbar-search-dark" pTooltip="Oportunidades" tooltipPosition="bottom">
           <a [routerLinkActiveOptions]="{exact: true}" [routerLink]="'institucion/oportunidades/'" class="nav-link"
-            routerLinkActive="active">
+             routerLinkActive="active">
             <div class="opportunity"></div>
           </a>
           <div [routerLinkActiveOptions]="{exact: true}" [routerLink]="'institucion/oportunidades/'"
-            class="active-opportunity" routerLinkActive="active"></div>
+               class="active-opportunity" routerLinkActive="active"></div>
         </li>
       </ul>
     </div>
@@ -94,9 +94,9 @@
               </span>
               <div class="media-body ml-2 d-none d-lg-block">
                 <h4 class="mb-0 text-sm font-weight-bold content-text-tooltip-navbar" pTooltip="{{this.user?.userName}}"
-                  tooltipPosition="top"
-                  (mouseover)="utilitiesString.seeTooltipTextUserNavbar($event, this.user?.userName.length)"
-                  [tooltipDisabled]="utilitiesString.activeTooltip">{{this.userNameToShow}}</h4>
+                    tooltipPosition="top"
+                    (mouseover)="utilitiesString.seeTooltipTextUserNavbar($event, this.user?.userName.length)"
+                    [tooltipDisabled]="utilitiesString.activeTooltip">{{this.userNameToShow}}</h4>
               </div>
             </div>
           </a>
@@ -106,7 +106,7 @@
               <span>Ver tu perfil</span>
             </a>
             <a *ngIf="this.user.userRole.length!==0" routerLinkActive="active" (click)="seeUser()"
-              class="dropdown-item cursor">
+               class="dropdown-item cursor">
               <em class="bi bi-diagram-3-fill"></em>
               <span>Cambiar de rol</span>
             </a>
@@ -126,7 +126,7 @@
   </div>
   <div *ngIf="!this.user" class="container-fluid">
     <button *ngIf="!this.user" [routerLink]="['/iniciar-sesion']" label="Iniciar sesión" pButton type="button"
-      class="btn-new" icon="icon-right" iconPos="left"></button>
+            class="btn-new" icon="icon-right" iconPos="left"></button>
   </div>
 </nav>
 
@@ -139,7 +139,7 @@
           <div class="col-auto">
             <a [routerLink]="['']" class="logo-text float-left" routerLinkActive="active">
               <div class="logo-img">
-                <img alt="Logo Joinus" class="nav-img-log" src="./assets/img/brand/joinus.svg" />
+                <img alt="Logo Joinus" class="nav-img-log" src="./assets/img/brand/joinus.svg"/>
               </div>
             </a>
 
@@ -230,8 +230,8 @@
 </div>
 
 <p-dialog [(visible)]="visibilityDialogChangeRole" [blockScroll]="true" [closable]="true" [dismissableMask]="true"
-  [draggable]="false" [minX]="70" [minY]="70" [modal]="true"
-  [styleClass]="'col-xl-5 col-lg-7 col-md-8 col-sm-11 col-11 '" [style]="{maxWidth: '60rem'}">
+          [draggable]="false" [minX]="70" [minY]="70" [modal]="true"
+          [styleClass]="'col-xl-5 col-lg-7 col-md-8 col-sm-11 col-11 '" [style]="{maxWidth: '60rem'}">
   <p-header>
     <h2>
       <em class="icon-user"></em>
@@ -244,23 +244,20 @@
       <p>{{ this.user.userName }}, en esta sección encontrarás los roles que tienes
         asignados, de esta lista debes escoger el rol que quieres tener activo
         ahora. <em class="text-blod">Para acceder a las funcionalidades asignadas al
-          mismo, se cerrara tu sesión y deberás volver a ingresar.</em>
+          mismo, debes cerrar tu sesión y volver a ingresar.</em>
       </p>
     </div>
   </p-toolbar>
   <p-table>
     <ng-template pTemplate="emptymessage">
-      <tr *ngFor="let role of this.user.userRole" class="cursor">
+      <tr *ngFor="let role of this.user.userRole;">
         <td>
           <span *ngIf="role.roleId !== this.user.userRoleActive" (click)="roleChange(role)">
-            <button [disabled]="buttonChangeRolePress" pButton type="button" class="btn-decline"
-              label="{{role.roleName}}">
-            </button>
+            <button pButton type="button" class="btn-decline" label="{{role.roleName}}"></button>
           </span>
-          <p-progressSpinner [hidden]="!buttonChangeRolePress" [style]="{width: '20px', height: '20px'}">
-          </p-progressSpinner>
-          <span *ngIf="role.roleId === this.user.userRoleActive" pTooltip="Este rol ya esta activo">
-            <button pButton type="button" class="status-Autorizada" label="{{role.roleName}}"></button>
+          <span *ngIf="role.roleId === this.user.userRoleActive" pTooltip="Este rol ya lo tienes activado">
+            <button pButton type="button" class="status-Autorizada" [disabled]="true"
+                    label="{{role.roleName}}"></button>
           </span>
         </td>
       </tr>

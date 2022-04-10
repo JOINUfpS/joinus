@@ -10,17 +10,13 @@ export class CardUserComponent {
 
   @Input() user: UserModel;
   @Input() optionAssignRole: boolean;
-  @Output() eventEmitterAssignRole = new EventEmitter<{ user: UserModel, becomeAdministrator: boolean }>();
+  @Output() eventEmitterAssignRole = new EventEmitter<{ user: UserModel }>();
 
   constructor(public utilitiesString: UtilitiesConfigString) {
   }
 
   assignRole(): void {
-    this.eventEmitterAssignRole.emit({user: this.user, becomeAdministrator: false});
-  }
-
-  becomeAdministrator(): void {
-    this.eventEmitterAssignRole.emit({user: this.user, becomeAdministrator: true});
+    this.eventEmitterAssignRole.emit({user: this.user});
   }
 
 }

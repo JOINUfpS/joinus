@@ -21,12 +21,12 @@ export class ConstString {
   static readonly MESSAGE_USER_NOT_FOUND = 'No se encontró un usuario para los datos ingresados.';
   static readonly ERROR_FIELD = 'Existe algún error con los valores de uno o varios campos.';
   static readonly ERROR_REQUEST = 'Error al procesar la solicitud.';
+  static readonly CONFIRM_DELETE = '¿Está seguro de que desea eliminar ';
   readonly OBJECT_NOT_FOUND = 'Objeto no encontrado';
   readonly TIPS_PASSWORD = 'La contraseña deben tener 8 caracteres mínimo y estar compuesta por números, letras minúsculas, mayúsculas, y al menos un caracter especial.';
   readonly ACCEPT = 'Aceptar';
   readonly DECLINE = 'Rechazar';
   readonly INVITE = 'Invitar';
-  readonly EDIT = 'Editar';
   readonly EDIT_PHOTO_COMMUNITY = 'Editar foto';
   readonly APPROVE = 'Aprobar';
   readonly APROVING = 'Aprobando';

@@ -66,8 +66,8 @@ class UserView(ModelViewSet):
     def change_password(self, request):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        respond = serializer.change_password()
-        return Response(response(data=respond, message=CustomMessages.PASSWORD_CHANGE_SUCCESSFUL))
+        serializer.change_password()
+        return Response(response(message=CustomMessages.PASSWORD_CHANGE_SUCCESSFUL))
 
     @action(methods=['put'], url_path="forgot_password", detail=False, serializer_class=ForgotPasswordSerializer)
     def forgot_password(self, request):

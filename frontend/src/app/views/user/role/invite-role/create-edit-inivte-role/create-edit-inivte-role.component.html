@@ -1,19 +1,20 @@
-<p-dialog [(visible)]="display" [blockScroll]="utilitiesString.blockScroll" [draggable]="false"
-          [dismissableMask]="utilitiesString.dismissableMask" [maximizable]="false" [minY]="70"
-          [modal]="utilitiesString.modal" [styleClass]="'col-sm-11 col-md-6 col-lg-5 col-xl-5 col-11'"
+<p-dialog [(visible)]="display" [blockScroll]="true" [draggable]="false"
+          [dismissableMask]="true" [maximizable]="false" [minY]="70"
+          [modal]="true" [styleClass]="'col-sm-11 col-md-6 col-lg-5 col-xl-5 col-11'"
           [style]="{maxWidth: '60rem'}">
   <p-header>
-    <h2 class="title-dialog" *ngIf="inviteRole">Editar invitación</h2>
-    <h2 class="title-dialog" *ngIf="!inviteRole">Nueva invitación</h2>
+    <h2 class="title-dialog" *ngIf="inviteRole">Editar invitación de rol</h2>
+    <h2 class="title-dialog" *ngIf="!inviteRole">Nueva invitación de rol</h2>
   </p-header>
   <div class="pr-4 pl-4">
     <form [formGroup]="form">
       <div class="row pt-2">
         <div class="col-lg-12 p-2">
           <span class="p-float-label">
-            <p-dropdown [autoDisplayFirst]="false" [itemSize]="1" [readonly]="inviteRole" [showClear]="true"
+            <p-dropdown [autoDisplayFirst]="false" [itemSize]="1" [showClear]="true"
                         id="userName" [options]="userOptions" formControlName="user" [filter]="true"
-                        [virtualScroll]="true" appendTo="body" filterBy="userName" optionLabel="userName">
+                        [virtualScroll]="true" appendTo="body" optionLabel="userName"
+                        emptyFilterMessage="No se encontraron usuarios" class="dropdown-roles">
             </p-dropdown>
             <label for="userName">Selecciona un usuario<strong class="text-requerid">*</strong></label>
           </span>
@@ -21,7 +22,8 @@
         <div class="col-lg-12 p-2">
           <span class="p-float-label">
             <p-dropdown [autoDisplayFirst]="false" appendTo="body" [options]="roleOptions" optionLabel="roleName"
-                        [filter]="true" [showClear]="true" filterBy="roleName" formControlName="role" id="roleName">
+                        filter="filter" formControlName="role" id="roleName"
+                        emptyFilterMessage="No se encontraron roles" class="dropdown-roles">
             </p-dropdown>
             <label for="roleName">Selecciona un rol<strong class="text-requerid">*</strong></label>
           </span>
